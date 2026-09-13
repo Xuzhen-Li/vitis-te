@@ -1,27 +1,39 @@
 # vitis-te
 
-EDTA-based transposable-element annotation and **curated** TE libraries for *Vitis* (and the same order for other plants).
+Public stub for *Vitis* TE libraries and the soft-mask hand-off into gene annotation.
 
-Gene-structure soft-mask consumes this scheme here:  
-[`gene-structure-annotation` `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
+**Operational notebook (authoritative detail):** local pangenome tree  
+`Desktop/script/00_pan&genome/03_TE/` (EDTA → TEtrimmer → TEsorter → gated trusted lib → panEDTA).  
+
+**Structure playbook plug-in:**  
+[gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
 
 ## This is not
 
-- Not gene-model annotation — [`gene-structure-annotation`](https://github.com/Xuzhen-Li/gene-structure-annotation) (BRAKER / GALBA / …)
-- Not functional annotation — [`gene-function-annotation`](https://github.com/Xuzhen-Li/gene-function-annotation)
-- Not PAV graphs — [`vitis-pangenome`](https://github.com/Xuzhen-Li/vitis-pangenome)
-- Not synteny — [`vitis-synteny`](https://github.com/Xuzhen-Li/vitis-synteny)
+- Not gene-model annotation — [gene-structure-annotation](https://github.com/Xuzhen-Li/gene-structure-annotation)
+- Not functional annotation — [gene-function-annotation](https://github.com/Xuzhen-Li/gene-function-annotation)
+- Not PAV graphs — [vitis-pangenome](https://github.com/Xuzhen-Li/vitis-pangenome)
 - Not a dump of another group’s raw TE calls
 
-## Lab order (do not skip curation)
+## Lab order (summary)
 
-1. **EDTA** per assembly (`--species others` unless rice/maize; prefer `--cds` when available)
-2. **TEtrimmer** for boundaries
-3. **TEsorter** for lineage (**naming**, not a genome-wide scanner)
-4. Manual spot-check (LTR false positives, LINE/SINE misses, CDS contamination)
-5. Curated lib: drop CDS → CD-HIT ~85% → 80-80 collapse
-6. Re-annotate with `--curatedlib` and/or **RepeatMasker** (soft-mask `-xsmall` for gene prediction)
-7. LTR age + **LAI** only after the lib is curated
+1. **EDTA** per assembly/haplotype (`--species others --sensitive 1 --anno 1`; document `--u`)
+2. **TEtrimmer** per hap → merge Perfect/Good → CD-HIT ~95% **working** lib  
+   (optional 80-80 **family** catalog; do not overwrite working)
+3. **TEsorter** (e.g. rexdb-plant) — domains/labels only; **never** replace working FASTA with `all.cls.lib`
+4. **Curation gate** (CDS BLAST, structure motifs, human ledger) → **trusted** FASTA
+5. Soft-mask / EDTA `--curatedlib` with **trusted only**
+6. **panEDTA** combine (official; not `cat` of TElibs) → panel reannotate
+7. LTR age / LAI / PAV after curated pan TE GFFs
+
+### Critical distinctions
+
+| Product | Use as `--curatedlib` / gene soft-mask? |
+|---------|----------------------------------------|
+| Raw EDTA TElib | No |
+| Working lib (post-TEtrimmer CD-HIT) | No (whole file) |
+| Trusted gated lib | **Yes** |
+| `cat` + CD-HIT of many libs | No (dedup ≠ curation) |
 
 ### EDTA starter
 
@@ -32,19 +44,14 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --threads 3
 ## Red lines
 
 - Do not treat EDTA raw output as a gold-standard TE library.
-- Classifier-only tools are for naming, not for scanning a genome or replacing trim.
-- Do not publish another group's raw TE calls as yours.
-- Do not hard-mask genomes for BRAKER/GALBA; soft-mask with a **host-gene-purged** lib (ProtExcluder).
-
-## Soft-mask hand-off
-
-After curated + purged lib → RepeatMasker `-xsmall` → `GENOME_SOFT` for  
-[`gene-structure-annotation`](https://github.com/Xuzhen-Li/gene-structure-annotation) A0.  
-Full plug-in notes: [TE_LIBRARY.md](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
+- Do not treat `cat`+CD-HIT as curatedlib.
+- Classifier-only tools name consensi; they do not replace trim or become the library.
+- Do not hard-mask for BRAKER/GALBA; soft-mask with a **trusted**, host-gene-purged lib.
+- Non-TE repeats (TRF / telomere / rDNA) are not curatedlib material.
 
 ## See also
 
-- [gene-structure-annotation](https://github.com/Xuzhen-Li/gene-structure-annotation)
+- [gene-structure-annotation TE_LIBRARY.md](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)
 - [bioinfo-agent-skills](https://github.com/Xuzhen-Li/bioinfo-agent-skills)
 
 **Author:** Xuzhen Li · [ORCID](https://orcid.org/0000-0003-3670-6657)
