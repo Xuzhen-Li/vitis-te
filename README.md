@@ -2,8 +2,9 @@
 
 Public stub for *Vitis* TE libraries and the soft-mask hand-off into gene annotation.
 
-**Operational notebook (authoritative detail):** local pangenome tree  
-`Desktop/script/00_pan&genome/03_TE/` (EDTA → TEtrimmer → TEsorter → gated trusted lib → panEDTA).  
+**Operational notebook:** private lab TE tree (not in git).  
+Pipeline idea: EDTA → TEtrimmer → TEsorter → CDS-gated **trusted** → soft-mask / panEDTA.  
+**R1 numbers (e.g. trusted ~240) are archive/teaching examples**; panel gold may move to a newer trusted emit.  
 
 **Structure playbook plug-in:**  
 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
@@ -21,7 +22,7 @@ Public stub for *Vitis* TE libraries and the soft-mask hand-off into gene annota
 2. **TEtrimmer** per hap → merge Perfect/Good → CD-HIT ~95% **working** lib  
    (optional 80-80 **family** catalog; do not overwrite working)
 3. **TEsorter** (e.g. rexdb-plant) — domains/labels only; **never** replace working FASTA with `all.cls.lib`
-4. **Curation gate** (CDS BLAST, structure motifs, human ledger) → **trusted** FASTA
+4. **Curation gate** (CDS BLAST + TEsorter class emit rules) → **trusted** FASTA (record sha256)
 5. Soft-mask / EDTA `--curatedlib` with **trusted only**
 6. **panEDTA** combine (official; not `cat` of TElibs) → panel reannotate
 7. LTR age / LAI / PAV after curated pan TE GFFs
