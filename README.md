@@ -5,6 +5,7 @@ Public stub for *Vitis* TE libraries and the soft-mask hand-off into gene annota
 **Operational notebook:** private lab TE tree (not in git).  
 Pipeline idea: EDTA → TEtrimmer → TEsorter → CDS-gated **trusted** → soft-mask / panEDTA.  
 **R1 numbers (e.g. trusted ~240) are archive/teaching examples**; panel gold may move to a newer trusted emit.  
+Gene soft-mask (**A0**) only accepts the **current trusted** file + version/sha256 — not raw EDTA / whole working.  
 
 **Structure playbook plug-in:**  
 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
