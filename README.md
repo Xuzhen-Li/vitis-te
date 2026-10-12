@@ -1,59 +1,57 @@
 # vitis-te
+[中文](README.zh.md)
 
-Public stub for *Vitis* TE libraries and the soft-mask hand-off into gene annotation.
+## Overview
 
-**Operational notebook:** private lab TE tree (not in git).  
-Pipeline idea: EDTA → TEtrimmer → TEsorter → CDS-gated **trusted** → soft-mask / panEDTA.  
-**R1 numbers (e.g. trusted ~240) are archive/teaching examples**; panel gold may move to a newer trusted emit.  
-Gene soft-mask (**A0**) only accepts the **current trusted** file + version/sha256 — not raw EDTA / whole working.  
+This repository provides a public stub for Vitis transposable element (TE) libraries and the soft-mask hand-off into gene annotation. The operational notebook is maintained in a private lab TE tree and is not tracked in git.
 
-**Structure playbook plug-in:**  
-[gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
+The pipeline progression is `EDTA` to `TEtrimmer` to `TEsorter` to CDS-gated trusted output, and finally to soft-masking or `panEDTA`. The `R1` numbers such as trusted `~240` are archive and teaching examples. The panel gold standard may shift to a newer trusted output.
 
-## This is not
+The gene soft-mask step designated as `A0` only accepts the current trusted file with its version and `sha256` hash, not raw `EDTA` output or the entire working library. The structure playbook plug-in is documented in [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
 
-- Not gene-model annotation — [gene-structure-annotation](https://github.com/Xuzhen-Li/gene-structure-annotation)
-- Not functional annotation — [gene-function-annotation](https://github.com/Xuzhen-Li/gene-function-annotation)
-- Not PAV graphs — [vitis-pangenome](https://github.com/Xuzhen-Li/vitis-pangenome)
-- Not a dump of another group’s raw TE calls
+## Out of Scope
 
-## Lab order (summary)
+- This project is not for gene-model annotation, which is handled by [gene-structure-annotation](https://github.com/Xuzhen-Li/gene-structure-annotation).
+- It is not for functional annotation, which belongs to [gene-function-annotation](https://github.com/Xuzhen-Li/gene-function-annotation).
+- It is not for PAV graphs, which are covered by [vitis-pangenome](https://github.com/Xuzhen-Li/vitis-pangenome).
+- It is not a dump of raw TE calls from other research groups.
 
-1. **EDTA** per assembly/haplotype (`--species others --sensitive 1 --anno 1`; document `--u`)
-2. **TEtrimmer** per hap → merge Perfect/Good → CD-HIT ~95% **working** lib  
-   (optional 80-80 **family** catalog; do not overwrite working)
-3. **TEsorter** (e.g. rexdb-plant) — domains/labels only; **never** replace working FASTA with `all.cls.lib`
-4. **Curation gate** (CDS BLAST + TEsorter class emit rules) → **trusted** FASTA (record sha256)
-5. Soft-mask / EDTA `--curatedlib` with **trusted only**
-6. **panEDTA** combine (official; not `cat` of TElibs) → panel reannotate
-7. LTR age / LAI / PAV after curated pan TE GFFs
+## Pipeline
 
-### Critical distinctions
+1. Run `EDTA` per assembly or haplotype using `--species others --sensitive 1 --anno 1` and document the `--u` parameter.
+2. Run `TEtrimmer` per haplotype, merge the Perfect and Good outputs, and use `CD-HIT` to generate a `~95%` working library. An optional `80-80` family catalog can be made, but do not overwrite the working library.
+3. Run `TEsorter` with resources like `rexdb-plant` to assign domains and labels only. Never replace the working FASTA with the `all.cls.lib` file.
+4. Use a curation gate with CDS BLAST and `TEsorter` class emit rules to generate a trusted FASTA and record its `sha256`.
+5. Use soft-mask or `EDTA` `--curatedlib` with the trusted file only.
+6. Run `panEDTA` to combine results officially, rather than just using `cat` on TE libraries, to reannotate the panel.
+7. Calculate LTR age, LAI, and PAV after generating curated pan TE GFFs.
+
+## Distinctions
 
 | Product | Use as `--curatedlib` / gene soft-mask? |
 |---------|----------------------------------------|
 | Raw EDTA TElib | No |
 | Working lib (post-TEtrimmer CD-HIT) | No (whole file) |
-| Trusted gated lib | **Yes** |
+| Trusted gated lib | Yes |
 | `cat` + CD-HIT of many libs | No (dedup ≠ curation) |
 
-### EDTA starter
+## Usage
 
 ```bash
 EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --threads 32
 ```
 
-## Red lines
+## Guidelines
 
-- Do not treat EDTA raw output as a gold-standard TE library.
-- Do not treat `cat`+CD-HIT as curatedlib.
-- Classifier-only tools name consensi; they do not replace trim or become the library.
-- Do not hard-mask for BRAKER/GALBA; soft-mask with a **trusted**, host-gene-purged lib.
-- Non-TE repeats (TRF / telomere / rDNA) are not curatedlib material.
+- Do not treat `EDTA` raw output as a gold-standard TE library.
+- Do not treat `cat` and `CD-HIT` output as `--curatedlib`.
+- Classifier-only tools name consensi but do not replace trimming tools or become the library itself.
+- Do not hard-mask for `BRAKER` or `GALBA`. You must soft-mask using a trusted library that has been purged of host genes.
+- Non-TE repeats like `TRF`, telomeres, and rDNA are not appropriate for `--curatedlib`.
 
-## See also
+## References
 
-- [gene-structure-annotation TE_LIBRARY.md](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)
+- [gene-structure-annotation `TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)
 - [bioinfo-agent-skills](https://github.com/Xuzhen-Li/bioinfo-agent-skills)
 
-**Author:** Xuzhen Li · [ORCID](https://orcid.org/0000-0003-3670-6657)
+Author: Xuzhen Li, [ORCID](https://orcid.org/0000-0003-3670-6657)
