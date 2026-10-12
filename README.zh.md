@@ -3,11 +3,11 @@
 
 ## 概述
 
-本仓库提供 Vitis 转座子（TE）文库及进入基因注释阶段之前的软屏蔽（soft-mask）交接数据。实验操作记录存放在私有实验室 TE 树中，未包含在 git 中。
+本仓库提供 *Vitis* 转座子（TE）文库及进入基因注释阶段之前的软屏蔽（soft-mask）交接环节。实验操作记录存放在私有实验室 TE 树中，未包含在 git 中。
 
 分析流程设计为 `EDTA` 至 `TEtrimmer`，至 `TEsorter`，再至基于 CDS 过滤的 trusted 结果，最终用于软屏蔽或 `panEDTA`。诸如 trusted `~240` 这样的 `R1` 编号属于归档和教学示例。最终的高质量参考数据可能会更新为新版的 trusted 结果。
 
-基因软屏蔽步骤（`A0`）仅接受当前的 trusted 文件及其 version 或 `sha256` 值，不接受原始的 `EDTA` 输出或整个 working 文库。结构指南插件见于 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)。
+基因软屏蔽步骤（`A0`）仅接受当前的 trusted 文件及其 version 和 `sha256` 值，不接受原始的 `EDTA` 输出或整个 working 文库。结构指南插件见于 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)。
 
 ## 不包含的内容
 
@@ -19,7 +19,7 @@
 ## 流程
 
 1. 针对每个组装或单倍型运行 `EDTA`，使用 `--species others --sensitive 1 --anno 1` 参数，并记录 `--u` 参数。
-2. 针对每个单倍型运行 `TEtrimmer`，合并 Perfect 与 Good 序列，并使用 `CD-HIT` 生成相似度约 `~95%` 的 working 文库。可以按需生成 `80-80` 阈值的 family 目录，但不要覆盖 working 文库。
+2. 针对每个单倍型运行 `TEtrimmer`，合并 Perfect 与 Good 序列，并使用 `CD-HIT` 生成相似度 `~95%` 的 working 文库。可以按需生成 `80-80` 阈值的 family 目录，但不要覆盖 working 文库。
 3. 使用 `TEsorter`（如 `rexdb-plant`）仅用于分配结构域和标签。不要用 `all.cls.lib` 文件替换 working FASTA。
 4. 通过包含 CDS BLAST 和 `TEsorter` 分类过滤规则的 curation 步骤，生成 trusted FASTA 并记录 `sha256` 值。
 5. 仅使用 trusted 文件进行软屏蔽或作为 `EDTA` 的 `--curatedlib` 传入。
@@ -52,6 +52,5 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --threads 3
 ## 参考
 
 - [gene-structure-annotation `TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)
-- [bioinfo-agent-skills](https://github.com/Xuzhen-Li/bioinfo-agent-skills)
 
 作者：李旭真，[ORCID](https://orcid.org/0000-0003-3670-6657)

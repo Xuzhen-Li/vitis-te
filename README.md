@@ -3,7 +3,7 @@
 
 ## Overview
 
-This repository provides a public stub for Vitis transposable element (TE) libraries and the soft-mask hand-off into gene annotation. The operational notebook is maintained in a private lab TE tree and is not tracked in git.
+This repository provides a public stub for *Vitis* transposable element (TE) libraries and the soft-mask hand-off into gene annotation. The operational notebook is maintained in a private lab TE tree and is not tracked in git.
 
 The pipeline progression is `EDTA` to `TEtrimmer` to `TEsorter` to CDS-gated trusted output, and finally to soft-masking or `panEDTA`. The `R1` numbers such as trusted `~240` are archive and teaching examples. The panel gold standard may shift to a newer trusted output.
 
@@ -52,6 +52,5 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --threads 3
 ## References
 
 - [gene-structure-annotation `TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)
-- [bioinfo-agent-skills](https://github.com/Xuzhen-Li/bioinfo-agent-skills)
 
 Author: Xuzhen Li, [ORCID](https://orcid.org/0000-0003-3670-6657)
