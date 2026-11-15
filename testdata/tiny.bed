@@ -1,0 +1,4 @@
+#chrom	start	end	name
+chrToy	500	700	LTR5
+chrToy	700	1100	INTERNAL
+chrToy	1100	1300	LTR3
