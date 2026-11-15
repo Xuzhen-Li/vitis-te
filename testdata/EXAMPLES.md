@@ -1,0 +1,1 @@
+The files `tiny.fa`, `tiny.bed` and `ltr_age.tsv` were written by `scripts/run_toy_pipeline.sh` on 2026-11-15 (seed 5) and are stored here as a worked example. You can regenerate them into a new directory with the same script. They are not real *Vitis* sequences.
