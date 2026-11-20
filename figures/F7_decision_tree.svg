@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="360" viewBox="0 0 820 360" role="img" aria-label="TE detection decision tree">
+<title>TE detection decision tree</title>
+<rect width="820" height="360" fill="#ffffff"/>
+<text x="20" y="28" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#111">F7. How to recognise a TE: a decision tree for one candidate</text>
+<rect x="40" y="50" width="320" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="50" y="78" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Does it have two LTRs, PBS and PPT?</text>
+<rect x="40" y="120" width="320" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="50" y="148" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">TIR plus a superfamily-typical TSD? [待确认]</text>
+<rect x="40" y="190" width="320" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="50" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Helitron-like ends, no TIR/TSD?</text>
+<rect x="40" y="260" width="320" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="50" y="288" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">LINE/SINE signatures, or only a repeat?</text>
+<rect x="420" y="50" width="360" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="430" y="78" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">LTR order: check pol domain order; date only intact pairs.</text>
+<rect x="420" y="120" width="360" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="430" y="148" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">TIR superfamily or MITE partner; keep families separate.</text>
+<rect x="420" y="190" width="360" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="430" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Treat as Helitron only after curation; high FP risk.</text>
+<rect x="420" y="260" width="360" height="46" rx="2" fill="#f7f7f7" stroke="#222" stroke-width="1"/>
+<text x="430" y="288" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">LINE/SINE vs satellite, rDNA, SSR, or a gene family.</text>
+<line x1="360" y1="73" x2="420" y2="73" stroke="#333" stroke-width="1.5"/>
+<line x1="360" y1="143" x2="420" y2="143" stroke="#333" stroke-width="1.5"/>
+<line x1="360" y1="213" x2="420" y2="213" stroke="#333" stroke-width="1.5"/>
+<line x1="360" y1="283" x2="420" y2="283" stroke="#333" stroke-width="1.5"/>
+<text x="40" y="330" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Structural evidence and protein domains beat a raw RepeatMasker name. Nested or fragmented copies need defragmentation before you trust a type call.</text>
+</svg>

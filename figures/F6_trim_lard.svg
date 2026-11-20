@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="320" viewBox="0 0 1100 320" role="img" aria-label="TRIM and LARD versus autonomous LTR">
+<title>TRIM and LARD versus autonomous LTR</title>
+<rect width="1100" height="320" fill="#ffffff"/>
+<text x="20" y="28" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#111">F6. Autonomous LTR element versus TRIM and LARD</text>
+<text x="40" y="58" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">Autonomous LTR: long LTRs + internal gag/pol (and sometimes other ORFs).</text>
+<text x="40" y="64" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="72" width="80" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="80.0" y="91" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">LTR</text>
+<rect x="120" y="72" width="260" height="28" rx="2" fill="#6ea8d8" stroke="#222" stroke-width="1"/>
+<text x="250.0" y="91" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">internal coding (gag, pol, ...)</text>
+<rect x="380" y="72" width="80" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="420.0" y="91" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">LTR</text>
+<text x="40" y="132" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">TRIM (Witte et al. 2001): very short LTRs (~100-250 bp) and a short internal domain with PBS and PPT, no mobility ORFs.</text>
+<text x="40" y="138" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="146" width="70" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="75.0" y="165" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">LTR</text>
+<rect x="110" y="146" width="90" height="28" rx="2" fill="#eeeeee" stroke="#222" stroke-width="1"/>
+<text x="155.0" y="165" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">PBS/PPT</text>
+<rect x="200" y="146" width="70" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="235.0" y="165" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">LTR</text>
+<text x="40" y="206" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">LARD (Kalendar et al. 2004): unusually long LTRs and a conserved but non-coding internal domain; described as Gypsy-related, non-autonomous.</text>
+<text x="40" y="212" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="220" width="120" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="100.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">long LTR</text>
+<rect x="160" y="220" width="160" height="28" rx="2" fill="#e8e0f0" stroke="#222" stroke-width="1"/>
+<text x="240.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">non-coding internal</text>
+<rect x="320" y="220" width="120" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="380.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">long LTR</text>
+<text x="40" y="280" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Both have LTR-like ends and can leave solo LTRs. They are kept as their own families, not merged into an autonomous consensus. TR-GAG is another reduced form (gag retained). Vitis counts [待确认].</text>
+</svg>
