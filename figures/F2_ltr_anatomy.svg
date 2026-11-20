@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="370" viewBox="0 0 1100 370" role="img" aria-label="LTR retrotransposon anatomy">
+<title>LTR retrotransposon anatomy</title>
+<rect width="1100" height="370" fill="#ffffff"/>
+<text x="20" y="28" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#111">F2. Anatomy of an intact LTR retrotransposon, and pol domain order</text>
+<text x="40" y="62" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111">Intact element (not to scale). Flanking TSD is 4-6 bp (Wicker Fig. 1, [待确认]), typically 5 bp (Witte et al. 2001 abstract); not drawn.</text>
+<rect x="40" y="70" width="70" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="75.0" y="89" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">LTR</text>
+<rect x="110" y="70" width="40" height="28" rx="2" fill="#eeeeee" stroke="#222" stroke-width="1"/>
+<text x="130.0" y="89" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">PBS</text>
+<rect x="150" y="70" width="90" height="28" rx="2" fill="#8fbf7f" stroke="#222" stroke-width="1"/>
+<text x="195.0" y="89" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">gag</text>
+<rect x="240" y="70" width="280" height="28" rx="2" fill="#6ea8d8" stroke="#222" stroke-width="1"/>
+<text x="380.0" y="89" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">pol</text>
+<rect x="520" y="70" width="40" height="28" rx="2" fill="#eeeeee" stroke="#222" stroke-width="1"/>
+<text x="540.0" y="89" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">PPT</text>
+<rect x="560" y="70" width="70" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="595.0" y="89" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">LTR</text>
+<text x="40" y="130" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">Copia (Ty1) pol domain order, typical:  PR — INT — RT — RH   (Wicker Fig. 1, [待确认])</text>
+<text x="40" y="137" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="145" width="70" height="28" rx="2" fill="#d0e4f7" stroke="#222" stroke-width="1"/>
+<text x="75.0" y="164" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">PR</text>
+<rect x="110" y="145" width="70" height="28" rx="2" fill="#9cc4e8" stroke="#222" stroke-width="1"/>
+<text x="145.0" y="164" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">INT</text>
+<rect x="180" y="145" width="70" height="28" rx="2" fill="#6ea8d8" stroke="#222" stroke-width="1"/>
+<text x="215.0" y="164" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">RT</text>
+<rect x="250" y="145" width="70" height="28" rx="2" fill="#3d7fb0" stroke="#222" stroke-width="1"/>
+<text x="285.0" y="164" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">RH</text>
+<text x="40" y="205" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">Gypsy (Ty3) pol domain order, typical:  PR — RT — RH — INT   (a named chromovirus / chromodomain clade is [待确认]; not in the opened Wicker text)</text>
+<text x="40" y="212" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="220" width="70" height="28" rx="2" fill="#d0e4f7" stroke="#222" stroke-width="1"/>
+<text x="75.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">PR</text>
+<rect x="110" y="220" width="70" height="28" rx="2" fill="#6ea8d8" stroke="#222" stroke-width="1"/>
+<text x="145.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">RT</text>
+<rect x="180" y="220" width="70" height="28" rx="2" fill="#3d7fb0" stroke="#222" stroke-width="1"/>
+<text x="215.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">RH</text>
+<rect x="250" y="220" width="70" height="28" rx="2" fill="#9cc4e8" stroke="#222" stroke-width="1"/>
+<text x="285.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">INT</text>
+<rect x="320" y="220" width="90" height="28" rx="2" fill="#c9b6e0" stroke="#222" stroke-width="1"/>
+<text x="365.0" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">chromo?</text>
+<text x="40" y="280" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">LTR: long terminal repeat, identical at insertion (Neumann et al. 2019). PBS: primer-binding site. PPT: polypurine tract.</text>
+<text x="40" y="298" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">gag: capsid-related. pol: protease (PR), integrase (INT), reverse transcriptase (RT), RNase H (RH).</text>
+<text x="40" y="316" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">The INT-before-RT versus RT-before-INT order is a practical way to tell Copia from Gypsy in a protein hit (Wicker Fig. 1, [待确认]).</text>
+<text x="40" y="334" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">At insertion the two LTRs are the same sequence (Neumann et al. 2019). Solo LTRs form later by recombination. A solo LTR has only one LTR, so LTR-LTR divergence cannot be calculated (a conclusion from the definition).</text>
+</svg>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-label="Helitron versus Maverick anatomy">
+<title>Helitron versus Maverick anatomy</title>
+<rect width="1200" height="340" fill="#ffffff"/>
+<text x="20" y="28" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#111">F5. Helitron versus Maverick / Polinton (Class II, subclass 2; Wicker 2007 body, [待确认])</text>
+<text x="40" y="60" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">Helitron: rolling-circle. Usually no TIR and no TSD. Typical plant ends are often 5'-TC...CTRR-3' (typical, not absolute) [待确认].</text>
+<text x="40" y="67" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="75" width="60" height="28" rx="2" fill="#f7e3a0" stroke="#222" stroke-width="1"/>
+<text x="70.0" y="94" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">5'TC</text>
+<rect x="100" y="75" width="300" height="28" rx="2" fill="#c9b6e0" stroke="#222" stroke-width="1"/>
+<text x="250.0" y="94" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">Rep/Hel (Wells: HUH + helicase); Wicker Y2 [待确认]</text>
+<rect x="400" y="75" width="70" height="28" rx="2" fill="#f7e3a0" stroke="#222" stroke-width="1"/>
+<text x="435.0" y="94" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">CTRR 3'</text>
+<text x="40" y="140" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="normal" text-anchor="start" fill="#111">Maverick / Polinton: large, long TIRs, self-encoded DNA polymerase B and integrase-like protein. TSD 6 bp (Kapitonov and Jurka 2006) or 5-6 bp (Pritham et al. 2007).</text>
+<text x="40" y="147" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111"></text>
+<rect x="40" y="155" width="70" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="75.0" y="174" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">long TIR</text>
+<rect x="110" y="155" width="140" height="28" rx="2" fill="#6ea8d8" stroke="#222" stroke-width="1"/>
+<text x="180.0" y="174" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">PolB</text>
+<rect x="250" y="155" width="140" height="28" rx="2" fill="#8fbf7f" stroke="#222" stroke-width="1"/>
+<text x="320.0" y="174" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">INT-like</text>
+<rect x="390" y="155" width="70" height="28" rx="2" fill="#f4c27a" stroke="#222" stroke-width="1"/>
+<text x="425.0" y="174" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="middle" fill="#111">long TIR</text>
+<text x="40" y="220" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Helitrons were described as rolling-circle transposons by Kapitonov and Jurka 2001 (doi:10.1073/pnas.151269298).</text>
+<text x="40" y="238" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Polintons: Kapitonov and Jurka 2006 (doi:10.1073/pnas.0600833103). Mavericks: Pritham, Putliwala and Feschotte 2007 (doi:10.1016/j.gene.2006.08.008) is a survey ("We previously identified ... Mavericks"), not the first report.</text>
+<text x="40" y="256" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">The two names refer to the same broad class of giant self-synthesizing DNA transposons; say which paper you follow. A candidate first report is Feschotte and Pritham 2005 (title only opened; [待确认]).</text>
+<text x="40" y="274" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Pritham et al. 2007 did not detect Mavericks in plants in that survey. Whether later plant reports exist is [待确认].</text>
+<text x="40" y="292" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">DeepHel abstract: existing Helitron methods often have high false-positive rates. Not treating raw calls as a trusted library is this repository's rule.</text>
+</svg>

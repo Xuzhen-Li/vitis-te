@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="360" viewBox="0 0 1180 360" role="img" aria-label="Wicker-style TE hierarchy">
+<title>Wicker-style TE hierarchy</title>
+<rect width="1180" height="360" fill="#ffffff"/>
+<text x="20" y="28" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="start" fill="#111">F1. Wicker-style hierarchy of eukaryotic TEs (simplified)</text>
+<text x="20" y="50" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111">Class I  retrotransposons (copy-and-paste, RNA intermediate)</text>
+<text x="28" y="70" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Order LTR: Copia (RLC); Gypsy (RLG); Bel-Pao (RLB; Wicker Fig. 1 occurrence M only, [待确认]); Retrovirus; ERV.</text>
+<text x="28" y="90" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Florendovirus / plant pararetroviruses (Caulimoviridae; Geering 2014) sit OUTSIDE Order LTR. Wells and Feschotte 2020 exclude typically non-integrating viral elements.</text>
+<text x="28" y="110" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Order DIRS (YR, Wells 2020; TSD 0, Wicker Fig. 1 [待确认]).  Order PLE (TSD variable, Wicker Fig. 1 [待确认]).</text>
+<text x="28" y="130" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Order LINE (superfamilies R2, RTE, Jockey, L1, I; Wicker Fig. 1 [待确认]).  Order SINE (tRNA, 7SL, 5S derived; Wells 2020).</text>
+<text x="28" y="150" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Non-autonomous LTR derivatives: TRIM, LARD, TR-GAG (need a partner element for proteins).</text>
+<text x="20" y="178" font-family="DejaVu Sans, Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="start" fill="#111">Class II  DNA transposons</text>
+<text x="28" y="200" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Subclass 1, order TIR (usually DDE transposase, cut-and-paste, TSD): Tc1/Mariner, hAT, Mutator, CACTA, PIF/Harbinger, PiggyBac, P, Merlin, Transib (Wicker Fig. 1 [待确认]).</text>
+<text x="28" y="220" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Subclass 1, order Crypton (tyrosine recombinase, TSD 0; Wicker 2007 Fig. 1, [待确认]). MITEs are short non-autonomous TIR elements (Tourist-PIF; Stowaway-Mariner).</text>
+<text x="28" y="240" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Subclass 2 (transposition by replication without double-strand cleavage; Wicker 2007 body, [待确认]): Helitron (rolling circle); Maverick / Polinton (DNA polymerase B).</text>
+<text x="28" y="260" font-family="DejaVu Sans, Arial, sans-serif" font-size="12" font-weight="normal" text-anchor="start" fill="#111">Nomenclature also exists in Repbase/Dfam and REXdb; they do not always agree.</text>
+<text x="20" y="330" font-family="DejaVu Sans, Arial, sans-serif" font-size="11" font-weight="normal" text-anchor="start" fill="#444">Source of the framework: Wicker et al. 2007, doi:10.1038/nrg2165 (abstract only; body and Fig. 1 [待确认]). This figure is an original schematic, not a journal reprint.</text>
+</svg>
