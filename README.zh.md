@@ -5,6 +5,7 @@
 <!-- PROSE:INTRO -->
 本仓库是葡萄属（*Vitis*）及其他植物转座元件（TE）的方法目录。正文按阅读顺序展开：什么是 TE、它们是如何被发现的、如何移动、如何分类、各类型有哪些序列特征、与宿主基因组怎样相互作用、葡萄基因组里目前已知什么、现有方法卡在哪里，以及每一步使用哪些软件。这里也是把葡萄 TE 文库交给基因软屏蔽的公开交接处。实验室里的操作笔记留在私有目录中，不纳入 git。
 <!-- /PROSE:INTRO -->
+中文书稿《转座子从发现到实践，以葡萄为例》见 [`book/README.md`](book/README.md)。
 
 结构注释的交接说明见 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)。与该仓库内容有所交叉是预期之中的；本页只提供交叉链接，不重复基因预测的操作手册。
 
