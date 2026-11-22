@@ -5,6 +5,7 @@ English | [中文](README.zh.md)
 <!-- PROSE:INTRO -->
 This repository is a methods catalogue for transposable elements (TEs) in *Vitis* and other plants. It starts from the basics: what a TE is, how TEs were discovered, how they move, how they are classified, which sequence features define each type, how they interact with the host genome, what is known in grapevine, where current methods struggle, and which software is used at each step. It is also the public hand-off for a *Vitis* TE library used in gene soft-masking. The operational laboratory notebook stays in a private tree and is not tracked in git.
 <!-- /PROSE:INTRO -->
+A Chinese book, 《转座子从发现到实践，以葡萄为例》 / Transposable elements from discovery to practice, with grapevine as the example, is in [`book/README.md`](book/README.md).
 
 The structure-annotation plug-in is documented in [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md). Overlap with that repository is expected; this page cross-links to it rather than repeating the gene-prediction playbook.
 
