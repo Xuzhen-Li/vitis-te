@@ -10,6 +10,8 @@ Gene-model annotation is handled by [gene-structure-annotation](https://github.c
 
 The book, 《转座子从发现到实践，以葡萄为例》 (Transposable elements from discovery to practice, with grapevine as the example), is in Chinese. Start from [`book/README.md`](book/README.md). The same text is in [`book/TE_BOOK_full.md`](book/TE_BOOK_full.md). The file list is in [`book/INDEX.md`](book/INDEX.md). Statements or citations that have not been checked against an opened source are marked [待确认].
 
+An illustrated combined edition (chapters 1-4, the type catalogue, chapter 13, chapters 5-12, and the book appendices) is in [`book/illustrated_v3_p2d/TE_BOOK_illustrated_v3_p2d.md`](book/illustrated_v3_p2d/TE_BOOK_illustrated_v3_p2d.md).
+
 - [Preface](book/chapters/00-preface.md)
   - [Aim of the book](book/chapters/00-preface.md#编写定位)
   - [How the book is organised](book/chapters/00-preface.md#全书结构与阅读路径)
@@ -62,6 +64,9 @@ The book, 《转座子从发现到实践，以葡萄为例》 (Transposable elem
   - [12.1 New challenges in the T2T and pangenome era](book/chapters/12-open-questions.md#121-t2t基因组与泛基因组时代的转座子解析新挑战)
   - [12.2 Deep learning and long-read multi-omics](book/chapters/12-open-questions.md#122-深度学习与长读长多组学在转座子研究中的应用)
   - [12.3 TE engineering and crop breeding](book/chapters/12-open-questions.md#123-转座子工程化应用与未来作物育种前景)
+- [Chapter 13. TEs as they appear in genomes: complete, fragmentary, chimeric, and domesticated](book/chapters/13-observed-forms.md)
+- [A type-by-type catalogue of transposable elements](book/chapters/types-catalogue.md)
+  - [Appendix to the catalogue: types outside the classification, and disputed types](book/chapters/types-catalogue.md#类型详解附录分类体系外与有争议的类型)
 - [Appendix A. Glossary of terms and abbreviations](book/chapters/appendix-a-glossary.md)
 - [Appendix B. Public databases and widely used tools](book/chapters/appendix-b-databases-and-tools.md)
   - [Public TE and repeat databases](book/chapters/appendix-b-databases-and-tools.md#公共转座子与重复序列数据库)
