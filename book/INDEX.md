@@ -26,3 +26,8 @@
 
 合订本：[`TE_BOOK_full.md`](TE_BOOK_full.md)，sha256 `954ba977e6017487e90a8852c9b85d350a7921ca68fd554854bce358950f9439`，汉字 152486（含书名行与合并说明，与分文件汉字之和不必相等）；DOI 去重 27 个，[待确认] 267 处。
 
+本页原表未改。下列为后来新增的文件（汉字与 DOI 计数方法与上表相同，于 2026-11-23 16:18 CST 由文件本身算出）：
+
+- 第13章 [`chapters/13-observed-forms.md`](chapters/13-observed-forms.md)，sha256 `e9f9f92b636183594bb37e5dcfbbe4429a56dc5d2fd7e6dc87b0704fdceb9783`，汉字 17322，DOI 去重 23，[待确认] 103。
+- 转座子类型逐类详解 [`chapters/types-catalogue.md`](chapters/types-catalogue.md)，sha256 `b5f1ae6f52d1ee4b4aba519bb9015c7ffd700908e61f084d370a92404753c289`，汉字 111290，DOI 去重 199，[待确认] 606。
+- 配图合订本 [`illustrated_v3_p2d/TE_BOOK_illustrated_v3_p2d.md`](illustrated_v3_p2d/TE_BOOK_illustrated_v3_p2d.md)，sha256 `a3088b4f1436611a6f1c5072f3a6e8193e0e4e3e19b31f41c80ac13f173fc1ba`，汉字 284718，DOI 去重 224，[待确认] 992。合订本与分章有重叠，故不宜与上表加总。
