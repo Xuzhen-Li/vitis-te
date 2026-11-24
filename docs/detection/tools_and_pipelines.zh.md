@@ -9,7 +9,7 @@
 从 2026-11-15 README 第 7 节搬来，科学表述不改。软屏蔽交接的链接改为指向 [softmask_handoff.zh.md](softmask_handoff.zh.md)，而不再指向本次追加计划从 gene-structure-annotation 撤下的 `TE_LIBRARY.md`。
 
 <!-- PROSE:SECTION:T03 -->
-- **嵌套和破碎拷贝。** 新插入套进旧元件，以及退化破碎的片段，会让结构检测漏掉拷贝，也会让同源注释把一个元件拆成许多命中片段。RepeatMasker 之后可用 RepeatCraft、oneCodeToFindThemAll 做碎片合并，并在整理时检查嵌套结构。
+- **嵌套和破碎拷贝。** 新插入套进旧元件，以及退化破碎的片段，会让结构检测漏掉拷贝，也会让同源注释把一个元件拆成许多命中片段。RepeatMasker 之后可用 [RepeatCraft](https://github.com/niccw/repeatcraftp)、[oneCodeToFindThemAll](https://doua.prabi.fr/software/one-code-to-find-them-all) 做碎片合并，并在整理时检查嵌套结构。
 - **新拷贝与旧拷贝。** 用 LTR-LTR 分歧度估计插入时间，只对整理之后仍然完整的年轻拷贝有意义。新插入时，两条 LTR 复制自同一模板，因此完全相同（Neumann 等 2019，[doi:10.1186/s13100-018-0144-1](https://doi.org/10.1186/s13100-018-0144-1)，全文：“Since the 5′ LTR and 3′ LTR are identical at the time of insertion of a new element copy to the genome the level of their divergence which is caused by mutations acquired over time is proportional to the insertion age.”）；随后的分歧度才是 T = K / (2r) 所度量的量，因为两条 LTR 各自独立积累突变。典型的 LTR 末端常为 5′-TG…CA-3′（典型特征，并非绝对；LTR_retriever 也会报告非典型末端）。插入之后，两条 LTR 之间的重组可以删掉内部区，只留下一条 LTR（solo LTR），这类元件无法用该公式定年。如果 r 的单位是每年每个位点，就不需要世代时间；若 r 是每代速率，则需先作换算。克隆作物的有性世代间隔很长，且不易确定。两条 LTR 之间的基因转换会使估出的年龄偏年轻，这一说法仍标 **[待确认]**（本轮打开的 Neumann 2019 全文和 SanMiguel 1998 摘要中未见）。不要把原始 EDTA 输出里的年龄当作最终交付结果；没有明确的替换率时（若速率按代计，还需明确世代时间），不要把分歧度换算成年代。EDTA 若不设 `--u`，会静默使用水稻的 1.3e-8 /bp/年，不能当作葡萄的默认值。葡萄的 `--u` 仍为 [待确认]。
 - **整理仍然是瓶颈。** TEtrimmer、MCHelper 和 Earl Grey 能自动完成部分 consensus 清理，但 trusted 文库仍需要有记录的 CDS 门控和分类输出规则。Goubert 等人 2022（[doi:10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7)）是手工整理的入门指南，不是这些工具的方法论文。
 - **基因家族和串联重复造成的假阳性。** NLR 簇、其他基因家族、简单重复和串联重复可能混入 de novo 文库。TRF、端粒和 rDNA 应放在单独的非 TE 轨道，它们不属于 `--curatedlib`。
@@ -28,17 +28,33 @@
 
 | 步骤 | 适用场合 | 本目录中的工具 |
 |------|----------|----------------|
-| de novo 发现 | 从组装或单倍型出发 | EDTA（此处默认）、RepeatModeler2、Earl Grey；家族发现还有 RepeatScout、RECON、PILER |
-| 结构检测 | 寻找完整的 LTR、TIR、MITE 或 Helitron | LTR_FINDER、LTR_FINDER_parallel、LTRharvest、LTR_retriever；HelitronScanner；MITE-Hunter、detectMITE、TIR-Learner、GRF |
-| 同源注释 | 用文库做注释或屏蔽 | RepeatMasker；文库为 Dfam 和 Repbase |
-| 分类 | 给 working 文库贴标签 | TEsorter + REXdb（植物 LTR 谱系）；DeepTE；TEclass |
-| 整理与 consensus | 把原始 consensus 变成 working 或 trusted 文库 | TEtrimmer（此处默认）、MCHelper、Goubert 指南、CD-HIT |
-| 文库质控 | 去掉非 TE 重复、检查组装质量 | TRF（非 TE 轨道）；在整理后或泛注释上计算 LAI |
-| 屏蔽 | 把基因组交给基因注释 | 只用 trusted 文库做 RepeatMasker `-xsmall`；用 BEDTools 检查轨道 |
-| TE 年龄 / 插入时间 | 整理后的完整 LTR 对 | LTR_retriever；演示脚本 `scripts/01_ltr_insertion_age.py` |
-| 多态 TE 检测 | 群体或长读插入检测，不是建库 | TEMP、RelocaTE2、xTea、Jitterbug |
-| 泛基因组 TE | 一组单倍型或基因组 | panEDTA（EDTA 仓库中的 `panEDTA.sh`） |
-| 可视化 / 碎片合并 | 整理同源注释 | RepeatCraft、oneCodeToFindThemAll |
+| de novo 发现 | 从组装或单倍型出发 | [EDTA](https://github.com/oushujun/EDTA)（此处默认）、[RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler)、[Earl Grey](https://github.com/TobyBaril/EarlGrey)；家族发现还有 [RepeatScout](https://github.com/Dfam-consortium/RepeatScout)、[RECON](https://github.com/Dfam-consortium/RECON)、[PILER](https://www.drive5.com/piler/) |
+| 结构检测 | 寻找完整的 LTR、TIR、MITE 或 Helitron | [LTR_FINDER](https://github.com/xzhub/LTR_FINDER)、[LTR_FINDER_parallel](https://github.com/oushujun/LTR_FINDER_parallel)、[LTRharvest](https://github.com/genometools/genometools)、[LTR_retriever](https://github.com/oushujun/LTR_retriever)；[HelitronScanner](https://sourceforge.net/projects/helitronscanner/)；MITE-Hunter、[detectMITE](https://sourceforge.net/projects/detectmite/)、[TIR-Learner](https://github.com/oushujun/TIR-Learner)、[GRF](https://github.com/bioinfolabmu/GenericRepeatFinder)、[Inpactor2](https://github.com/simonorozcoarias/Inpactor2) |
+| 同源注释 | 用文库做注释或屏蔽 | [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker)（[网站](https://www.repeatmasker.org/)）；文库为 [Dfam](https://www.dfam.org/) 和 [Repbase](https://www.girinst.org/repbase/) |
+| 分类 | 给 working 文库贴标签 | [TEsorter](https://github.com/zhangrengang/TEsorter) + [REXdb](https://bitbucket.org/petrnovak/repex_tarean)（植物 LTR 谱系）；[DeepTE](https://github.com/LiLabAtVT/DeepTE)；[TEclass](https://bioinformatics.uni-muenster.de/tools/teclass/index.hbi)；[Inpactor](https://github.com/simonorozcoarias/Inpactor)、[Inpactor2](https://github.com/simonorozcoarias/Inpactor2) |
+| 整理与 consensus | 把原始 consensus 变成 working 或 trusted 文库 | [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer)（此处默认）、[MCHelper](https://github.com/GonzalezLab/MCHelper)、[SENMAP](https://github.com/simonorozcoarias/SENMAP)、Goubert 指南（[doi:10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7)）、[CD-HIT](https://github.com/weizhongli/cdhit) |
+| 文库质控 | 去掉非 TE 重复、检查组装质量 | [TRF](https://github.com/Benson-Genomics-Lab/TRF)（非 TE 轨道；[网站](https://tandem.bu.edu/trf/trf.html)）；在整理后或泛注释上计算 LAI（[LTR_retriever](https://github.com/oushujun/LTR_retriever)） |
+| 屏蔽 | 把基因组交给基因注释 | 只用 trusted 文库做 [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker) `-xsmall`；用 [BEDTools](https://github.com/arq5x/bedtools2) 检查轨道 |
+| TE 年龄 / 插入时间 | 整理后的完整 LTR 对 | [LTR_retriever](https://github.com/oushujun/LTR_retriever)；演示脚本 `scripts/01_ltr_insertion_age.py` |
+| 多态 TE 检测 | 群体或长读插入检测，不是建库 | [TEMP](https://github.com/JialiUMassWengLab/TEMP)、[RelocaTE2](https://github.com/JinfengChen/RelocaTE2)、[xTea](https://github.com/parklab/xTea)、[Jitterbug](https://github.com/elzbth/jitterbug)、[TIP_finder](https://github.com/simonorozcoarias/TIP_finder) |
+| 泛基因组 TE | 一组单倍型或基因组 | [panEDTA](https://github.com/oushujun/EDTA)（EDTA 仓库中的 `panEDTA.sh`） |
+| 可视化 / 碎片合并 | 整理同源注释 | [RepeatCraft](https://github.com/niccw/repeatcraftp)、[oneCodeToFindThemAll](https://doua.prabi.fr/software/one-code-to-find-them-all) |
+
+### Inpactor 系列（植物 LTR 反转录转座子）
+
+下列工具是对默认 EDTA 路线的补充或备选，不能代替经过 CDS 门控的 trusted 文库。
+
+| 名称 | 用途 | 代码或数据仓库 | DOI |
+|------|------|----------------|-----|
+| Inpactor | 在高性能计算环境下分类植物 LTR 反转录转座子，区分自主与非自主拷贝，并估算插入时间 | [github.com/simonorozcoarias/Inpactor](https://github.com/simonorozcoarias/Inpactor) | [10.3390/biology7020032](https://doi.org/10.3390/biology7020032) |
+| Inpactor2 | 结合深度学习与结构特征，检测完整植物 LTR 反转录转座子、过滤碎片与嵌套拷贝，并分类到超家族和谱系；输入为组装基因组 | [github.com/simonorozcoarias/Inpactor2](https://github.com/simonorozcoarias/Inpactor2) | [10.1093/bib/bbac511](https://doi.org/10.1093/bib/bbac511) |
+| InpactorDB | 谱系级植物 LTR 反转录转座子参考集（论文中为 195 个基因组、108 个物种；去冗余后 67,241 条） | [InpactorDB 检索页](https://inpactordb.github.io)；数据集 [10.5281/zenodo.4386317](https://doi.org/10.5281/zenodo.4386317)（其后快照见 [10.5281/zenodo.5816833](https://doi.org/10.5281/zenodo.5816833)） | [10.3390/genes12020190](https://doi.org/10.3390/genes12020190) |
+| SENMAP | 用卷积网络在整理植物 LTR 文库时保留完整拷贝 | [github.com/simonorozcoarias/SENMAP](https://github.com/simonorozcoarias/SENMAP) | [10.1515/jib-2021-0036](https://doi.org/10.1515/jib-2021-0036)（期刊论文；会议摘要：[10.1109/ci-ibbi54220.2021.9626130](https://doi.org/10.1109/ci-ibbi54220.2021.9626130)） |
+| TIP_finder | 用 Illumina 双端短读、染色体级别参考基因组和转座子一致性序列，在高性能计算环境下检测插入多态 | [github.com/simonorozcoarias/TIP_finder](https://github.com/simonorozcoarias/TIP_finder) | [10.3390/biology9090281](https://doi.org/10.3390/biology9090281) |
+| YORO | 用卷积网络做基因组目标检测，用于转座子的检测与分类 | [github.com/simonorozcoarias/YORO](https://github.com/simonorozcoarias/YORO) | [10.1371/journal.pone.0291925](https://doi.org/10.1371/journal.pone.0291925) |
+| PanTEon | 跨界的转座子分类器设计与比较框架及配套数据库（预印本） | [github.com/simonorozcoarias/PanTEon](https://github.com/simonorozcoarias/PanTEon) | [10.64898/2026.04.01.715927](https://doi.org/10.64898/2026.04.01.715927) |
+
+同一工作线上的相关论文（不是独立软件）：植物反转录转座子结构、识别与分类的综述（[10.3390/ijms20153837](https://doi.org/10.3390/ijms20153837)）；机器学习用于转座子检测与分类的系统调查（[10.7717/peerj.8311](https://doi.org/10.7717/peerj.8311)）；基于 k-mer 的植物 LTR 分类方法（[10.7717/peerj.11456](https://doi.org/10.7717/peerj.11456)）；以及这些任务中性能指标的比较（[10.3390/pr8060638](https://doi.org/10.3390/pr8060638)）。配套实验仓库：[MLinTEs](https://github.com/simonorozcoarias/MLinTEs) 和 [MachineLearningInTEs](https://github.com/simonorozcoarias/MachineLearningInTEs)。
 <!-- /PROSE:SECTION:T04 -->
 
 ## 已审核的操作流程和红线
@@ -78,19 +94,19 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --u RATE --
 
 | 工具 | 论文（官方题名，年份） | DOI | 用途 | 和上面路线的关系 |
 |------|------------------------|-----|------|------------------|
-| HiTE | *HiTE: a fast and accurate dynamic boundary adjustment approach for full-length transposable element detection and annotation*（2024） | [10.1038/s41467-024-49912-8](https://doi.org/10.1038/s41467-024-49912-8) | 全长 TE 检测；HiTE README 的输出列出 confident TIR、Helitron 和 non-LTR 鉴定结果（以及 LTR 相关输出） | 并列的 de novo 建库工具；2026-11-15 记录的检查中未测 |
+| [HiTE](https://github.com/CSU-KangHu/HiTE) | *HiTE: a fast and accurate dynamic boundary adjustment approach for full-length transposable element detection and annotation*（2024） | [10.1038/s41467-024-49912-8](https://doi.org/10.1038/s41467-024-49912-8) | 全长 TE 检测；HiTE README 的输出列出 confident TIR、Helitron 和 non-LTR 鉴定结果（以及 LTR 相关输出） | 并列的 de novo 建库工具；2026-11-15 记录的检查中未测 |
 | Earl Grey | 已在旧目录中 | [10.1093/molbev/msae068](https://doi.org/10.1093/molbev/msae068) | 自动注释和整理，并给出论文风格的汇总图 | 并列流程。软屏蔽基因组 FASTA 是 Earl Grey 的可选项（README 里 `-d` / soft-mask，默认 no），没有 CDS 门控时不能代替 trusted 文库 |
 | TEtrimmer | 已在旧目录中 | [10.1038/s41467-025-63889-y](https://doi.org/10.1038/s41467-025-63889-y) | 自动完成手工整理 consensus 的若干步骤 | 上面路线里的默认修剪工具 |
-| DANTE / DANTE_LTR | *DANTE and DANTE_LTR: lineage-centric annotation pipelines for long terminal repeat retrotransposons in plant genomes*（2024） | [10.1093/nargab/lqae113](https://doi.org/10.1093/nargab/lqae113) | 植物 LTR 的谱系注释 | 补充 TEsorter/REXdb；不代替 trusted 门控 |
-| GraffiTE | *A unified framework to analyze transposable element insertion polymorphisms using graph genomes*（2024） | [10.1038/s41467-024-53294-2](https://doi.org/10.1038/s41467-024-53294-2) | 在图上分析 TE 插入多态，可从组装或长读出发再分型 | 文库之后的下游分析，不是建库工具。2024 年论文描述的是 v1.0；当前 README 默认是 1.1（标志、默认值和输出文件有改动；`--reads` 已改名为 `--genotype_with`）。要复现论文，README 指向 `-r v1.0.0.0`。交叉见 vitis-pangenome 和 VOD 项目 14 |
+| [DANTE](https://github.com/kavonrtep/dante) / [DANTE_LTR](https://github.com/kavonrtep/dante_ltr) | *DANTE and DANTE_LTR: lineage-centric annotation pipelines for long terminal repeat retrotransposons in plant genomes*（2024） | [10.1093/nargab/lqae113](https://doi.org/10.1093/nargab/lqae113) | 植物 LTR 的谱系注释 | 补充 TEsorter/REXdb；不代替 trusted 门控 |
+| [GraffiTE](https://github.com/cgroza/GraffiTE) | *A unified framework to analyze transposable element insertion polymorphisms using graph genomes*（2024） | [10.1038/s41467-024-53294-2](https://doi.org/10.1038/s41467-024-53294-2) | 在图上分析 TE 插入多态，可从组装或长读出发再分型 | 文库之后的下游分析，不是建库工具。2024 年论文描述的是 v1.0；当前 README 默认是 1.1（标志、默认值和输出文件有改动；`--reads` 已改名为 `--genotype_with`）。要复现论文，README 指向 `-r v1.0.0.0`。交叉见 vitis-pangenome 和 VOD 项目 14 |
 | panEDTA | Crossref 官方题名为 *Differences in activity and stability drive transposable element variation in tropical and temperate maize*（2024）。该文介绍了 panEDTA。 | [10.1101/gr.278131.123](https://doi.org/10.1101/gr.278131.123) | 在泛基因组面板上做一致的 TE 注释 | 已是上面路线里的面板合并步骤 |
-| TEclass2 | *Transformer-Based Classification of Transposable Element Consensus Sequences with TEclass2*（2025） | [10.3390/biology15010059](https://doi.org/10.3390/biology15010059) | 用 Transformer 给 consensus 分类 | 只贴标签 |
+| [TEclass2](https://github.com/IOB-Muenster/TEclass2) | *Transformer-Based Classification of Transposable Element Consensus Sequences with TEclass2*（2025） | [10.3390/biology15010059](https://doi.org/10.3390/biology15010059) | 用 Transformer 给 consensus 分类 | 只贴标签 |
 | Terrier | *Terrier: a deep learning repeat classifier*（2025） | [10.1093/bib/bbaf442](https://doi.org/10.1093/bib/bbaf442) | 深度学习重复分类器 | 只贴标签 |
 | CREATE | *CREATE: a novel attention-based framework for efficient classification of transposable elements*（2025） | [10.1093/bib/bbaf608](https://doi.org/10.1093/bib/bbaf608) | 基于注意力机制的 TE 分类 | 只贴标签 |
-| DeepHel | *DeepHel: improving the accuracy and completeness of Helitron annotation with a multi-stage deep learning framework*（2026） | [10.1093/bioinformatics/btag817](https://doi.org/10.1093/bioinformatics/btag817) | Helitron 注释 | 与 HelitronScanner 并列；仍要整理 |
-| ColabCuraTE | *ColabCuraTE: an easy-to-use, web-based pipeline for the manual curation of transposable elements*（2025） | [10.1186/s13100-025-00389-2](https://doi.org/10.1186/s13100-025-00389-2) | 浏览器里做手工整理 | 补充 TEtrimmer 和 Goubert 2022 指南 |
+| [DeepHel](https://github.com/lyysxb/DeepHel) | *DeepHel: improving the accuracy and completeness of Helitron annotation with a multi-stage deep learning framework*（2026） | [10.1093/bioinformatics/btag817](https://doi.org/10.1093/bioinformatics/btag817) | Helitron 注释 | 与 HelitronScanner 并列；仍要整理 |
+| [ColabCuraTE](https://github.com/Ellison-Lab/ColabCuraTE) | *ColabCuraTE: an easy-to-use, web-based pipeline for the manual curation of transposable elements*（2025） | [10.1186/s13100-025-00389-2](https://doi.org/10.1186/s13100-025-00389-2) | 浏览器里做手工整理 | 补充 TEtrimmer 和 Goubert 2022 指南 |
 | TE_Bench | *TE_Bench: a foundational benchmarking workflow for transposable element annotation pipelines*（2026） | [10.1186/s13100-026-00405-z](https://doi.org/10.1186/s13100-026-00405-z) | 比较 EDTA、RepeatModeler2 和 Earl Grey | 在默认配置下，RepeatModeler2 与 Earl Grey 表现相近，并优于默认 EDTA（摘要）。用来比较工具；不要复制其插图。若重绘，只能用表中数字，并注明出处 |
-| panHiTE | *panHiTE: A comprehensive and accurate pipeline for TE detection in large-scale population genomes*（2026） | [10.1016/j.xplc.2025.101669](https://doi.org/10.1016/j.xplc.2025.101669) | 在群体基因组上检测 TE（Plant Commun 2026，doi:10.1016/j.xplc.2025.101669；HiTE README 同时列出预印本 doi:10.1101/2025.02.15.638472） | 与 panEDTA 并列；此处未运行 |
+| [panHiTE](https://github.com/CSU-KangHu/HiTE) | *panHiTE: A comprehensive and accurate pipeline for TE detection in large-scale population genomes*（2026） | [10.1016/j.xplc.2025.101669](https://doi.org/10.1016/j.xplc.2025.101669) | 在群体基因组上检测 TE（Plant Commun 2026，doi:10.1016/j.xplc.2025.101669；HiTE README 同时列出预印本 doi:10.1101/2025.02.15.638472） | 与 panEDTA 并列；此处未运行 |
 
 只做分类的工具只给 consensus 命名，不能取代修剪，也不能直接作为最终文库。
 
