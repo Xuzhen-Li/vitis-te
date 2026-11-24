@@ -177,6 +177,20 @@ $$\text{raw LAI} = \frac{\text{完整LTR反转录转座子总长度}}{\text{全�
 
 以葡萄属（*Vitis*）泛基因组研究为例，采用泛基因组联合注释策略能够释放出单基因组注释无法企及的科学威力：首先，在比较北美野生葡萄、东亚野生葡萄与欧亚栽培葡萄时，研究者可以精准量化究竟是哪几个特定的*Gypsy*或*Copia*家族在某个地理演化支中发生了谱系特异性爆发，彻底杜绝因独立构库导致的假性差异；其次，对于某些在栽培葡萄中仅存1至2个拷贝、极易在单基因组聚类中漏检的年轻活跃家族，若其在某个野生近缘种中拥有较高拷贝数，pan-TElib就能将其顺利捕获并反向精准标注出栽培葡萄中的稀有拷贝；最后，这套统一标尺的泛基因组转座子注释，为下一章探讨群体水平的转座子插入多态性（TIPs）鉴定、群体遗传学选择检验以及TE-GWAS表型关联分析，铺设了最坚实的数据高速公路。
 
+## 7.4 植物 LTR 反转录转座子的 Inpactor 系列工具
+
+第7.1–7.3节以 RepeatMasker、RepeatModeler2、LTR_retriever 和 EDTA 为主线。与这条主线并列、但不取代 CDS 门控 trusted 文库的，是 Orozco-Arias 等人发展的 Inpactor 系列。下列说明只依据已打开的论文与软件说明，不改变上文已有表述。
+
+**Inpactor**（doi:10.3390/biology7020032；https://github.com/simonorozcoarias/Inpactor）是面向大型植物基因组的并行流程，用于对 LTR 反转录转座子做分类、区分自主与非自主拷贝、构建基于反转录酶的系统发育，并估算插入时间。该文以菠萝基因组为例作了演示。
+
+**Inpactor2**（doi:10.1093/bib/bbac511；https://github.com/simonorozcoarias/Inpactor2）在组装基因组上结合深度学习与结构特征，检测完整 LTR 反转录转座子、过滤碎片与嵌套插入，并分类到超家族和谱系，输出半整理的 FASTA 文库。其训练数据来自 InpactorDB。软件说明亦指出可选地调用 RepeatMasker 做注释。
+
+**InpactorDB**（doi:10.3390/genes12020190；检索页 https://inpactordb.github.io；论文数据可用性声明为 doi:10.5281/zenodo.4386317）是谱系级植物 LTR 参考集，文中为 195 个基因组、108 个物种，去冗余后 67,241 条完整元件，并用于训练全连接与卷积网络做谱系分类。
+
+**SENMAP**（期刊论文 doi:10.1515/jib-2021-0036；会议摘要 doi:10.1109/ci-ibbi54220.2021.9626130；https://github.com/simonorozcoarias/SENMAP）用卷积网络在整理植物 LTR 文库时区分完整与非完整拷贝。
+
+同一工作线上还有：植物反转录转座子结构、识别与分类的综述（doi:10.3390/ijms20153837）；机器学习用于转座子检测与分类的系统调查（doi:10.7717/peerj.8311）；基于 k-mer 的植物 LTR 分类方法（doi:10.7717/peerj.11456）；以及这些任务中性能指标的比较（doi:10.3390/pr8060638）。YORO（doi:10.1371/journal.pone.0291925；https://github.com/simonorozcoarias/YORO）把卷积网络用于基因组目标检测。PanTEon（doi:10.64898/2026.04.01.715927；https://github.com/simonorozcoarias/PanTEon）是跨界分类器比较框架的预印本，不是默认注释流程的一部分。
+
 ## 本章参考文献
 
 - doi:10.1038/nrg2165
