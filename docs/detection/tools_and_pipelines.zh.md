@@ -141,10 +141,10 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --u RATE --
 |  | **LTRpred** | 用于完整 LTR 反转录转座子从头注释的 R 包。当前仓库由 HajkD/LTRpred 重定向到 drostlab/LTRpred。 | [github.com/drostlab/LTRpred](https://github.com/drostlab/LTRpred) | [10.21105/joss.02170](https://doi.org/10.21105/joss.02170) |
 |  | **MGEScan** | 官方说明中介绍的 Galaxy 系统，用于识别 LTR 与非 LTR 反转录转座子。 | [github.com/MGEScan/mgescan](https://github.com/MGEScan/mgescan) | — |
 |  | **Red** | 无需预先文库、在全基因组尺度上从头检测重复 DNA 的工具。 | [github.com/BioinformaticsToolsmith/Red](https://github.com/BioinformaticsToolsmith/Red) | [10.1186/s12859-015-0654-5](https://doi.org/10.1186/s12859-015-0654-5) |
-|  | **EDTA-GUI** | 面向植物的 EDTA 图形界面实现，并提供谱系级分类。本次未确认到官方代码仓库。 | — | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
+|  | **EDTA-GUI** | 面向植物的 EDTA 图形界面实现，并提供谱系级分类。本次未确认到官方代码仓库。 | [github.com/Marcos-Fernando/EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
 |  | **Tephra** | 从基因组组装发现转座子家族并描述其结构与演化的命令行流程，不必预先提供参考文库。官方说明中的引用是该仓库本身；本次未使用题名匹配的期刊论文。 | [github.com/sestaton/tephra](https://github.com/sestaton/tephra) | — |
 |  | **Transposome** | 从未组装的双端全基因组鸟枪法读段注释转座子家族。 | [github.com/sestaton/Transposome](https://github.com/sestaton/Transposome) | [10.1093/bioinformatics/btv059](https://doi.org/10.1093/bioinformatics/btv059) |
-|  | **CARP** | 综合从头重复序列流程，用于在基因组组装中识别、聚类并注释转座子和片段重复。本次未找到返回 HTTP 200 的官方代码仓库。 | — | [10.1371/journal.pone.0193588](https://doi.org/10.1371/journal.pone.0193588) |
+|  | **CARP** | 综合从头重复序列流程，用于在基因组组装中识别、聚类并注释转座子和片段重复。本次未找到返回 HTTP 200 的官方代码仓库。 | [github.com/carp-te/carp-documentation](https://github.com/carp-te/carp-documentation) | [10.1371/journal.pone.0193588](https://doi.org/10.1371/journal.pone.0193588) |
 |  | **MegaLTR** | 用于在植物基因组中检测完整 LTR 反转录转座子并计算 LTR 组装指数的网页服务与本地流程。本次未能成功打开配套网页服务；GitHub 仓库已打开。 | [github.com/MoradMMokhtar/MegaLTR](https://github.com/MoradMMokhtar/MegaLTR) | [10.3389/fpls.2023.1237426](https://doi.org/10.3389/fpls.2023.1237426) |
 |  | **TE-greedy-nester** | 基于结构检测 LTR 反转录转座子，并重建其嵌套顺序。 | [gitlab.fi.muni.cz/lexa/nested](https://gitlab.fi.muni.cz/lexa/nested) | [10.1093/bioinformatics/btaa632](https://doi.org/10.1093/bioinformatics/btaa632) |
 |  | **PhyLTR** | 官方说明中用于 LTR 反转录转座子系统发育分析的流程。已确认 Zenodo 软件记录；本次未使用另外题名匹配的期刊论文。 | [github.com/mcsimenc/PhyLTR](https://github.com/mcsimenc/PhyLTR) | [10.5281/zenodo.4256534](https://doi.org/10.5281/zenodo.4256534) |
@@ -153,7 +153,7 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --u RATE --
 |  | **Dfam TETools** | Dfam 联盟维护的容器，提供可运行的 RepeatMasker 与 RepeatModeler 安装。它封装的是本目录中已有的工具，本身不是新的注释器。 | [github.com/Dfam-consortium/TETools](https://github.com/Dfam-consortium/TETools) | — |
 |  | **PanTE** | 泛基因组转座子注释流程，按官方说明和题名匹配的预印本，把多条互补的从头检测路径合并为分类文库。 | [github.com/unavailable-2374/Pan_TE](https://github.com/unavailable-2374/Pan_TE) | [10.21203/rs.3.rs-5867196/v1](https://doi.org/10.21203/rs.3.rs-5867196/v1) |
 |  | **ParTEA** | Earl Grey 泛基因组流程（ParTEA），用于在多个基因组间保持一致的转座子注释。Earl Grey 本身已单独列出。 | [github.com/TobyBaril/EarlGreyParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | [10.64898/2026.11.04.764261](https://doi.org/10.64898/2026.11.04.764261) |
-|  | **MAKER-P** | 植物基因注释工具包，不是转座子注释器。在注释植物基因组时可使用重复序列文库。本次未找到返回 HTTP 200 的 MAKER-P 官方页面；未把通用 MAKER 仓库当作 MAKER-P 主页。 | — | [10.1104/pp.113.230144](https://doi.org/10.1104/pp.113.230144) |
+|  | **MAKER-P** | 植物基因注释工具包，不是转座子注释器。在注释植物基因组时可使用重复序列文库。本次未找到返回 HTTP 200 的 MAKER-P 官方页面；未把通用 MAKER 仓库当作 MAKER-P 主页。 | [yandell-lab.org/software/maker-p/](https://yandell-lab.org/software/maker-p/) | [10.1104/pp.113.230144](https://doi.org/10.1104/pp.113.230144) |
 | 文库构建、精修与去冗余 | **VSEARCH** | 通用的开放源代码聚类与去重工具，有时用于降低转座子文库冗余。它本身不是转座子注释器。 | [github.com/torognes/vsearch](https://github.com/torognes/vsearch) | [10.7717/peerj.2584](https://doi.org/10.7717/peerj.2584) |
 |  | **MMseqs2** | 通用序列搜索与聚类套件，有时用于大规模转座子家族聚类。它本身不是转座子注释器。 | [github.com/soedinglab/MMseqs2](https://github.com/soedinglab/MMseqs2) | [10.1038/nbt.3988](https://doi.org/10.1038/nbt.3988) |
 |  | **TE-Aid** | 绘制覆盖度、分歧度、自点阵和开放读框图，辅助人工精修一致性序列。介绍见本目录中已有的入门精修指南论文。 | [github.com/clemgoub/TE-Aid](https://github.com/clemgoub/TE-Aid) | [10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7) |
@@ -190,9 +190,18 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --u RATE --
 |  | **SyRI** | 从全基因组组装中识别共线与重排区域以及局部序列差异。通用工具，不是转座子注释器。此处使用已发表 DOI，而非预印本。 | [github.com/schneebergerlab/syri](https://github.com/schneebergerlab/syri) | [10.1186/s13059-019-1911-0](https://doi.org/10.1186/s13059-019-1911-0) |
 |  | **MEGAnE** | Mobile Element Genotyping Analysis Environment：按官方说明，从短读全基因组数据识别并为多态可移动元件分型。官方说明引用该预印本；预印本题名未使用工具名。 | [github.com/shohei-kojima/MEGAnE](https://github.com/shohei-kojima/MEGAnE) | [10.1101/2022.03.25.485726](https://doi.org/10.1101/2022.03.25.485726) |
 |  | **TEfinder** | 利用双端测序中的不一致读段检测新的转座子插入的流程。 | [github.com/VistaSohrab/TEfinder](https://github.com/VistaSohrab/TEfinder) | [10.3390/genes12020224](https://doi.org/10.3390/genes12020224) |
-|  | **ITIS** | 从二代测序数据识别转座子插入位点的工具。本次未能成功打开论文中的网站。 | — | [10.1186/s12859-015-0507-2](https://doi.org/10.1186/s12859-015-0507-2) |
-|  | **TE-Tracker** | 从全基因组重测序系统识别转座事件。本次未确认到官方代码仓库。 | — | [10.1186/s12859-014-0377-z](https://doi.org/10.1186/s12859-014-0377-z) |
-|  | **ELITE** | Efficiently Locating Insertions of Transposable Elements，一篇 ACM 方法论文。本次未确认到官方代码仓库。 | — | [10.1145/3307339.3342182](https://doi.org/10.1145/3307339.3342182) |
+|  | **ITIS** | 从二代测序数据识别转座子插入位点的工具。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of bioinformatics.psc.ac.cn/software/ITIS](https://web.archive.org/web/20160825205722/http://bioinformatics.psc.ac.cn:80/software/ITIS/) | [10.1186/s12859-015-0507-2](https://doi.org/10.1186/s12859-015-0507-2) |
+|  | **TE-Tracker** | 从全基因组重测序系统识别转座事件。本次未确认到官方代码仓库。 | [web.archive.org snapshot of genoscope.cns.fr/externe/tetracker](https://web.archive.org/web/20170813054646/http://www.genoscope.cns.fr:80/externe/tetracker/) | [10.1186/s12859-014-0377-z](https://doi.org/10.1186/s12859-014-0377-z) |
+|  | **ELITE** | Efficiently Locating Insertions of Transposable Elements，一篇 ACM 方法论文。本次未确认到官方代码仓库。 | [github.com/Anwica/ELITE](https://github.com/Anwica/ELITE) | [10.1145/3307339.3342182](https://doi.org/10.1145/3307339.3342182) |
+|  | **TIF** | Transposon Insertion Finder：从短读数据检测新生转座并报告插入位置的程序，不依赖已有的转座子文库。 | [github.com/akiomiyao/tif](https://github.com/akiomiyao/tif) | [10.1186/1471-2105-15-71](https://doi.org/10.1186/1471-2105-15-71) |
+|  | **TEF** | Transposable Element Finder：通用的活性转座子检测程序，通过比较两个样本、或一个样本与参考基因组，利用接合读段或靶位点重复证据寻找活跃转座。 | [github.com/akiomiyao/tef](https://github.com/akiomiyao/tef) | [10.1186/s12859-022-05011-3](https://doi.org/10.1186/s12859-022-05011-3) |
+|  | **ITIPs** | 在白菜（Brassica rapa）泛基因组中检测转座子插入多态的流程，依赖 smartie-sv 和 bwa。 | [github.com/caixu0518/ITIPs](https://github.com/caixu0518/ITIPs) | [10.1111/pbi.13807](https://doi.org/10.1111/pbi.13807) |
+|  | **RTRIP** | 约 3,000 份水稻种质的转座子插入多态目录，并附有分析脚本。论文中的网站目前无法打开；已打开一份存档的官方页面。 | [web.archive.org snapshot of RTRIP](https://web.archive.org/web/20240226054850/http://ibi.zju.edu.cn/Rtrip/index.html) | [10.1111/pbi.13425](https://doi.org/10.1111/pbi.13425) |
+|  | **panTEvo** | 用于在棉花泛基因组中追踪 LTR 反转录转座子动态与插入多态的流程。 | [github.com/Lcamdom/panTEvo](https://github.com/Lcamdom/panTEvo) | [10.1186/s13059-025-03837-7](https://doi.org/10.1186/s13059-025-03837-7) |
+|  | **TEPEAK** | 用于在非模式物种群体中识别并刻画多态转座子的方法。不是植物专用工具。 | [github.com/ryanlayerlab/TEPEAK](https://github.com/ryanlayerlab/TEPEAK) | [10.1371/journal.pcbi.1013122](https://doi.org/10.1371/journal.pcbi.1013122) |
+|  | **TypeSINE** | 从短读数据检测 SINE 插入多态。题名匹配的预印本研究对象是猪，不是植物。当前可用仓库为 github.com/mobilome/TypeSINE。 | [github.com/mobilome/TypeSINE](https://github.com/mobilome/TypeSINE) | [10.1101/2025.05.21.653756](https://doi.org/10.1101/2025.05.21.653756) |
+|  | **AnchorWave** | 面向高序列多样性、广泛结构变异和全基因组复制的全基因组比对工具。不是转座子注释器；论文报告了玉米中转座子有无变异的召回情况。 | [github.com/baoxingsong/AnchorWave](https://github.com/baoxingsong/AnchorWave) | [10.1073/pnas.2113075119](https://doi.org/10.1073/pnas.2113075119) |
+|  | **SVIM-asm** | 面向单倍体和二倍体基因组组装的结构变异检测工具。不是转座子注释器。 | [github.com/eldariont/svim-asm](https://github.com/eldariont/svim-asm) | [10.1093/bioinformatics/btaa1034](https://doi.org/10.1093/bioinformatics/btaa1034) |
 | 转座子表达与小 RNA | **TEtranscripts** | 在批量 RNA-seq 差异表达分析中同时计入基因与转座子表达，并处理多重比对读段。 | [github.com/mhammell-laboratory/TEtranscripts](https://github.com/mhammell-laboratory/TEtranscripts) | [10.1093/bioinformatics/btv422](https://doi.org/10.1093/bioinformatics/btv422) |
 |  | **TElocal** | 按座位定量转座子表达，与 TEtranscripts 出自同一实验室。 | [github.com/mhammell-laboratory/TElocal](https://github.com/mhammell-laboratory/TElocal) | — |
 |  | **Telescope** | 用贝叶斯模型从 RNA-seq 按座位估计转座子表达。 | [github.com/mlbendall/telescope](https://github.com/mlbendall/telescope) | [10.1371/journal.pcbi.1006453](https://doi.org/10.1371/journal.pcbi.1006453) |
@@ -206,7 +215,7 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --u RATE --
 |  | **piPipes** | 官方说明中介绍的一套流程，用于分析多种测序数据中的 piRNA 与转座子转录本。 | [github.com/bowhan/piPipes](https://github.com/bowhan/piPipes) | — |
 | 年龄、分歧度与景观 | **ParseRM** | 解析 RepeatMasker 的 .out 或 .align 文件，汇总组成、分歧度与景观。本次未匹配到独立方法论文的题名。 | [github.com/4ureliek/Parsing-RepeatMasker-Outputs](https://github.com/4ureliek/Parsing-RepeatMasker-Outputs) | — |
 |  | **VHICA** | Vertical and Horizontal Inheritance Consistence Analysis：通过比较转座子与宿主基因的分歧，区分垂直遗传与水平转移。 | [cran.r-project.org/package=vhica](https://cran.r-project.org/package=vhica) | [10.1093/molbev/msv341](https://doi.org/10.1093/molbev/msv341) |
-|  | **REANNOTATE** | 用于重建插入历史的重复序列自动古生物学注释。本次未能成功打开论文中的网站。 | — | [10.1186/1471-2164-9-614](https://doi.org/10.1186/1471-2164-9-614) |
+|  | **REANNOTATE** | 用于重建插入历史的重复序列自动古生物学注释。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of bioinformatics.org/reannotate](https://web.archive.org/web/20120208050248/http://www.bioinformatics.org/reannotate/) | [10.1186/1471-2164-9-614](https://doi.org/10.1186/1471-2164-9-614) |
 |  | **RepeatLandscape** | 解析 RepeatMasker 比对输出并绘制重复序列景观直方图或饼图的脚本。本次未匹配到独立方法论文的题名。 | [github.com/caballero/RepeatLandscape](https://github.com/caballero/RepeatLandscape) | — |
 |  | **TE_Density** | 按窗口计算相对于基因的转座子密度，用于研究转座子与基因的空间关系。 | [github.com/sjteresi/TE_Density](https://github.com/sjteresi/TE_Density) | [10.1186/s13100-022-00264-4](https://doi.org/10.1186/s13100-022-00264-4) |
 |  | **TEGRiP** | Transposable Elements Genes RelationshIps Pipeline：检测转座子与相邻基因的位置和方向关系。官方说明使用名称 TEGRiP。 | [github.com/marieBvr/TEs_genes_relationship_pipeline](https://github.com/marieBvr/TEs_genes_relationship_pipeline) | [10.24072/pcjournal.57](https://doi.org/10.24072/pcjournal.57) |
@@ -227,21 +236,23 @@ EDTA.pl --genome assembly.fa --species others --sensitive 1 --anno 1 --u RATE --
 |  | **Saha et al. 2008** | 对从头重复序列发现程序的实证比较。这是论文，不是软件工具。 | — | [10.1093/nar/gkn064](https://doi.org/10.1093/nar/gkn064) |
 | 多倍体亚基因组与串联重复 | **TRASH** | Tandem Repeat Annotation and Structural Hierarchy：注释串联重复，包括卫星阵列。不是转座子注释器。 | [github.com/vlothec/TRASH](https://github.com/vlothec/TRASH) | [10.1093/bioinformatics/btad308](https://doi.org/10.1093/bioinformatics/btad308) |
 |  | **SubPhaser** | 利用亚基因组特异 k-mer（主要来自转座子等重复序列）划分异源多倍体亚基因组。不是转座子注释器。 | [github.com/zhangrengang/SubPhaser](https://github.com/zhangrengang/SubPhaser) | [10.1111/nph.18173](https://doi.org/10.1111/nph.18173) |
-|  | **PolyCRACKER** | 利用重复序列演化信号，在无监督条件下划分多倍体亚基因组。见到过非官方代码镜像，未将其作为官方仓库。 | — | [10.1186/s12864-019-5828-5](https://doi.org/10.1186/s12864-019-5828-5) |
+|  | **PolyCRACKER** | 利用重复序列演化信号，在无监督条件下划分多倍体亚基因组。见到过非官方代码镜像，未将其作为官方仓库。 | [bitbucket.org/berkeleylab/jgi-polycracker](https://bitbucket.org/berkeleylab/jgi-polycracker/) | [10.1186/s12864-019-5828-5](https://doi.org/10.1186/s12864-019-5828-5) |
 | 数据库与参考集 | **PlantRep** | 在数百个植物基因组中重新注释得到的植物重复序列一致性库。本次未能成功打开其公开网站。 | — | [10.1007/s00299-021-02817-y](https://doi.org/10.1007/s00299-021-02817-y) |
 |  | **RiTE-db** | 稻属转座子资源库。当前页面由旧的 genome.arizona.edu 地址重定向而来。 | [ava.genome.arizona.edu/cgi-bin/rite/index.cgi](https://ava.genome.arizona.edu/cgi-bin/rite/index.cgi) | [10.1186/s12864-015-1762-3](https://doi.org/10.1186/s12864-015-1762-3) |
 |  | **SINEBase** | 收录真核生物 SINE 一致性序列并提供结构分析的数据库与工具。 | [sines.eimb.ru](https://sines.eimb.ru/) | [10.1093/nar/gks1263](https://doi.org/10.1093/nar/gks1263) |
 |  | **SoyTEdb** | 大豆基因组转座子数据库。原域名现重定向到 SoyBase 的旧版页面。 | [legacy.soybase.org/soytedb](https://legacy.soybase.org/soytedb/) | [10.1186/1471-2164-11-113](https://doi.org/10.1186/1471-2164-11-113) |
 |  | **RepetDB** | 与 REPET 项目相关的转座子参考序列统一资源。 | [urgi.versailles.inrae.fr/repetdb](https://urgi.versailles.inrae.fr/repetdb) | [10.1186/s13100-019-0150-y](https://doi.org/10.1186/s13100-019-0150-y) |
 |  | **TREP** | 面向植物的人工精修转座子平台，附录B已有条目；此处补入方法目录。 | [trep-db.uzh.ch](https://trep-db.uzh.ch) | — |
-|  | **HTT-DB** | 水平转移转座子数据库，另有更新说明论文。本次尝试的公开网站未能成功打开。 | — | [10.1093/bioinformatics/btv281](https://doi.org/10.1093/bioinformatics/btv281) |
+|  | **HTT-DB** | 水平转移转座子数据库，另有更新说明论文。本次尝试的公开网站未能成功打开。 | [web.archive.org snapshot of HTT-DB](https://web.archive.org/web/20220814084307/http://lpa.saogabriel.unipampa.edu.br:8080/httdatabase/) | [10.1093/bioinformatics/btv281](https://doi.org/10.1093/bioinformatics/btv281) |
 |  | **PlantLTRdb** | 收录 195 个植物物种完整 LTR 反转录转座子的交互式数据库。 | [bioinformatics.um6p.ma/PlantLTRdb/](https://bioinformatics.um6p.ma/PlantLTRdb/) | [10.3389/fpls.2023.1134627](https://doi.org/10.3389/fpls.2023.1134627) |
-|  | **DPTEdb** | 雌雄异株植物转座子综合数据库。本次未能成功打开论文中的网站。 | — | [10.1093/database/baw078](https://doi.org/10.1093/database/baw078) |
-|  | **SPTEdb** | 杨柳科植物转座子数据库。本次未能成功打开论文中的网站。 | — | [10.1093/database/bay024](https://doi.org/10.1093/database/bay024) |
+|  | **DPTEdb** | 雌雄异株植物转座子综合数据库。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of DPTEdb](https://web.archive.org/web/20180812090334/http://genedenovoweb.ticp.net:81/DPTEdb/index.php) | [10.1093/database/baw078](https://doi.org/10.1093/database/baw078) |
+|  | **SPTEdb** | 杨柳科植物转座子数据库。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of SPTEdb](https://web.archive.org/web/20180730000921/http://genedenovoweb.ticp.net:81/SPTEdb/index.php) | [10.1093/database/bay024](https://doi.org/10.1093/database/bay024) |
 |  | **RetrOryza** | 水稻 LTR 反转录转座子数据库。本次尝试的公开网站未能成功打开。 | — | [10.1093/nar/gkl780](https://doi.org/10.1093/nar/gkl780) |
-|  | **TIGR Plant Repeat Databases** | 历史上用于识别植物重复序列的汇总资源。本次未能成功打开原来的 TIGR 网址。 | — | [10.1093/nar/gkh099](https://doi.org/10.1093/nar/gkh099) |
-|  | **ConTEdb** | 针叶树转座子综合数据库。本次尝试的公开网站未能成功打开。 | — | [10.1093/database/bay131](https://doi.org/10.1093/database/bay131) |
+|  | **TIGR Plant Repeat Databases** | 历史上用于识别植物重复序列的汇总资源。本次未能成功打开原来的 TIGR 网址。 | [rice.uga.edu/pub/data/TIGR_Plant_Repeats/](https://rice.uga.edu/pub/data/TIGR_Plant_Repeats/) | [10.1093/nar/gkh099](https://doi.org/10.1093/nar/gkh099) |
+|  | **ConTEdb** | 针叶树转座子综合数据库。本次尝试的公开网站未能成功打开。 | [web.archive.org snapshot of ConTEdb](https://web.archive.org/web/20210921143932/http://genedenovoweb.ticp.net:81/conTEdb/index.php) | [10.1093/database/bay131](https://doi.org/10.1093/database/bay131) |
 |  | **AnnoTEP-DB** | 与 EDTA-GUI 论文相关的说明与预注释基因组资源。目录中已有 EDTA-GUI 软件条目，本次未改那一行。当前可用地址需要末尾斜杠。 | [plantgenomics.ncc.unesp.br/AnnoTEP-DB/](https://plantgenomics.ncc.unesp.br/AnnoTEP-DB/) | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
 |  | **MaizeGP** | 开放的玉米图泛基因组平台，含结构变异目录。这是物种泛基因组资源，不是专一的转座子数据库。 | [github.com/Jia-nianhua/Maize-Graph-Pangenome](https://github.com/Jia-nianhua/Maize-Graph-Pangenome) | [10.1111/jipb.70439](https://doi.org/10.1111/jipb.70439) |
 |  | **TE Hub** | 用于分享并连接转座子注释工具、数据、资源和方法的社区站点。 | [tehub.org](https://tehub.org/) | [10.1186/s13100-021-00244-0](https://doi.org/10.1186/s13100-021-00244-0) |
 |  | **awesome-transposable-elements** | 公开整理的转座子研究软件、数据库和其他资源清单。这是社区索引，不是原始数据库。 | [github.com/nixonlab/awesome-transposable-elements](https://github.com/nixonlab/awesome-transposable-elements) | — |
+|  | **GrapeGenomics Vitis RepeatMasker library** | 基于赤霞珠（Cabernet Sauvignon）的葡萄 RepeatMasker 自定义文库（Vitis_repeats.lib.gz），由 Cantu 实验室发布。这是可直接用于屏蔽的文库，不是可浏览检索的转座子数据库。未确认到正式的数据集 DOI。 | [grapegenomics.com/pages/repeats.php](https://grapegenomics.com/pages/repeats.php) | — |
+|  | **PN40024 T2T TE annotations** | 随 PN40024 端粒到端粒基因组发布的转座子注释文件（PN_T2T_TE.gff3）。论文已在本目录中；本行只收录注释文件。 | [zenodo.org/records/13741133](https://zenodo.org/records/13741133) | [10.5281/zenodo.13741133](https://doi.org/10.5281/zenodo.13741133) |
