@@ -116,179 +116,400 @@
 
 默认路线是 EDTA，再到 TEtrimmer，再到 TEsorter，再到经过 CDS 过滤的 trusted 文库，最后用于软屏蔽或 panEDTA。带判断节点的决策树见 [`docs/WORKFLOW.zh.md`](docs/WORKFLOW.zh.md)。按步骤划分的软件、行业难点，以及同一路线的更详细说明见 [`docs/detection/tools_and_pipelines.zh.md`](docs/detection/tools_and_pipelines.zh.md)。用于识别各类型的序列特征见 [`docs/detection/signatures.zh.md`](docs/detection/signatures.zh.md)。交给基因注释的软屏蔽说明见 [`docs/detection/softmask_handoff.zh.md`](docs/detection/softmask_handoff.zh.md)。每一行的链接、标题匹配的 DOI（如有）、输入、输出和适用场合见 [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv)。此处未锁定工具版本。只在 Crossref 题名与目标论文一致时收录 DOI（核对于 2026-11-15，Asia/Shanghai，CST，UTC+8）。没有题名匹配 DOI 的条目只写网址，或标 [待确认]。
 
-按分析步骤重新整理的软件指南见 [`docs/software/README.zh.md`](docs/software/README.zh.md)：先是整套流程及其覆盖的步骤，再是每个分析步骤，每个条目带原始论文、论文署名的实验室和基于引用数的权威度指标，并含可视化一节。逐条数据见 [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv)。
+### 按分析步骤划分的软件
 
-与上面默认的 EDTA 路线并列、但不取代它的，是 Inpactor 这一组面向植物 LTR 反转录转座子的工具：[Inpactor](https://github.com/simonorozcoarias/Inpactor) 和 [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) 用于完整 LTR 元件的分类（Inpactor2 还能做检测并分到谱系），[InpactorDB](https://inpactordb.github.io) 是谱系级的植物 LTR 参考集，[SENMAP](https://github.com/simonorozcoarias/SENMAP) 在整理文库时保留完整拷贝，[TIP_finder](https://github.com/simonorozcoarias/TIP_finder) 用短读长双端数据检测插入多态。题名核对过的 DOI 和代码仓库链接见下方，以及 [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv)。
+本节目录：各步骤的链接如下。括号中的数字是该表中的条目数。权威度规则和整套流程覆盖表也列在这里。本节共 198 条。
 
-### 按步骤划分的软件
+- [权威度规则](#权威度规则)
+- [整套流程及其覆盖的步骤](#整套流程及其覆盖的步骤)（14）
+- [整套流程：论文、实验室与权威度](#整套流程论文实验室与权威度)（14）
+- [重复家族发现工具与基于读段的发现](#重复家族发现工具与基于读段的发现)（8）
+- [LTR 反转录转座子检测](#ltr-反转录转座子检测)（13）
+- [TIR、MITE、Helitron 与 SINE 检测](#tirmitehelitron-与-sine-检测)（14）
+- [精修、去冗余与文库质控](#精修去冗余与文库质控)（10）
+- [分类](#分类)（14）
+- [屏蔽、注释与注释结果整理](#屏蔽注释与注释结果整理)（6）
+- [插入年龄、景观与水平转移](#插入年龄景观与水平转移)（8）
+- [插入多态：短读长](#插入多态短读长)（25）
+- [插入多态：长读长与结果注释](#插入多态长读长与结果注释)（9）
+- [插入多态：组装、泛基因组与图基因组](#插入多态组装泛基因组与图基因组)（11）
+- [插入多态：植物资源与其他输入](#插入多态植物资源与其他输入)（2）
+- [转座子表达与小 RNA](#转座子表达与小-rna)（11）
+- [可视化](#可视化)（22）
+  - [转座子专用视图、景观图与嵌套结构图](#转座子专用视图景观图与嵌套结构图)（6）
+  - [重复序列点图与一致性热图](#重复序列点图与一致性热图)（3）
+  - [密度图与核型（染色体示意）图](#密度图与核型染色体示意图)（3）
+  - [Circos 风格的环形图](#circos-风格的环形图)（2）
+  - [基因组浏览器轨道](#基因组浏览器轨道)（4）
+  - [共线性、组装比对与泛基因组图视图](#共线性组装比对与泛基因组图视图)（4）
+- [多倍体亚基因组与串联重复](#多倍体亚基因组与串联重复)（3）
+- [数据库与文库：通用](#数据库与文库通用)（5）
+- [数据库与文库：植物](#数据库与文库植物)（11）
+- [数据库与文库：葡萄（Vitis）](#数据库与文库葡萄vitis)（2）
+- [模拟与评测](#模拟与评测)（6）
+- [社区索引与交叉链接](#社区索引与交叉链接)（3）
 
-| 步骤 | 适用场合 | 本目录中的工具 |
-|------|----------|----------------|
-| de novo 发现 | 从组装或单倍型出发 | [EDTA](https://github.com/oushujun/EDTA)（此处默认）、[RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler)、[Earl Grey](https://github.com/TobyBaril/EarlGrey)；家族发现还有 [RepeatScout](https://github.com/Dfam-consortium/RepeatScout)、[RECON](https://github.com/Dfam-consortium/RECON)、[PILER](https://www.drive5.com/piler/) |
-| 结构检测 | 寻找完整的 LTR、TIR、MITE 或 Helitron | [LTR_FINDER](https://github.com/xzhub/LTR_FINDER)、[LTR_FINDER_parallel](https://github.com/oushujun/LTR_FINDER_parallel)、[LTRharvest](https://github.com/genometools/genometools)、[LTR_retriever](https://github.com/oushujun/LTR_retriever)；[HelitronScanner](https://sourceforge.net/projects/helitronscanner/)；MITE-Hunter、[detectMITE](https://sourceforge.net/projects/detectmite/)、[TIR-Learner](https://github.com/oushujun/TIR-Learner)、[GRF](https://github.com/bioinfolabmu/GenericRepeatFinder)、[Inpactor2](https://github.com/simonorozcoarias/Inpactor2) |
-| 同源注释 | 用文库做注释或屏蔽 | [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker)（[网站](https://www.repeatmasker.org/)）；文库为 [Dfam](https://www.dfam.org/) 和 [Repbase](https://www.girinst.org/repbase/) |
-| 分类 | 给 working 文库贴标签 | [TEsorter](https://github.com/zhangrengang/TEsorter) + [REXdb](https://bitbucket.org/petrnovak/repex_tarean)（植物 LTR 谱系）；[DeepTE](https://github.com/LiLabAtVT/DeepTE)；[TEclass](https://bioinformatics.uni-muenster.de/tools/teclass/index.hbi)；[Inpactor](https://github.com/simonorozcoarias/Inpactor)、[Inpactor2](https://github.com/simonorozcoarias/Inpactor2) |
-| 整理与 consensus | 把原始 consensus 变成 working 或 trusted 文库 | [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer)（此处默认）、[MCHelper](https://github.com/GonzalezLab/MCHelper)、[SENMAP](https://github.com/simonorozcoarias/SENMAP)、Goubert 指南（[doi:10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7)）、[CD-HIT](https://github.com/weizhongli/cdhit) |
-| 文库质控 | 去掉非 TE 重复、检查组装质量 | [TRF](https://github.com/Benson-Genomics-Lab/TRF)（非 TE 轨道；[网站](https://tandem.bu.edu/trf/trf.html)）；在整理后或泛注释上计算 LAI（[LTR_retriever](https://github.com/oushujun/LTR_retriever)） |
-| 屏蔽 | 把基因组交给基因注释 | 只用 trusted 文库做 [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker) `-xsmall`；用 [BEDTools](https://github.com/arq5x/bedtools2) 检查轨道 |
-| TE 年龄 / 插入时间 | 整理后的完整 LTR 对 | [LTR_retriever](https://github.com/oushujun/LTR_retriever)；演示脚本 `scripts/01_ltr_insertion_age.py` |
-| 多态 TE 检测 | 群体或长读插入检测，不是建库 | [TEMP](https://github.com/JialiUMassWengLab/TEMP)、[RelocaTE2](https://github.com/JinfengChen/RelocaTE2)、[xTea](https://github.com/parklab/xTea)、[Jitterbug](https://github.com/elzbth/jitterbug)、[TIP_finder](https://github.com/simonorozcoarias/TIP_finder) |
-| 泛基因组 TE | 一组单倍型或基因组 | [panEDTA](https://github.com/oushujun/EDTA)（EDTA 仓库中的 `panEDTA.sh`） |
-| 可视化 / 碎片合并 | 整理同源注释 | [RepeatCraft](https://github.com/niccw/repeatcraftp)、[oneCodeToFindThemAll](https://doua.prabi.fr/software/one-code-to-find-them-all) |
+下面按分析步骤列出本目录的 198 个软件、数据库和流程。每个条目给出原始论文、实验室和权威度；链接指向官方仓库或站点。更长的说明见 [`docs/software/README.zh.md`](docs/software/README.zh.md)，逐条数据见 [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv)，每条的核对说明见 [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv)。
 
-### Inpactor 系列（植物 LTR 反转录转座子）
+**默认路线：** [EDTA](https://github.com/oushujun/EDTA) → [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) → [TEsorter](https://github.com/zhangrengang/TEsorter) → 经 CDS 过滤的 trusted 文库 → [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker) 软屏蔽，或用 panEDTA 处理多基因组。下表中只有这条路线上的工具标「默认」；没有默认的步骤，各行按论文被引次数排序，这不说明哪个工具更适合你的基因组。
 
-下列工具是对默认 EDTA 路线的补充或备选，不能代替经过 CDS 门控的 trusted 文库。
+#### 权威度规则
 
-| 名称 | 用途 | 代码或数据仓库 | DOI |
-|------|------|----------------|-----|
-| Inpactor | 在高性能计算环境下分类植物 LTR 反转录转座子，区分自主与非自主拷贝，并估算插入时间 | [github.com/simonorozcoarias/Inpactor](https://github.com/simonorozcoarias/Inpactor) | [10.3390/biology7020032](https://doi.org/10.3390/biology7020032) |
-| Inpactor2 | 结合深度学习与结构特征，检测完整植物 LTR 反转录转座子、过滤碎片与嵌套拷贝，并分类到超家族和谱系；输入为组装基因组 | [github.com/simonorozcoarias/Inpactor2](https://github.com/simonorozcoarias/Inpactor2) | [10.1093/bib/bbac511](https://doi.org/10.1093/bib/bbac511) |
-| InpactorDB | 谱系级植物 LTR 反转录转座子参考集（论文中为 195 个基因组、108 个物种；去冗余后 67,241 条） | [InpactorDB 检索页](https://inpactordb.github.io)；数据集 [10.5281/zenodo.4386317](https://doi.org/10.5281/zenodo.4386317)（其后快照见 [10.5281/zenodo.5816833](https://doi.org/10.5281/zenodo.5816833)） | [10.3390/genes12020190](https://doi.org/10.3390/genes12020190) |
-| SENMAP | 用卷积网络在整理植物 LTR 文库时保留完整拷贝 | [github.com/simonorozcoarias/SENMAP](https://github.com/simonorozcoarias/SENMAP) | [10.1515/jib-2021-0036](https://doi.org/10.1515/jib-2021-0036)（期刊论文；会议摘要：[10.1109/ci-ibbi54220.2021.9626130](https://doi.org/10.1109/ci-ibbi54220.2021.9626130)） |
-| TIP_finder | 用 Illumina 双端短读、染色体级别参考基因组和转座子一致性序列，在高性能计算环境下检测插入多态 | [github.com/simonorozcoarias/TIP_finder](https://github.com/simonorozcoarias/TIP_finder) | [10.3390/biology9090281](https://doi.org/10.3390/biology9090281) |
-| YORO | 用卷积网络做基因组目标检测，用于转座子的检测与分类 | [github.com/simonorozcoarias/YORO](https://github.com/simonorozcoarias/YORO) | [10.1371/journal.pone.0291925](https://doi.org/10.1371/journal.pone.0291925) |
-| PanTEon | 跨界的转座子分类器设计与比较框架及配套数据库（预印本） | [github.com/simonorozcoarias/PanTEon](https://github.com/simonorozcoarias/PanTEon) | [10.64898/2026.04.01.715927](https://doi.org/10.64898/2026.04.01.715927) |
+> **权威度规则（只在此处说明一次）：** 权威度取 OpenAlex 的论文被引次数（2026-11-25 取数）。标准：500 次及以上；成熟：100–499 次；较新：少于 100 次且论文发表于 2023 年或之后；小众：少于 100 次且发表于 2023 年之前；无论文：目录中没有题名匹配的论文。BEDTools、IGV 这类通用工具的引用数来自所有学科。实验室取论文元数据中的通讯作者及其机构（多个通讯作者时写第一位并以 +N 表示其余人数；没有标注时写末位作者）；DOI 已用 Crossref 核对，例外见 `catalog/SOFTWARE_AUTHORITY.tsv` 的 `doi_check` 列。本节共 198 条：标准 28、成熟 47、较新 42、小众 58、无论文 23。
+
+#### 整套流程及其覆盖的步骤
+
+「有」表示该流程自己的说明或目录条目写明了这一步，「—」只表示没有写明。各流程的论文和实验室见本表后的第一张表。
+
+| 流程 | 建库 | 精修/去冗余 | 分类 | 屏蔽/注释 | 年龄/分化度 | 多基因组 | 权威度 |
+|---|---|---|---|---|---|---|---|
+| **[EDTA](https://github.com/oushujun/EDTA)** （默认路线） | 有 | 有 | 有 | 有 | — | 经 panEDTA | 标准 · 1683 次 |
+| **[panEDTA](https://github.com/oushujun/EDTA/blob/master/panEDTA.sh)** （默认路线） | — | 有 | — | 有 | — | 有 | 较新 · 84 次 |
+| [EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | 同 EDTA | 同 EDTA | 有 | 同 EDTA | — | — | 较新 · 2 次 |
+| [RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler) | 有 | 有 | 有 | — | — | — | 标准 · 4333 次 |
+| [Dfam TETools](https://github.com/Dfam-consortium/TETools) | 经 RepeatModeler | — | 经 RepeatModeler | 经 RepeatMasker | — | — | 无论文 |
+| [Earl Grey](https://github.com/TobyBaril/EarlGrey) | 有 | 有 | 有 | 有 | 有 | ParTEA | 成熟 · 292 次 |
+| [ParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | — | — | — | 有 | — | 有 | 较新 · 0 次，预印本 |
+| [HiTE](https://github.com/CSU-KangHu/HiTE) | 有 | — | 有 | 有 | — | panHiTE | 较新 · 71 次 |
+| [panHiTE](https://github.com/CSU-KangHu/HiTE) | 有 | — | — | — | — | 有 | 较新 · 5 次 |
+| [REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | 有 | 有 | — | 有 | — | — | 标准 · 589 次 |
+| [Tephra](https://github.com/sestaton/tephra) | 有 | — | 有 | 有 | 有 | — | 无论文 |
+| [CARP](https://github.com/carp-te/carp-documentation) | 有 | 有 | — | 有 | — | — | 小众 · 36 次 |
+| [CLARI-TE](https://github.com/jdaron/CLARI-TE) | — | — | — | 有 | — | — | 无论文 |
+| [PanTE](https://github.com/unavailable-2374/Pan_TE) | 有 | — | 有 | — | — | 有 | 较新 · 2 次，预印本 |
+
+#### 整套流程：论文、实验室与权威度
+
+| 工具 | 角色 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|---|
+| [EDTA](https://github.com/oushujun/EDTA) | **默认** | *Genome biology* 2019 · [10.1186/s13059-019-1905-y](https://doi.org/10.1186/s13059-019-1905-y) | Ning Jiang, Michigan State University +2 | 标准 · 1683 次 |
+| [panEDTA](https://github.com/oushujun/EDTA/blob/master/panEDTA.sh) | **默认** | *Genome Research* 2024 · [10.1101/gr.278131.123](https://doi.org/10.1101/gr.278131.123) | Matthew B. Hufford, Iowa State University +1 | 较新 · 84 次 |
+| [RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler) | 备选 | *Proceedings of the National Academy of Sciences* 2020 · [10.1073/pnas.1921046117](https://doi.org/10.1073/pnas.1921046117) | Arian F. A. Smit, Institute for Systems Biology（末位作者） | 标准 · 4333 次 |
+| [REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | 备选 | *PLoS ONE* 2011 · [10.1371/journal.pone.0016526](https://doi.org/10.1371/journal.pone.0016526) | Hadi Quesneville, Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement | 标准 · 589 次 |
+| [Earl Grey](https://github.com/TobyBaril/EarlGrey) | 备选 | *Molecular Biology and Evolution* 2024 · [10.1093/molbev/msae068](https://doi.org/10.1093/molbev/msae068) | Tobias Baril, University of Exeter +1 | 成熟 · 292 次 |
+| [HiTE](https://github.com/CSU-KangHu/HiTE) | 备选 | *Nature Communications* 2024 · [10.1038/s41467-024-49912-8](https://doi.org/10.1038/s41467-024-49912-8) | Bin Hu, Beijing Institute of Technology +1 | 较新 · 71 次 |
+| [CARP](https://github.com/carp-te/carp-documentation) | 备选 | *PLoS ONE* 2018 · [10.1371/journal.pone.0193588](https://doi.org/10.1371/journal.pone.0193588) | David L. Adelson, The University of Adelaide | 小众 · 36 次 |
+| [panHiTE](https://github.com/CSU-KangHu/HiTE) | 备选 | *Plant Communications* 2025 · [10.1016/j.xplc.2025.101669](https://doi.org/10.1016/j.xplc.2025.101669) | Jianxin Wang, Central South University | 较新 · 5 次 |
+| [EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | 备选 | *BMC Genomics* 2026 · [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) | Alessandro M. Varani, Universidade Estadual Paulista (Unesp) +1 | 较新 · 2 次 |
+| [PanTE](https://github.com/unavailable-2374/Pan_TE) | 备选 | *Research Square* 2025 · [10.21203/rs.3.rs-5867196/v1](https://doi.org/10.21203/rs.3.rs-5867196/v1) | Yiwen Wang, The University of Melbourne | 较新 · 2 次，预印本 |
+| [ParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | 备选 | *bioRxiv (Cold Spring Harbor Laboratory)* 2026 · [10.64898/2026.11.04.764261](https://doi.org/10.64898/2026.11.04.764261) | Tobias Baril, Swedish Museum of Natural History | 较新 · 0 次，预印本 |
+| [CLARI-TE](https://github.com/jdaron/CLARI-TE) | 备选 | — | — | 无论文 |
+| [Dfam TETools](https://github.com/Dfam-consortium/TETools) | 备选 | — | — | 无论文 |
+| [Tephra](https://github.com/sestaton/tephra) | 备选 | — | — | 无论文 |
+
+#### 重复家族发现工具与基于读段的发现
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [RepeatScout](https://github.com/Dfam-consortium/RepeatScout) | *Bioinformatics* 2005 · [10.1093/bioinformatics/bti1018](https://doi.org/10.1093/bioinformatics/bti1018) | Alkes L. Price, University of California San Diego | 标准 · 2427 次 |
+| [RECON](https://github.com/Dfam-consortium/RECON) | *Genome Research* 2002 · [10.1101/gr.88502](https://doi.org/10.1101/gr.88502) | Sean R. Eddy, Howard Hughes Medical Institute | 标准 · 1126 次 |
+| [PILER](https://www.drive5.com/piler/) | *Bioinformatics* 2005 · [10.1093/bioinformatics/bti1003](https://doi.org/10.1093/bioinformatics/bti1003) | R. C. Edgar, bob@drive5.com | 标准 · 807 次 |
+| [TAREAN](https://repeatexplorer-elixir.cerit-sc.cz/galaxy/) | *Nucleic Acids Research* 2017 · [10.1093/nar/gkx257](https://doi.org/10.1093/nar/gkx257) | Jir̆í Macas, Institute of Plant Molecular Biology | 成熟 · 368 次 |
+| [RepeatExplorer2](https://repeatexplorer-elixir.cerit-sc.cz) | *Nature Protocols* 2020 · [10.1038/s41596-020-0400-y](https://doi.org/10.1038/s41596-020-0400-y) | Jir̆í Macas, Czech Academy of Sciences | 成熟 · 320 次 |
+| [Red](https://github.com/BioinformaticsToolsmith/Red) | *BMC Bioinformatics* 2015 · [10.1186/s12859-015-0654-5](https://doi.org/10.1186/s12859-015-0654-5) | Hani Z. Girgis, National Institutes of Health | 成熟 · 275 次 |
+| [dnaPipeTE](https://github.com/clemgoub/dnaPipeTE) | *Genome Biology and Evolution* 2015 · [10.1093/gbe/evv050](https://doi.org/10.1093/gbe/evv050) | Matthieu Boulesteix, Lyon 1 Université | 成熟 · 240 次 |
+| [Transposome](https://github.com/sestaton/Transposome) | *Bioinformatics* 2015 · [10.1093/bioinformatics/btv059](https://doi.org/10.1093/bioinformatics/btv059) | S. Evan Staton, University of Georgia | 小众 · 22 次 |
+
+#### LTR 反转录转座子检测
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [LTR_FINDER](https://github.com/xzhub/LTR_FINDER) | *Nucleic Acids Research* 2007 · [10.1093/nar/gkm286](https://doi.org/10.1093/nar/gkm286) | Hao Wang, Fudan University | 标准 · 2933 次 |
+| [LTRharvest](https://github.com/genometools/genometools) | *BMC Bioinformatics* 2008 · [10.1186/1471-2105-9-18](https://doi.org/10.1186/1471-2105-9-18) | Ute Willhoeft, Universität Hamburg | 标准 · 1855 次 |
+| [LTR_retriever](https://github.com/oushujun/LTR_retriever) | *Plant Physiology* 2017 · [10.1104/pp.17.01310](https://doi.org/10.1104/pp.17.01310) | Ning Jiang, Michigan State University | 标准 · 1703 次 |
+| [LTRdigest](https://github.com/genometools/genometools) | *Nucleic Acids Research* 2009 · [10.1093/nar/gkp759](https://doi.org/10.1093/nar/gkp759) | Sascha Steinbiss, Universität Hamburg | 成熟 · 310 次 |
+| [LTR_FINDER_parallel](https://github.com/oushujun/LTR_FINDER_parallel) | *Mobile DNA* 2019 · [10.1186/s13100-019-0193-0](https://doi.org/10.1186/s13100-019-0193-0) | Ning Jiang, Michigan State University | 成熟 · 291 次 |
+| [DANTE and DANTE_LTR](https://github.com/kavonrtep/dante_ltr) | *NAR Genomics and Bioinformatics* 2024 · [10.1093/nargab/lqae113](https://doi.org/10.1093/nargab/lqae113) | Jir̆í Macas, Czech Academy of Sciences | 较新 · 42 次 |
+| [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) | *Briefings in Bioinformatics* 2022 · [10.1093/bib/bbac511](https://doi.org/10.1093/bib/bbac511) | Simón Orozco-Arias, Universidad de Caldas +3 | 小众 · 38 次 |
+| [LTRpred](https://github.com/drostlab/LTRpred) | *The Journal of Open Source Software* 2020 · [10.21105/joss.02170](https://doi.org/10.21105/joss.02170) | Hajk‐Georg Drost, University of Cambridge | 小众 · 28 次 |
+| [LtrDetector](https://github.com/BioinformaticsToolsmith/LtrDetector) | *BMC Genomics* 2019 · [10.1186/s12864-019-5796-9](https://doi.org/10.1186/s12864-019-5796-9) | Hani Z. Girgis, University of Tulsa | 小众 · 27 次 |
+| [TE-greedy-nester](https://gitlab.fi.muni.cz/lexa/nested) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa632](https://doi.org/10.1093/bioinformatics/btaa632) | Matej Lexa, Czech Academy of Sciences | 小众 · 24 次 |
+| [MegaLTR](https://github.com/MoradMMokhtar/MegaLTR) | *Frontiers in Plant Science* 2023 · [10.3389/fpls.2023.1237426](https://doi.org/10.3389/fpls.2023.1237426) | Morad M. Mokhtar, Université Mohammed VI Polytechnique +1 | 较新 · 9 次 |
+| [PhyLTR](https://github.com/mcsimenc/PhyLTR) | *Zenodo (CERN European Organization for Nuclear Research)* 2020 · [10.5281/zenodo.4256534](https://doi.org/10.5281/zenodo.4256534) | Der, JP.（末位作者） | 小众 · 0 次 |
+| [MGEScan](https://github.com/MGEScan/mgescan) | — | — | 无论文 |
+
+#### TIR、MITE、Helitron 与 SINE 检测
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [MITE-Hunter](https://doi.org/10.1093/nar/gkq862) | *Nucleic Acids Research* 2010 · [10.1093/nar/gkq862](https://doi.org/10.1093/nar/gkq862) | S. R. Wessler, University of Georgia | 标准 · 759 次 |
+| [HelitronScanner](https://sourceforge.net/projects/helitronscanner/) | *Proceedings of the National Academy of Sciences* 2014 · [10.1073/pnas.1410068111](https://doi.org/10.1073/pnas.1410068111) | Chunguang Du, Montclair State University（末位作者） | 成熟 · 307 次 |
+| [TIR-Learner](https://github.com/oushujun/TIR-Learner) | *Molecular Plant* 2019 · [10.1016/j.molp.2019.02.008](https://doi.org/10.1016/j.molp.2019.02.008) | Thomas Peterson, Iowa State University | 成熟 · 175 次 |
+| [MITE Tracker](https://github.com/INTABiotechMJ/MITE-Tracker) | *BMC Bioinformatics* 2018 · [10.1186/s12859-018-2376-y](https://doi.org/10.1186/s12859-018-2376-y) | Leonardo Sebastian Vanzetti, Consejo Nacional de Investigaciones Científicas y Técnicas | 成熟 · 144 次 |
+| [Generic Repeat Finder (GRF)](https://github.com/bioinfolabmu/GenericRepeatFinder) | *Plant Physiology* 2019 · [10.1104/pp.19.00386](https://doi.org/10.1104/pp.19.00386) | Chun Liang, Miami University（末位作者） | 成熟 · 138 次 |
+| [SINE-Finder](https://doi.org/10.1105/tpc.111.088682) | *The Plant Cell* 2011 · [10.1105/tpc.111.088682](https://doi.org/10.1105/tpc.111.088682) | Thomas Schmidt, Technische Universität Dresden（末位作者） | 成熟 · 128 次 |
+| [detectMITE](https://sourceforge.net/projects/detectmite/) | *Scientific Reports* 2016 · [10.1038/srep19688](https://doi.org/10.1038/srep19688) | Guoli Ji, Xiamen University +1 | 小众 · 70 次 |
+| [SINE_Scan](https://github.com/maohlzj/SINE_Scan) | *Bioinformatics* 2016 · [10.1093/bioinformatics/btw718](https://doi.org/10.1093/bioinformatics/btw718) | Hao Wang, University of Georgia | 小众 · 57 次 |
+| [EAHelitron](https://github.com/dontkme/EAHelitron) | *BMC Bioinformatics* 2019 · [10.1186/s12859-019-2945-8](https://doi.org/10.1186/s12859-019-2945-8) | Yidan Ouyang, Huazhong Agricultural University +1 | 小众 · 50 次 |
+| [miteFinderII](https://github.com/jhu99/miteFinder) | *BMC Medical Genomics* 2018 · [10.1186/s12920-018-0418-y](https://doi.org/10.1186/s12920-018-0418-y) | Xuequn Shang, Northwestern Polytechnical University | 小众 · 49 次 |
+| [AnnoSINE](https://github.com/yangli557/AnnoSINE) | *Plant Physiology* 2021 · [10.1093/plphys/kiab524](https://doi.org/10.1093/plphys/kiab524) | Yanni Sun, City University of Hong Kong | 小众 · 23 次 |
+| [MUSTv2](https://doi.org/10.1515/jib-2017-0029) | *Berichte aus der medizinischen Informatik und Bioinformatik/Journal of integrative bioinformatics* 2017 · [10.1515/jib-2017-0029](https://doi.org/10.1515/jib-2017-0029) | Qing Wu, Hangzhou Dianzi University +1 | 小众 · 20 次 |
+| [AnnoSINE_v2](https://github.com/oushujun/AnnoSINE_v2) | *Mobile DNA* 2024 · [10.1101/2024.03.01.582874](https://doi.org/10.1101/2024.03.01.582874) | Yanni Sun, City University of Hong Kong +1 | 较新 · 4 次 |
+| [DeepHel](https://github.com/lyysxb/DeepHel) | *Bioinformatics* 2026 · [10.1093/bioinformatics/btag817](https://doi.org/10.1093/bioinformatics/btag817) | Jianxin Wang, Central South University | 较新 · 0 次 |
+
+#### 精修、去冗余与文库质控
+
+| 工具 | 角色 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|---|
+| [CD-HIT](https://github.com/weizhongli/cdhit) | **默认** | *Bioinformatics* 2012 · [10.1093/bioinformatics/bts565](https://doi.org/10.1093/bioinformatics/bts565) | LiMin Fu, University of California San Diego +3 | 标准 · 12430 次 |
+| [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) | **默认** | *Nature Communications* 2025 · [10.1038/s41467-025-63889-y](https://doi.org/10.1038/s41467-025-63889-y) | Stefan Kusch, Forschungszentrum Jülich +1 | 较新 · 37 次 |
+| [VSEARCH](https://github.com/torognes/vsearch) | 备选 | *PeerJ* 2016 · [10.7717/peerj.2584](https://doi.org/10.7717/peerj.2584) | Frédéric Mahé, Centre de Coopération Internationale en Recherche Agronomique pour le Développement（末位作者） | 标准 · 12129 次 |
+| [Tandem Repeats Finder (TRF)](https://tandem.bu.edu/trf/trf.html) | 备选 | *Nucleic Acids Research* 1999 · [10.1093/nar/27.2.573](https://doi.org/10.1093/nar/27.2.573) | Gary Benson, Icahn School of Medicine at Mount Sinai | 标准 · 10371 次 |
+| [MMseqs2](https://github.com/soedinglab/MMseqs2) | 备选 | *Nature Biotechnology* 2017 · [10.1038/nbt.3988](https://doi.org/10.1038/nbt.3988) | Johannes Söding, Max Planck Institute for Biophysical Chemistry | 标准 · 5716 次 |
+| [LTR Assembly Index (LAI)](https://github.com/oushujun/LTR_retriever) | 备选 | *Nucleic Acids Research* 2018 · [10.1093/nar/gky730](https://doi.org/10.1093/nar/gky730) | Shujun Ou, Michigan State University | 标准 · 947 次 |
+| [TE-Aid](https://github.com/clemgoub/TE-Aid) | 备选 | *Mobile DNA* 2022 · [10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7) | Anna Victoria Protasio, University of Cambridge | 成熟 · 196 次 |
+| [MCHelper](https://github.com/GonzalezLab/MCHelper) | 备选 | *Genome Research* 2024 · [10.1101/gr.278821.123](https://doi.org/10.1101/gr.278821.123) | Josefa González, Consejo Superior de Investigaciones Científicas | 较新 · 51 次 |
+| [SENMAP](https://github.com/simonorozcoarias/SENMAP) | 备选 | *Berichte aus der medizinischen Informatik und Bioinformatik/Journal of integrative bioinformatics* 2022 · [10.1515/jib-2021-0036](https://doi.org/10.1515/jib-2021-0036) | Simón Orozco-Arias, Universidad de Caldas +6 | 小众 · 6 次 |
+| [ColabCuraTE](https://github.com/Ellison-Lab/ColabCuraTE) | 备选 | *Mobile DNA* 2025 · [10.1186/s13100-025-00389-2](https://doi.org/10.1186/s13100-025-00389-2) | Christopher E. Ellison, Rutgers, The State University of New Jersey | 较新 · 2 次 |
+
+#### 分类
+
+| 工具 | 角色 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|---|
+| [TEsorter](https://github.com/zhangrengang/TEsorter) | **默认** | *Horticulture Research* 2022 · [10.1093/hr/uhac017](https://doi.org/10.1093/hr/uhac017) | Rengang Zhang, Kunming Institute of Botany +2 | 成熟 · 376 次 |
+| [REXdb](https://bitbucket.org/petrnovak/repex_tarean) | 备选 | *Mobile DNA* 2019 · [10.1186/s13100-018-0144-1](https://doi.org/10.1186/s13100-018-0144-1) | Pavel Neumann, Czech Academy of Sciences | 成熟 · 478 次 |
+| [TEclass](https://bioinformatics.uni-muenster.de/tools/teclass/index.hbi) | 备选 | *Bioinformatics* 2009 · [10.1093/bioinformatics/btp084](https://doi.org/10.1093/bioinformatics/btp084) | György Abrusán, University of Münster | 成熟 · 443 次 |
+| [PASTEC](https://urgi.versailles.inrae.fr/Tools/REPET) | 备选 | *PLoS ONE* 2014 · [10.1371/journal.pone.0091929](https://doi.org/10.1371/journal.pone.0091929) | Hadi Quesneville, Ressources génomique-info | 成熟 · 350 次 |
+| [DeepTE](https://github.com/LiLabAtVT/DeepTE) | 备选 | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa519](https://doi.org/10.1093/bioinformatics/btaa519) | Song Li, Virginia Tech | 成熟 · 239 次 |
+| [TERL](https://github.com/muriloHoracio/TERL) | 备选 | *Briefings in Bioinformatics* 2020 · [10.1093/bib/bbaa185](https://doi.org/10.1093/bib/bbaa185) | Murilo Horacio Pereira da Cruz, Universidade Tecnológica Federal do Paraná +1 | 小众 · 64 次 |
+| [Inpactor](https://github.com/simonorozcoarias/Inpactor) | 备选 | *Biology* 2018 · [10.3390/biology7020032](https://doi.org/10.3390/biology7020032) | Romain Guyot, Centre de Coopération Internationale en Recherche Agronomique pour le Développement | 小众 · 34 次 |
+| [ClassifyTE](https://github.com/manisa/ClassifyTE) | 备选 | *Bioinformatics* 2021 · [10.1093/bioinformatics/btab146](https://doi.org/10.1093/bioinformatics/btab146) | Md Tamjidul Hoque, LSU New Orleans +1 | 小众 · 25 次 |
+| [TEclass2](https://github.com/IOB-Muenster/TEclass2) | 备选 | *Biology* 2025 · [10.3390/biology15010059](https://doi.org/10.3390/biology15010059) | Wojciech Makałowski, University of Münster | 较新 · 23 次 |
+| [CREATE](https://doi.org/10.1093/bib/bbaf608) | 备选 | *Briefings in Bioinformatics* 2025 · [10.1093/bib/bbaf608](https://doi.org/10.1093/bib/bbaf608) | Xingyu Liao, Northwestern Polytechnical University +1 | 较新 · 11 次 |
+| [Terrier](https://doi.org/10.1093/bib/bbaf442) | 备选 | *Briefings in Bioinformatics* 2025 · [10.1093/bib/bbaf442](https://doi.org/10.1093/bib/bbaf442) | Robert Turnbull, The University of Melbourne | 较新 · 10 次 |
+| [NeuralTE](https://github.com/CSU-KangHu/NeuralTE) | 备选 | *ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics (ACM-BCB)* 2024 · [10.1145/3698587.3701346](https://doi.org/10.1145/3698587.3701346) | Jianxin Wang, Central South University | 较新 · 9 次 |
+| [YORO](https://github.com/simonorozcoarias/YORO) | 备选 | *PLoS ONE* 2023 · [10.1371/journal.pone.0291925](https://doi.org/10.1371/journal.pone.0291925) | Romain Guyot, Centre de Coopération Internationale en Recherche Agronomique pour le Développement | 较新 · 5 次 |
+| [PanTEon](https://github.com/simonorozcoarias/PanTEon) | 备选 | *bioRxiv (Cold Spring Harbor Laboratory)* 2026 · [10.64898/2026.04.01.715927](https://doi.org/10.64898/2026.04.01.715927) | Simón Orozco-Arias, Barcelona Supercomputing Center | 较新 · 1 次，预印本 |
+
+#### 屏蔽、注释与注释结果整理
+
+| 工具 | 角色 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|---|
+| [RepeatMasker](https://www.repeatmasker.org/) | **默认** | — | — | 无论文 |
+| [BEDTools](https://github.com/arq5x/bedtools2) | 备选 | *Bioinformatics* 2010 · [10.1093/bioinformatics/btq033](https://doi.org/10.1093/bioinformatics/btq033) | Aaron R. Quinlan, University of Virginia +1 | 标准 · 30267 次 |
+| [MAKER-P](https://yandell-lab.org/software/maker-p/) | 备选 | *Plant Physiology* 2013 · [10.1104/pp.113.230144](https://doi.org/10.1104/pp.113.230144) | Mark D. Yandell, Eccles Institute of Human Genetics (M.S.C., M.L., M.Y.) and（末位作者） | 成熟 · 451 次 |
+| [oneCodeToFindThemAll](https://doua.prabi.fr/software/one-code-to-find-them-all) | 备选 | *Mobile DNA* 2014 · [10.1186/1759-8753-5-13](https://doi.org/10.1186/1759-8753-5-13) | Emmanuelle Lerat, Lyon 1 Université | 成熟 · 213 次 |
+| [RepeatCraft](https://github.com/niccw/repeatcraftp) | 备选 | *Bioinformatics* 2018 · [10.1093/bioinformatics/bty745](https://doi.org/10.1093/bioinformatics/bty745) | Wai Yee Wong, University of Vienna | 小众 · 51 次 |
+| [Soft-mask hand-off (this repository)](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md) | 备选 | — | — | 无论文 |
+
+#### 插入年龄、景观与水平转移
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [VHICA](https://cran.r-project.org/package=vhica) | *Molecular Biology and Evolution* 2015 · [10.1093/molbev/msv341](https://doi.org/10.1093/molbev/msv341) | Gabriel Luz Wallau, Universidade Federal de Santa Maria | 小众 · 78 次 |
+| [HTT-DB](https://web.archive.org/web/20220814084307/http://lpa.saogabriel.unipampa.edu.br:8080/httdatabase/) | *Bioinformatics* 2015 · [10.1093/bioinformatics/btv281](https://doi.org/10.1093/bioinformatics/btv281) | Bruno Reis Dotto, Universidade Federal do Pampa +1 | 小众 · 62 次 |
+| [REANNOTATE](https://web.archive.org/web/20120208050248/http://www.bioinformatics.org/reannotate/) | *BMC Genomics* 2008 · [10.1186/1471-2164-9-614](https://doi.org/10.1186/1471-2164-9-614) | Vini Pereira, Quadram Institute | 小众 · 37 次 |
+| [TE_Density](https://github.com/sjteresi/TE_Density) | *Mobile DNA* 2022 · [10.1186/s13100-022-00264-4](https://doi.org/10.1186/s13100-022-00264-4) | Patrick P. Edger, Michigan State University | 小众 · 17 次 |
+| [TEGRiP](https://github.com/marieBvr/TEs_genes_relationship_pipeline) | *Peer Community Journal* 2021 · [10.24072/pcjournal.57](https://doi.org/10.24072/pcjournal.57) | Quynh-Trang Bui, Université de Bordeaux（末位作者） | 小众 · 7 次 |
+| [ParseRM](https://github.com/4ureliek/Parsing-RepeatMasker-Outputs) | — | — | 无论文 |
+| [RepeatLandscape](https://github.com/caballero/RepeatLandscape) | — | — | 无论文 |
+| [Repeattools](https://github.com/AgustinAmata/Repeattools) | — | — | 无论文 |
+
+#### 插入多态：短读长
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [MELT](https://melt.igs.umaryland.edu) | *Genome Research* 2017 · [10.1101/gr.218032.116](https://doi.org/10.1101/gr.218032.116) | Scott E. Devine, University of Maryland, Baltimore | 成熟 · 411 次 |
+| [TEPID](https://github.com/ListerLab/TEPID) | *eLife* 2016 · [10.7554/eLife.20777](https://doi.org/10.7554/eLife.20777) | Ryan Lister, The University of Western Australia | 成熟 · 261 次 |
+| [RetroSeq](https://github.com/tk2/RetroSeq) | *Bioinformatics* 2012 · [10.1093/bioinformatics/bts697](https://doi.org/10.1093/bioinformatics/bts697) | Thomas Keane, Wellcome Sanger Institute | 成熟 · 229 次 |
+| [TEMP](https://github.com/JialiUMassWengLab/TEMP) | *Nucleic Acids Research* 2014 · [10.1093/nar/gku323](https://doi.org/10.1093/nar/gku323) | William E. Theurkauf, University of Massachusetts Chan Medical School +1 | 成熟 · 146 次 |
+| [xTea](https://github.com/parklab/xTea) | *Nature Communications* 2021 · [10.1038/s41467-021-24041-8](https://doi.org/10.1038/s41467-021-24041-8) | Eunjung Alice Lee, Broad Institute +1 | 成熟 · 131 次 |
+| [PoPoolationTE2](https://doi.org/10.1093/molbev/msw137) | *Molecular Biology and Evolution* 2016 · [10.1093/molbev/msw137](https://doi.org/10.1093/molbev/msw137) | Christian Schlötterer, University of Veterinary Medicine Vienna | 成熟 · 129 次 |
+| [Mobster](https://github.com/jyhehir/mobster) | *Genome biology* 2014 · [10.1186/s13059-014-0488-x](https://doi.org/10.1186/s13059-014-0488-x) | Jayne Y. Hehir‐Kwa, Radboud University Medical Center | 成熟 · 118 次 |
+| [TEFLoN](https://github.com/jradrion/TEFLoN) | *Genome Biology and Evolution* 2017 · [10.1093/gbe/evx050](https://doi.org/10.1093/gbe/evx050) | Sarah Schaack, Reed College | 小众 · 91 次 |
+| [ITIS](https://web.archive.org/web/20160825205722/http://bioinformatics.psc.ac.cn:80/software/ITIS/) | *BMC Bioinformatics* 2015 · [10.1186/s12859-015-0507-2](https://doi.org/10.1186/s12859-015-0507-2) | Renyi Liu, Chinese Academy of Sciences +1 | 小众 · 66 次 |
+| [TEMP2](https://github.com/weng-lab/TEMP2) | *Nucleic Acids Research* 2021 · [10.1093/nar/gkab010](https://doi.org/10.1093/nar/gkab010) | William E. Theurkauf, University of Massachusetts Chan Medical School +2 | 小众 · 66 次 |
+| [MEGAnE](https://github.com/shohei-kojima/MEGAnE) | *Nature Genetics* 2023 · [10.1101/2022.03.25.485726](https://doi.org/10.1101/2022.03.25.485726) | Shohei Kojima, RIKEN +1 | 较新 · 64 次 |
+| [RelocaTE2](https://github.com/JinfengChen/RelocaTE2) | *PeerJ* 2017 · [10.7717/peerj.2942](https://doi.org/10.7717/peerj.2942) | J. Stajich, University of California, Riverside（末位作者） | 小众 · 56 次 |
+| [Jitterbug](https://github.com/elzbth/jitterbug) | *BMC Genomics* 2015 · [10.1186/s12864-015-1975-5](https://doi.org/10.1186/s12864-015-1975-5) | Josep Casacuberta, Center for Research in Agricultural Genomics +1 | 小众 · 53 次 |
+| [TIF](https://github.com/akiomiyao/tif) | *BMC Bioinformatics* 2014 · [10.1186/1471-2105-15-71](https://doi.org/10.1186/1471-2105-15-71) | Akio Miyao, Institute of Agrobiological Sciences | 小众 · 45 次 |
+| [TE-Tracker](https://web.archive.org/web/20170813054646/http://www.genoscope.cns.fr:80/externe/tetracker/) | *BMC Bioinformatics* 2014 · [10.1186/s12859-014-0377-z](https://doi.org/10.1186/s12859-014-0377-z) | Vincent Colot, Centre National de la Recherche Scientifique +1 | 小众 · 36 次 |
+| [ngs_te_mapper2](https://github.com/bergmanlab/ngs_te_mapper2) | *Genetics* 2021 · [10.1093/genetics/iyab113](https://doi.org/10.1093/genetics/iyab113) | Casey Bergman, University of Georgia | 小众 · 27 次 |
+| [T-lex3](https://github.com/GonzalezLab/T-lex3) | *Bioinformatics* 2019 · [10.1093/bioinformatics/btz727](https://doi.org/10.1093/bioinformatics/btz727) | Josefa González, Universitat Pompeu Fabra | 小众 · 27 次 |
+| [McClintock 2](https://github.com/bergmanlab/mcclintock) | *Mobile DNA* 2023 · [10.1186/s13100-023-00296-4](https://doi.org/10.1186/s13100-023-00296-4) | Casey Bergman, University of Georgia | 较新 · 21 次 |
+| [TEfinder](https://github.com/VistaSohrab/TEfinder) | *Genes* 2021 · [10.3390/genes12020224](https://doi.org/10.3390/genes12020224) | Li‐Jun Ma, University of Massachusetts Amherst +1 | 小众 · 19 次 |
+| [TIP_finder](https://github.com/simonorozcoarias/TIP_finder) | *Biology* 2020 · [10.3390/biology9090281](https://doi.org/10.3390/biology9090281) | Simón Orozco-Arias, Universidad de Caldas +1 | 小众 · 11 次 |
+| [TEF](https://github.com/akiomiyao/tef) | *BMC Bioinformatics* 2022 · [10.1186/s12859-022-05011-3](https://doi.org/10.1186/s12859-022-05011-3) | Akio Miyao, National Agriculture and Food Research Organization | 小众 · 6 次 |
+| [TypeSINE](https://github.com/mobilome/TypeSINE) | *bioRxiv (Cold Spring Harbor Laboratory)* 2025 · [10.1101/2025.05.21.653756](https://doi.org/10.1101/2025.05.21.653756) | Chengyi Song, Yangzhou University | 较新 · 2 次，预印本 |
+| [ELITE](https://github.com/Anwica/ELITE) | *ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics (ACM-BCB)* 2019 · [10.1145/3307339.3342182](https://doi.org/10.1145/3307339.3342182) | Leonard McMillan, University of North Carolina at Chapel Hill（末位作者） | 小众 · 1 次 |
+| [TE-locate](https://sourceforge.net/projects/te-locate/) | — | — | 无论文 |
+| [TRACKPOSON](https://github.com/Markestine/TRACKPOSON) | — | — | 无论文 |
+
+#### 插入多态：长读长与结果注释
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [PALMER](https://github.com/WeichenZhou/PALMER) | *Nucleic Acids Research* 2019 · [10.1093/nar/gkz1173](https://doi.org/10.1093/nar/gkz1173) | Ryan E. Mills, University of Michigan | 成熟 · 104 次 |
+| [LoRTE](https://doi.org/10.1186/s13100-017-0088-x) | *Mobile DNA* 2017 · [10.1186/s13100-017-0088-x](https://doi.org/10.1186/s13100-017-0088-x) | Jonathan Filée, Centre National de la Recherche Scientifique（末位作者） | 小众 · 38 次 |
+| [TrEMOLO](https://github.com/DrosophilaGenomeEvolution/TrEMOLO) | *Genome biology* 2023 · [10.1186/s13059-023-02911-2](https://doi.org/10.1186/s13059-023-02911-2) | Anna-Sophie Fiston-Lavier, Centre National de la Recherche Scientifique +1 | 较新 · 34 次 |
+| [TELR](https://github.com/bergmanlab/telr) | *Nucleic Acids Research* 2022 · [10.1093/nar/gkac794](https://doi.org/10.1093/nar/gkac794) | Casey Bergman, University of Georgia | 小众 · 28 次 |
+| [rMETL](https://github.com/tjiangHIT/rMETL) | *Bioinformatics* 2019 · [10.1093/bioinformatics/btz106](https://doi.org/10.1093/bioinformatics/btz106) | Yadong Wang, Harbin Institute of Technology | 小众 · 25 次 |
+| [sTELLeR](https://github.com/kristinebilgrav/sTELLeR) | *Bioinformatics* 2024 · [10.1093/bioinformatics/btae686](https://doi.org/10.1093/bioinformatics/btae686) | Kristine Bilgrav Sæther, Science for Life Laboratory | 较新 · 12 次 |
+| [somrit](https://github.com/adcosta17/somrit) | *bioRxiv (Cold Spring Harbor Laboratory)* 2023 · [10.1101/2023.08.06.552193](https://doi.org/10.1101/2023.08.06.552193) | Jared T. Simpson, Ontario Institute for Cancer Research | 较新 · 3 次，预印本 |
+| [MEIGA-PAV](https://github.com/MEIGA-tk/MEIGA-PAV) | — | — | 无论文 |
+| [SVAN](https://github.com/REPBIO-LAB/SVAN) | — | — | 无论文 |
+
+#### 插入多态：组装、泛基因组与图基因组
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [SyRI](https://github.com/schneebergerlab/syri) | *Genome biology* 2019 · [10.1186/s13059-019-1911-0](https://doi.org/10.1186/s13059-019-1911-0) | Korbinian Schneeberger, Max Planck Institute for Plant Breeding Research | 标准 · 1256 次 |
+| [PanGenie](https://github.com/eblerjana/pangenie) | *Nature Genetics* 2022 · [10.1038/s41588-022-01043-w](https://doi.org/10.1038/s41588-022-01043-w) | Tobias Marschall, Heinrich Heine University Düsseldorf | 成熟 · 349 次 |
+| [Paragraph](https://github.com/Illumina/paragraph) | *Genome biology* 2019 · [10.1186/s13059-019-1909-7](https://doi.org/10.1186/s13059-019-1909-7) | Michael A. Eberle, Illumina (United States) | 成熟 · 246 次 |
+| [SVIM-asm](https://github.com/eldariont/svim-asm) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa1034](https://doi.org/10.1093/bioinformatics/btaa1034) | Martin Vingron, Max Planck Institute for Molecular Genetics | 成熟 · 232 次 |
+| [AnchorWave](https://github.com/baoxingsong/AnchorWave) | *Proceedings of the National Academy of Sciences* 2021 · [10.1073/pnas.2113075119](https://doi.org/10.1073/pnas.2113075119) | Baoxing Song, Cornell University +2 | 成熟 · 120 次 |
+| [ITIPs](https://github.com/caixu0518/ITIPs) | *Plant Biotechnology Journal* 2022 · [10.1111/pbi.13807](https://doi.org/10.1111/pbi.13807) | Jian Wu, Institute of Vegetables and Flowers +1 | 小众 · 87 次 |
+| [GraffiTE](https://github.com/cgroza/GraffiTE) | *Nature Communications* 2024 · [10.1038/s41467-024-53294-2](https://doi.org/10.1038/s41467-024-53294-2) | Clément Goubert, University of Arizona | 较新 · 54 次 |
+| [pantera](https://github.com/piosierra/pantera) | *Mobile DNA* 2024 · [10.1186/s13100-024-00323-y](https://doi.org/10.1186/s13100-024-00323-y) | Richard Michael Durbin, University of Cambridge | 较新 · 31 次 |
+| [panREPET](https://forgemia.inra.fr/urgi-anagen/panREPET) | *Genome biology* 2026 · [10.1186/s13059-026-03984-5](https://doi.org/10.1186/s13059-026-03984-5) | Hadi Quesneville, Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement | 较新 · 9 次 |
+| [panTEvo](https://github.com/Lcamdom/panTEvo) | *Genome biology* 2025 · [10.1186/s13059-025-03837-7](https://doi.org/10.1186/s13059-025-03837-7) | Lucía Campos, Universitat Autònoma de Barcelona +1 | 较新 · 9 次 |
+| [Pannagram](https://github.com/iganna/pannagram) | *bioRxiv (Cold Spring Harbor Laboratory)* 2025 · [10.1101/2025.02.07.637071](https://doi.org/10.1101/2025.02.07.637071) | Anna A. Igolkina, Gregor Mendel Institute of Molecular Plant Biology | 较新 · 6 次，预印本 |
+
+#### 插入多态：植物资源与其他输入
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [RTRIP](https://web.archive.org/web/20240226054850/http://ibi.zju.edu.cn/Rtrip/index.html) | *Plant Biotechnology Journal* 2020 · [10.1111/pbi.13425](https://doi.org/10.1111/pbi.13425) | Jian‐Hong Xu, Zhejiang University | 小众 · 20 次 |
+| [TEPEAK](https://github.com/ryanlayerlab/TEPEAK) | *PLoS Computational Biology* 2026 · [10.1371/journal.pcbi.1013122](https://doi.org/10.1371/journal.pcbi.1013122) | Devin Burke, University of Colorado Boulder | 较新 · 1 次 |
+
+#### 转座子表达与小 RNA
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [TEtranscripts](https://github.com/mhammell-laboratory/TEtranscripts) | *Bioinformatics* 2015 · [10.1093/bioinformatics/btv422](https://doi.org/10.1093/bioinformatics/btv422) | Molly Hammell, Cold Spring Harbor Laboratory | 标准 · 822 次 |
+| [ShortStack](https://github.com/MikeAxtell/ShortStack) | *Rna* 2013 · [10.1261/rna.035279.112](https://doi.org/10.1261/rna.035279.112) | Michael J. Axtell, Pennsylvania State University | 标准 · 579 次 |
+| [RepEnrich](https://doi.org/10.1186/1471-2164-15-583) | *BMC Genomics* 2014 · [10.1186/1471-2164-15-583](https://doi.org/10.1186/1471-2164-15-583) | Nicola Neretti, Brown University | 成熟 · 360 次 |
+| [SQuIRE](https://github.com/wyang17/SQuIRE) | *Nucleic Acids Research* 2019 · [10.1093/nar/gky1301](https://doi.org/10.1093/nar/gky1301) | Lindsay M. Payer, Johns Hopkins University +1 | 成熟 · 232 次 |
+| [Telescope](https://github.com/mlbendall/telescope) | *PLoS Computational Biology* 2019 · [10.1371/journal.pcbi.1006453](https://doi.org/10.1371/journal.pcbi.1006453) | Douglas F. Nixon, Weill Cornell Medicine | 成熟 · 227 次 |
+| [TEtools](https://github.com/l-modolo/TEtools) | *Nucleic Acids Research* 2016 · [10.1093/nar/gkw953](https://doi.org/10.1093/nar/gkw953) | Emmanuelle Lerat, Lyon 1 Université +3 | 成熟 · 149 次 |
+| [SalmonTE](https://github.com/jeonglab-bcm/SalmonTE) | *Pacific Symposium on Biocomputing (PSB)* 2017 · [10.1142/9789813235533_0016](https://doi.org/10.1142/9789813235533_0016) | Zhandong Liu, Baylor College of Medicine（末位作者） | 成熟 · 109 次 |
+| [SoloTE](https://github.com/bvaldebenitom/SoloTE) | *Communications Biology* 2022 · [10.1038/s42003-022-04020-5](https://doi.org/10.1038/s42003-022-04020-5) | Braulio Valdebenito‐Maturana, Icahn School of Medicine at Mount Sinai | 小众 · 76 次 |
+| [piPipes](https://github.com/bowhan/piPipes) | — | — | 无论文 |
+| [scTE](https://github.com/JiekaiLab/scTE) | — | — | 无论文 |
+| [TElocal](https://github.com/mhammell-laboratory/TElocal) | — | — | 无论文 |
+
+#### 可视化
+
+按用途分组。标为通用工具的条目不限于转座子，转座子的用法是用户自己提供 TE 坐标或轨道。
+
+##### 转座子专用视图、景观图与嵌套结构图
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [TEnest](https://github.com/cmdcolin/TEnest) | *Plant Physiology* 2007 · [10.1104/pp.107.110353](https://doi.org/10.1104/pp.107.110353) | Roger P. Wise, Agricultural Research Service | 小众 · 81 次 |
+| [UCSC Repeat Browser](https://repeatbrowser.ucsc.edu) | *Mobile DNA* 2020 · [10.1186/s13100-020-00208-w](https://doi.org/10.1186/s13100-020-00208-w) | Sofie R. Salama, Howard Hughes Medical Institute +1 | 小众 · 53 次 |
+| [RepeatOBserver](https://github.com/celphin/RepeatOBserverV1) | *Molecular Ecology Resources* 2025 · [10.1111/1755-0998.14084](https://doi.org/10.1111/1755-0998.14084) | Cassandra Elphinstone, University of British Columbia | 较新 · 32 次 |
+| [LTRsift](https://github.com/satta/ltrsift) | *Mobile DNA* 2012 · [10.1186/1759-8753-3-18](https://doi.org/10.1186/1759-8753-3-18) | Stefan Kurtz, Universität Hamburg | 小众 · 13 次 |
+| [DfamTEBrowser](https://github.com/Dfam-consortium/DfamTEBrowser) | — | — | 无论文 |
+| [RepeatMasker landscape utilities (calcDivergenceFromAlign.pl, createRepeatLandscape.pl)](https://github.com/Dfam-consortium/RepeatMasker/blob/master/util/createRepeatLandscape.pl) | — | R. M. Hubley, J. Caballero, Institute for Systems Biology（脚本头部署名） | 无论文 |
+
+##### 重复序列点图与一致性热图
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [StainedGlass](https://github.com/vollgerlab/StainedGlass) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac018](https://doi.org/10.1093/bioinformatics/btac018) | Mitchell Robert Vollger, University of Washington +1 | 成熟 · 177 次 |
+| [FlexiDot](https://github.com/molbio-dresden/flexidot) | *Bioinformatics* 2018 · [10.1093/bioinformatics/bty395](https://doi.org/10.1093/bioinformatics/bty395) | Tony Heitkam, Technische Universität Dresden | 小众 · 95 次 |
+| [ModDotPlot](https://github.com/marbl/ModDotPlot) | *Bioinformatics* 2024 · [10.1093/bioinformatics/btae493](https://doi.org/10.1093/bioinformatics/btae493) | Alexander P. Sweeten, National Institutes of Health +1 | 较新 · 86 次 |
+
+##### 密度图与核型（染色体示意）图
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [karyoploteR](https://github.com/bernatgel/karyoploteR) | *Bioinformatics* 2017 · [10.1093/bioinformatics/btx346](https://doi.org/10.1093/bioinformatics/btx346) | Bernat Gel, Institut d'Investigació en Ciències de la Salut Germans Trias i Pujol | 标准 · 845 次 |
+| [RIdeogram](https://github.com/TickingClock1992/RIdeogram) | *PeerJ Computer Science* 2020 · [10.7717/peerj-cs.251](https://doi.org/10.7717/peerj-cs.251) | Guangchuang Yu, Southern Medical University +1 | 标准 · 633 次 |
+| [chromoMap](https://github.com/lakshay-anand/chromoMap) | *BMC Bioinformatics* 2022 · [10.1186/s12859-021-04556-z](https://doi.org/10.1186/s12859-021-04556-z) | Lakshay Anand, University of Kentucky | 成熟 · 261 次 |
+
+##### Circos 风格的环形图
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [circlize](https://github.com/jokergoo/circlize) | *Bioinformatics* 2014 · [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393) | Benedikt Brors, German Cancer Research Center | 标准 · 4971 次 |
+| [interacCircos](https://github.com/mrcuizhe/interacCircos) | *Bioinformatics* 2021 · [10.1093/bioinformatics/btab232](https://doi.org/10.1093/bioinformatics/btab232) | Tianyi Zang, Harbin Institute of Technology +1 | 小众 · 19 次 |
+
+##### 基因组浏览器轨道
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [IGV](https://github.com/igvteam/igv) | *Briefings in Bioinformatics* 2012 · [10.1093/bib/bbs017](https://doi.org/10.1093/bib/bbs017) | J. T. Robinson, Broad Institute | 标准 · 10150 次 |
+| [JBrowse 2](https://github.com/GMOD/jbrowse-components) | *Genome biology* 2023 · [10.1186/s13059-023-02914-z](https://doi.org/10.1186/s13059-023-02914-z) | Ian H Holmes, University of California, Berkeley | 标准 · 907 次 |
+| [igv.js](https://github.com/igvteam/igv.js) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac830](https://doi.org/10.1093/bioinformatics/btac830) | James T Robinson, University of California San Diego | 标准 · 648 次 |
+| [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692) | Fidel Ramírez, Max Planck Institute of Immunobiology and Epigenetics | 标准 · 575 次 |
+
+##### 共线性、组装比对与泛基因组图视图
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [plotsr](https://github.com/schneebergerlab/plotsr) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac196](https://doi.org/10.1093/bioinformatics/btac196) | Korbinian Schneeberger, Ludwig-Maximilians-Universität München | 成熟 · 383 次 |
+| [ODGI](https://github.com/pangenome/odgi) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac308](https://doi.org/10.1093/bioinformatics/btac308) | Erik P. Garrison, University of Tennessee Health Science Center | 成熟 · 233 次 |
+| [NGenomeSyn](https://github.com/hewm2008/NGenomeSyn) | *Bioinformatics* 2023 · [10.1093/bioinformatics/btad121](https://doi.org/10.1093/bioinformatics/btad121) | Xiaodong Fang, BGI Group (China) | 成熟 · 195 次 |
+| [SVbyEye](https://github.com/daewoooo/SVbyEye) | *Bioinformatics* 2025 · [10.1093/bioinformatics/btaf332](https://doi.org/10.1093/bioinformatics/btaf332) | David Porubskỳ, University of Washington | 较新 · 71 次 |
+
+另见其他步骤中的相关条目：ParseRM、RepeatLandscape、Repeattools、TE_Density、TE-Aid。
+
+#### 多倍体亚基因组与串联重复
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [SubPhaser](https://github.com/zhangrengang/SubPhaser) | *New Phytologist* 2022 · [10.1111/nph.18173](https://doi.org/10.1111/nph.18173) | Jian‐Feng Mao, Beijing Forestry University（末位作者） | 成熟 · 179 次 |
+| [TRASH](https://github.com/vlothec/TRASH) | *Bioinformatics* 2023 · [10.1093/bioinformatics/btad308](https://doi.org/10.1093/bioinformatics/btad308) | Ian R. Henderson, University of Cambridge | 成熟 · 115 次 |
+| [PolyCRACKER](https://bitbucket.org/berkeleylab/jgi-polycracker/) | *BMC Genomics* 2019 · [10.1186/s12864-019-5828-5](https://doi.org/10.1186/s12864-019-5828-5) | Sean Gordon, Joint Genome Institute +1 | 小众 · 20 次 |
+
+#### 数据库与文库：通用
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [Repbase Update](https://www.girinst.org/repbase/) | *Cytogenetic and Genome Research* 2005 · [10.1159/000084979](https://doi.org/10.1159/000084979) | Jolanta Walichiewicz, Genetic Information Research Institute（末位作者） | 标准 · 3782 次 |
+| [Dfam (Storer et al. 2021)](https://www.dfam.org/) | *Mobile DNA* 2021 · [10.1186/s13100-020-00230-y](https://doi.org/10.1186/s13100-020-00230-y) | Jessica M. Storer, Institute for Systems Biology +2 | 标准 · 838 次 |
+| [SINEBase](https://sines.eimb.ru/) | *Nucleic Acids Research* 2012 · [10.1093/nar/gks1263](https://doi.org/10.1093/nar/gks1263) | Dmitri A. Kramerov, Engelhardt Institute of Molecular Biology | 成熟 · 229 次 |
+| [RepetDB](https://urgi.versailles.inrae.fr/repetdb) | *Mobile DNA* 2019 · [10.1186/s13100-019-0150-y](https://doi.org/10.1186/s13100-019-0150-y) | Joëlle Amselem, Université Paris-Saclay | 小众 · 72 次 |
+| [TREP](https://trep-db.uzh.ch) | — | — | 无论文 |
+
+#### 数据库与文库：植物
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [TIGR Plant Repeat Databases](https://rice.uga.edu/pub/data/TIGR_Plant_Repeats/) | *Nucleic Acids Research* 2003 · [10.1093/nar/gkh099](https://doi.org/10.1093/nar/gkh099) | Shu Ouyang, The Institute for Genomic Research, 9712 Medical Center Drive, Rockville, MD 20850, USA | 成熟 · 335 次 |
+| [SoyTEdb](https://legacy.soybase.org/soytedb/) | *BMC Genomics* 2010 · [10.1186/1471-2164-11-113](https://doi.org/10.1186/1471-2164-11-113) | Randy C. Shoemaker, Agricultural Research Service +1 | 成熟 · 157 次 |
+| [RiTE-db](https://ava.genome.arizona.edu/cgi-bin/rite/index.cgi) | *BMC Genomics* 2015 · [10.1186/s12864-015-1762-3](https://doi.org/10.1186/s12864-015-1762-3) | Rod A. Wing, University of Arizona | 小众 · 84 次 |
+| RetrOryza | *Nucleic Acids Research* 2006 · [10.1093/nar/gkl780](https://doi.org/10.1093/nar/gkl780) | Olivier Panaud, University of Arizona | 小众 · 66 次 |
+| [PlantRep](https://doi.org/10.1007/s00299-021-02817-y) | *Plant Cell Reports* 2022 · [10.1007/s00299-021-02817-y](https://doi.org/10.1007/s00299-021-02817-y) | Yu Zhang, Sun Yat-sen University | 小众 · 47 次 |
+| [DPTEdb](https://web.archive.org/web/20180812090334/http://genedenovoweb.ticp.net:81/DPTEdb/index.php) | *Database* 2016 · [10.1093/database/baw078](https://doi.org/10.1093/database/baw078) | Lianfeng Gu, Fujian Agriculture and Forestry University +1 | 小众 · 24 次 |
+| [InpactorDB](https://inpactordb.github.io) | *Genes* 2021 · [10.3390/genes12020190](https://doi.org/10.3390/genes12020190) | Simón Orozco-Arias, Universidad de Caldas +1 | 小众 · 24 次 |
+| [SPTEdb](https://web.archive.org/web/20180730000921/http://genedenovoweb.ticp.net:81/SPTEdb/index.php) | *Database* 2018 · [10.1093/database/bay024](https://doi.org/10.1093/database/bay024) | Wenjun Ma, Chinese Academy of Forestry +1 | 小众 · 22 次 |
+| [PlantLTRdb](https://bioinformatics.um6p.ma/PlantLTRdb/) | *Frontiers in Plant Science* 2023 · [10.3389/fpls.2023.1134627](https://doi.org/10.3389/fpls.2023.1134627) | Morad M. Mokhtar, Université Mohammed VI Polytechnique +1 | 较新 · 21 次 |
+| [ConTEdb](https://web.archive.org/web/20210921143932/http://genedenovoweb.ticp.net:81/conTEdb/index.php) | *Database* 2018 · [10.1093/database/bay131](https://doi.org/10.1093/database/bay131) | Fangqun Ouyang, Chinese Academy of Forestry +1 | 小众 · 20 次 |
+| [AnnoTEP-DB](https://plantgenomics.ncc.unesp.br/AnnoTEP-DB/) | *BMC Genomics* 2026 · [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) | Alessandro M. Varani, Universidade Estadual Paulista (Unesp) +1 | 较新 · 2 次 |
+| [MaizeGP](https://github.com/Jia-nianhua/Maize-Graph-Pangenome) | *Journal of Integrative Plant Biology* 2026 · [10.1111/jipb.70439](https://doi.org/10.1111/jipb.70439) | Shaojiang Chen, China Agricultural University +2 | 较新 · 0 次 |
+
+#### 数据库与文库：葡萄（Vitis）
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [PN40024 T2T TE annotations](https://zenodo.org/records/13741133) | *DIGITAL.CSIC (Spanish National Research Council (CSIC))* 2023 · [10.5281/zenodo.13741133](https://doi.org/10.5281/zenodo.13741133) | ShiXiaoya | 较新 · 1 次 |
+| [GrapeGenomics Vitis RepeatMasker library](https://grapegenomics.com/pages/repeats.php) | — | — | 无论文 |
+
+#### 模拟与评测
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [simuG](https://github.com/yjx1217/simuG) | *Bioinformatics* 2019 · [10.1093/bioinformatics/btz424](https://doi.org/10.1093/bioinformatics/btz424) | Jia‐Xing Yue, Centre National de la Recherche Scientifique +1 | 小众 · 61 次 |
+| [PrinTE](https://github.com/cwb14/PrinTE) | *Nature Communications* 2026 · [10.1101/2025.06.04.657780](https://doi.org/10.1101/2025.06.04.657780) | Shujun Ou, The Ohio State University | 较新 · 2 次 |
+| [TEgenomeSimulator](https://github.com/Plant-Food-Research-Open/TEgenomeSimulator) | *bioRxiv (Cold Spring Harbor Laboratory)* 2026 · [10.64898/2026.03.09.710711](https://doi.org/10.64898/2026.03.09.710711) | Ting-Hsuan Chen, Bioeconomy Science Institute | 较新 · 2 次，预印本 |
+| [TEvarSim](https://github.com/daweili-lab/TEvarSim) | *PLoS Computational Biology* 2026 · [10.1371/journal.pcbi.1013933](https://doi.org/10.1371/journal.pcbi.1013933) | Dawei Li, Texas Tech University | 较新 · 2 次 |
+| [TE_Bench](https://doi.org/10.1186/s13100-026-00405-z) | *Mobile DNA* 2026 · [10.1186/s13100-026-00405-z](https://doi.org/10.1186/s13100-026-00405-z) | Hannah Kania, Duke University | 较新 · 1 次 |
+| [TE_simu](https://github.com/unavailable-2374/TE_simu) | — | — | 无论文 |
+
+#### 社区索引与交叉链接
+
+| 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
+|---|---|---|---|
+| [TE Hub](https://tehub.org/) | *Mobile DNA* 2021 · [10.1186/s13100-021-00244-0](https://doi.org/10.1186/s13100-021-00244-0) | Travis J. Wheeler, University of Montana | 小众 · 42 次 |
+| [awesome-transposable-elements](https://github.com/nixonlab/awesome-transposable-elements) | — | — | 无论文 |
+| [gene-structure-annotation TE_LIBRARY.md](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md) | — | — | 无论文 |
 
 同一工作线上的相关论文（不是独立软件）：植物反转录转座子结构、识别与分类的综述（[10.3390/ijms20153837](https://doi.org/10.3390/ijms20153837)）；机器学习用于转座子检测与分类的系统调查（[10.7717/peerj.8311](https://doi.org/10.7717/peerj.8311)）；基于 k-mer 的植物 LTR 分类方法（[10.7717/peerj.11456](https://doi.org/10.7717/peerj.11456)）；以及这些任务中性能指标的比较（[10.3390/pr8060638](https://doi.org/10.3390/pr8060638)）。配套实验仓库：[MLinTEs](https://github.com/simonorozcoarias/MLinTEs) 和 [MachineLearningInTEs](https://github.com/simonorozcoarias/MachineLearningInTEs)。
 
-### 按分析步骤增补的软件与数据库
-
-下面是对上文软件表的补充，不改变默认的 EDTA、TEtrimmer、TEsorter 路线。每一条都有已打开的论文 DOI，或已打开且返回成功的官方代码/数据入口。仍找不到可核验来源的候选没有写入。
-
-| 步骤 | 名称 | 用途 | 代码或数据入口 | DOI |
-|------|------|------|----------------|-----|
-| 从头检测（含 LTR、TIR、MITE、Helitron、LINE/SINE，以及基于短读的发现） | **RepeatExplorer2** | 用短读做图聚类，在不必先组装基因组的情况下识别并定量重复序列，提供 Galaxy 界面。 | [repeatexplorer-elixir.cerit-sc.cz](https://repeatexplorer-elixir.cerit-sc.cz) | [10.1038/s41596-020-0400-y](https://doi.org/10.1038/s41596-020-0400-y) |
-|  | **dnaPipeTE** | 从低覆盖度原始短读组装、注释并定量转座子，不需要基因组组装。 | [github.com/clemgoub/dnaPipeTE](https://github.com/clemgoub/dnaPipeTE) | [10.1093/gbe/evv050](https://doi.org/10.1093/gbe/evv050) |
-|  | **REPET** | 包含 TEdenovo 与 TEannot 的流程包，用于在组装基因组中从头检测、聚类并注释转座子家族。 | [urgi.versailles.inrae.fr/Tools/REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | [10.1371/journal.pone.0016526](https://doi.org/10.1371/journal.pone.0016526) |
-|  | **EAHelitron** | 基于保守末端基序和富 GC 发夹的 Helitron 结构注释工具。论文摘要中给出软件名 EAHelitron。 | [github.com/dontkme/EAHelitron](https://github.com/dontkme/EAHelitron) | [10.1186/s12859-019-2945-8](https://doi.org/10.1186/s12859-019-2945-8) |
-|  | **MITE Tracker** | 通过邻近反向重复、家族聚类和侧翼序列过滤，在大型基因组中寻找并分类 MITE。 | [github.com/INTABiotechMJ/MITE-Tracker](https://github.com/INTABiotechMJ/MITE-Tracker) | [10.1186/s12859-018-2376-y](https://doi.org/10.1186/s12859-018-2376-y) |
-|  | **miteFinderII** | 在真核基因组中识别隐藏的 MITE。当前仓库由 screamer/miteFinder 重定向到 jhu99/miteFinder。 | [github.com/jhu99/miteFinder](https://github.com/jhu99/miteFinder) | [10.1186/s12920-018-0418-y](https://doi.org/10.1186/s12920-018-0418-y) |
-|  | **AnnoSINE** | 面向植物基因组的 SINE 注释工具，结合同源与结构搜索并过滤假阳性，以构建 SINE 文库。 | [github.com/yangli557/AnnoSINE](https://github.com/yangli557/AnnoSINE) | [10.1093/plphys/kiab524](https://doi.org/10.1093/plphys/kiab524) |
-|  | **AnnoSINE_v2** | 用于植物和动物基因组从头 SINE 注释的加速版本（预印本）。 | [github.com/oushujun/AnnoSINE_v2](https://github.com/oushujun/AnnoSINE_v2) | [10.1101/2024.03.01.582874](https://doi.org/10.1101/2024.03.01.582874) |
-|  | **SINE_Scan** | 在大规模基因组数据中发现 SINE 家族。 | [github.com/maohlzj/SINE_Scan](https://github.com/maohlzj/SINE_Scan) | [10.1093/bioinformatics/btw718](https://doi.org/10.1093/bioinformatics/btw718) |
-|  | **SINE-Finder** | 论文中给出的工具，用于定向发现植物基因组中源自 tRNA 的 SINE。本次未确认到仍可访问的官方代码仓库。 | — | [10.1105/tpc.111.088682](https://doi.org/10.1105/tpc.111.088682) |
-|  | **LtrDetector** | LTR 反转录转座子的从头检测工具。当前仓库由 TulsaBioinformaticsToolsmith/LtrDetector 重定向而来。 | [github.com/BioinformaticsToolsmith/LtrDetector](https://github.com/BioinformaticsToolsmith/LtrDetector) | [10.1186/s12864-019-5796-9](https://doi.org/10.1186/s12864-019-5796-9) |
-|  | **MUSTv2** | 改进的近期活跃 MITE 从头检测程序。本次未确认到仍可访问的官方代码仓库。 | — | [10.1515/jib-2017-0029](https://doi.org/10.1515/jib-2017-0029) |
-|  | **LTRdigest** | 注释候选 LTR 反转录转座子的内部特征（蛋白结构域、PBS 和 PPT）。与 LTRharvest 同属 GenomeTools。 | [github.com/genometools/genometools](https://github.com/genometools/genometools) | [10.1093/nar/gkp759](https://doi.org/10.1093/nar/gkp759) |
-|  | **LTRpred** | 用于完整 LTR 反转录转座子从头注释的 R 包。当前仓库由 HajkD/LTRpred 重定向到 drostlab/LTRpred。 | [github.com/drostlab/LTRpred](https://github.com/drostlab/LTRpred) | [10.21105/joss.02170](https://doi.org/10.21105/joss.02170) |
-|  | **MGEScan** | 官方说明中介绍的 Galaxy 系统，用于识别 LTR 与非 LTR 反转录转座子。 | [github.com/MGEScan/mgescan](https://github.com/MGEScan/mgescan) | — |
-|  | **Red** | 无需预先文库、在全基因组尺度上从头检测重复 DNA 的工具。 | [github.com/BioinformaticsToolsmith/Red](https://github.com/BioinformaticsToolsmith/Red) | [10.1186/s12859-015-0654-5](https://doi.org/10.1186/s12859-015-0654-5) |
-|  | **EDTA-GUI** | 面向植物的 EDTA 图形界面实现，并提供谱系级分类。本次未确认到官方代码仓库。 | [github.com/Marcos-Fernando/EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
-|  | **Tephra** | 从基因组组装发现转座子家族并描述其结构与演化的命令行流程，不必预先提供参考文库。官方说明中的引用是该仓库本身；本次未使用题名匹配的期刊论文。 | [github.com/sestaton/tephra](https://github.com/sestaton/tephra) | — |
-|  | **Transposome** | 从未组装的双端全基因组鸟枪法读段注释转座子家族。 | [github.com/sestaton/Transposome](https://github.com/sestaton/Transposome) | [10.1093/bioinformatics/btv059](https://doi.org/10.1093/bioinformatics/btv059) |
-|  | **CARP** | 综合从头重复序列流程，用于在基因组组装中识别、聚类并注释转座子和片段重复。本次未找到返回 HTTP 200 的官方代码仓库。 | [github.com/carp-te/carp-documentation](https://github.com/carp-te/carp-documentation) | [10.1371/journal.pone.0193588](https://doi.org/10.1371/journal.pone.0193588) |
-|  | **MegaLTR** | 用于在植物基因组中检测完整 LTR 反转录转座子并计算 LTR 组装指数的网页服务与本地流程。本次未能成功打开配套网页服务；GitHub 仓库已打开。 | [github.com/MoradMMokhtar/MegaLTR](https://github.com/MoradMMokhtar/MegaLTR) | [10.3389/fpls.2023.1237426](https://doi.org/10.3389/fpls.2023.1237426) |
-|  | **TE-greedy-nester** | 基于结构检测 LTR 反转录转座子，并重建其嵌套顺序。 | [gitlab.fi.muni.cz/lexa/nested](https://gitlab.fi.muni.cz/lexa/nested) | [10.1093/bioinformatics/btaa632](https://doi.org/10.1093/bioinformatics/btaa632) |
-|  | **PhyLTR** | 官方说明中用于 LTR 反转录转座子系统发育分析的流程。已确认 Zenodo 软件记录；本次未使用另外题名匹配的期刊论文。 | [github.com/mcsimenc/PhyLTR](https://github.com/mcsimenc/PhyLTR) | [10.5281/zenodo.4256534](https://doi.org/10.5281/zenodo.4256534) |
-|  | **TAREAN** | 从未组装短读识别并刻画卫星 DNA 的工具，可通过 RepeatExplorer 的 Galaxy 服务使用。RepeatExplorer2 本身已单独列出。 | [repeatexplorer-elixir.cerit-sc.cz/galaxy/](https://repeatexplorer-elixir.cerit-sc.cz/galaxy/) | [10.1093/nar/gkx257](https://doi.org/10.1093/nar/gkx257) |
-|  | **CLARI-TE** | 官方说明中用于小麦等复杂基因组转座子注释的脚本。本次未确认到题名匹配的期刊论文。 | [github.com/jdaron/CLARI-TE](https://github.com/jdaron/CLARI-TE) | — |
-|  | **Dfam TETools** | Dfam 联盟维护的容器，提供可运行的 RepeatMasker 与 RepeatModeler 安装。它封装的是本目录中已有的工具，本身不是新的注释器。 | [github.com/Dfam-consortium/TETools](https://github.com/Dfam-consortium/TETools) | — |
-|  | **PanTE** | 泛基因组转座子注释流程，按官方说明和题名匹配的预印本，把多条互补的从头检测路径合并为分类文库。 | [github.com/unavailable-2374/Pan_TE](https://github.com/unavailable-2374/Pan_TE) | [10.21203/rs.3.rs-5867196/v1](https://doi.org/10.21203/rs.3.rs-5867196/v1) |
-|  | **ParTEA** | Earl Grey 泛基因组流程（ParTEA），用于在多个基因组间保持一致的转座子注释。Earl Grey 本身已单独列出。 | [github.com/TobyBaril/EarlGreyParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | [10.64898/2026.11.04.764261](https://doi.org/10.64898/2026.11.04.764261) |
-|  | **MAKER-P** | 植物基因注释工具包，不是转座子注释器。在注释植物基因组时可使用重复序列文库。本次未找到返回 HTTP 200 的 MAKER-P 官方页面；未把通用 MAKER 仓库当作 MAKER-P 主页。 | [yandell-lab.org/software/maker-p/](https://yandell-lab.org/software/maker-p/) | [10.1104/pp.113.230144](https://doi.org/10.1104/pp.113.230144) |
-| 文库构建、精修与去冗余 | **VSEARCH** | 通用的开放源代码聚类与去重工具，有时用于降低转座子文库冗余。它本身不是转座子注释器。 | [github.com/torognes/vsearch](https://github.com/torognes/vsearch) | [10.7717/peerj.2584](https://doi.org/10.7717/peerj.2584) |
-|  | **MMseqs2** | 通用序列搜索与聚类套件，有时用于大规模转座子家族聚类。它本身不是转座子注释器。 | [github.com/soedinglab/MMseqs2](https://github.com/soedinglab/MMseqs2) | [10.1038/nbt.3988](https://doi.org/10.1038/nbt.3988) |
-|  | **TE-Aid** | 绘制覆盖度、分歧度、自点阵和开放读框图，辅助人工精修一致性序列。介绍见本目录中已有的入门精修指南论文。 | [github.com/clemgoub/TE-Aid](https://github.com/clemgoub/TE-Aid) | [10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7) |
-| 分类（含深度学习） | **NeuralTE** | 利用多种序列特征对转座子超家族进行分类的深度学习工具。 | [github.com/CSU-KangHu/NeuralTE](https://github.com/CSU-KangHu/NeuralTE) | [10.1145/3698587.3701346](https://doi.org/10.1145/3698587.3701346) |
-|  | **TERL** | 用卷积网络从原始序列分类转座子。 | [github.com/muriloHoracio/TERL](https://github.com/muriloHoracio/TERL) | [10.1093/bib/bbaa185](https://doi.org/10.1093/bib/bbaa185) |
-|  | **ClassifyTE** | 基于 stacking 的转座子层级分类器。 | [github.com/manisa/ClassifyTE](https://github.com/manisa/ClassifyTE) | [10.1093/bioinformatics/btab146](https://doi.org/10.1093/bioinformatics/btab146) |
-|  | **PASTEC** | 将转座子自动分类到目一级的工具，可作为 REPET 模块或独立程序使用。 | [urgi.versailles.inrae.fr/Tools/REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | [10.1371/journal.pone.0091929](https://doi.org/10.1371/journal.pone.0091929) |
-| 插入多态检测（短读、长读及相关工具） | **McClintock 2** | 可安装并运行多种短读转座子插入检测器的元流程，并带有模拟评估框架。 | [github.com/bergmanlab/mcclintock](https://github.com/bergmanlab/mcclintock) | [10.1186/s13100-023-00296-4](https://doi.org/10.1186/s13100-023-00296-4) |
-|  | **TEMP2** | 用短读取检测生殖系转座子插入，并可估计新发单例插入频率。附录B中已有条目。 | [github.com/weng-lab/TEMP2](https://github.com/weng-lab/TEMP2) | [10.1093/nar/gkab010](https://doi.org/10.1093/nar/gkab010) |
-|  | **MELT** | 面向群体规模的短读可移动元件插入检测工具。附录B中已有条目。 | [melt.igs.umaryland.edu](https://melt.igs.umaryland.edu) | [10.1101/gr.218032.116](https://doi.org/10.1101/gr.218032.116) |
-|  | **TEPID** | 用短读绘制植物群体中的转座子插入多样性。附录B中已有条目。官方说明引用该 eLife 论文。 | [github.com/ListerLab/TEPID](https://github.com/ListerLab/TEPID) | [10.7554/eLife.20777](https://doi.org/10.7554/eLife.20777) |
-|  | **PoPoolationTE2** | 用 Pool-Seq 数据比较转座子插入多态。本次未确认到仍可访问的官方仓库。 | — | [10.1093/molbev/msw137](https://doi.org/10.1093/molbev/msw137) |
-|  | **RetroSeq** | 用 Illumina 双端全基因组测序检测非参考转座子插入。 | [github.com/tk2/RetroSeq](https://github.com/tk2/RetroSeq) | [10.1093/bioinformatics/bts697](https://doi.org/10.1093/bioinformatics/bts697) |
-|  | **TEFLoN** | 用短读发现转座子插入与缺失并估计速率。官方说明引用该论文，但论文题名中不含工具名。 | [github.com/jradrion/TEFLoN](https://github.com/jradrion/TEFLoN) | [10.1093/gbe/evx050](https://doi.org/10.1093/gbe/evx050) |
-|  | **T-lex3** | 用短读对参考转座子插入分型，并估计群体频率。 | [github.com/GonzalezLab/T-lex3](https://github.com/GonzalezLab/T-lex3) | [10.1093/bioinformatics/btz727](https://doi.org/10.1093/bioinformatics/btz727) |
-|  | **ngs_te_mapper2** | 用短读取检测转座子插入，包含分裂读支持。官方说明称方法见该 Genetics 论文。 | [github.com/bergmanlab/ngs_te_mapper2](https://github.com/bergmanlab/ngs_te_mapper2) | [10.1093/genetics/iyab113](https://doi.org/10.1093/genetics/iyab113) |
-|  | **Mobster** | 用不一致读对和分裂读从高通量测序数据中检测可移动元件插入。 | [github.com/jyhehir/mobster](https://github.com/jyhehir/mobster) | [10.1186/s13059-014-0488-x](https://doi.org/10.1186/s13059-014-0488-x) |
-|  | **TE-locate** | 用双端短读定位非参考转座子插入。本次未匹配到方法论文 DOI。 | [sourceforge.net/projects/te-locate](https://sourceforge.net/projects/te-locate/) | — |
-|  | **TRACKPOSON** | 官方说明中介绍的流程，用于检测转座子插入多态并生成有无矩阵。 | [github.com/Markestine/TRACKPOSON](https://github.com/Markestine/TRACKPOSON) | — |
-|  | **TrEMOLO** | 结合组装与比对，用长读取估计转座子等位频率。 | [github.com/DrosophilaGenomeEvolution/TrEMOLO](https://github.com/DrosophilaGenomeEvolution/TrEMOLO) | [10.1186/s13059-023-02911-2](https://doi.org/10.1186/s13059-023-02911-2) |
-|  | **PALMER** | 用长读取检测非参考可移动元件插入。官方说明将该论文列为一作方法文献。 | [github.com/WeichenZhou/PALMER](https://github.com/WeichenZhou/PALMER) | [10.1093/nar/gkz1173](https://doi.org/10.1093/nar/gkz1173) |
-|  | **LoRTE** | 用低覆盖度 PacBio 长读取检测转座子引起的变异。本次未找到返回 HTTP 200 的官方代码仓库。 | — | [10.1186/s13100-017-0088-x](https://doi.org/10.1186/s13100-017-0088-x) |
-|  | **rMETL** | 通过对长读重新比对来检测可移动元件插入。 | [github.com/tjiangHIT/rMETL](https://github.com/tjiangHIT/rMETL) | [10.1093/bioinformatics/btz106](https://doi.org/10.1093/bioinformatics/btz106) |
-|  | **sTELLeR** | 从长读基因组快速检测转座子插入，并输出 VCF。 | [github.com/kristinebilgrav/sTELLeR](https://github.com/kristinebilgrav/sTELLeR) | [10.1093/bioinformatics/btae686](https://doi.org/10.1093/bioinformatics/btae686) |
-|  | **TELR** | 用长读取检测非参考转座子插入，并对插入序列做局部组装。官方说明引用该论文。 | [github.com/bergmanlab/telr](https://github.com/bergmanlab/telr) | [10.1093/nar/gkac794](https://doi.org/10.1093/nar/gkac794) |
-|  | **somrit** | 用于从长读取识别并分析体细胞反转录转座子插入的工具包。 | [github.com/adcosta17/somrit](https://github.com/adcosta17/somrit) | [10.1101/2023.08.06.552193](https://doi.org/10.1101/2023.08.06.552193) |
-|  | **SVAN** | 按官方说明，对序列已解析的插入与缺失（包括可移动元件插入）做注释和分类。本次未挂接题名匹配的方法学 DOI。 | [github.com/REPBIO-LAB/SVAN](https://github.com/REPBIO-LAB/SVAN) | — |
-|  | **MEIGA-PAV** | 按官方说明，在已解析序列的结构变异 VCF 中注释可移动元件插入。 | [github.com/MEIGA-tk/MEIGA-PAV](https://github.com/MEIGA-tk/MEIGA-PAV) | — |
-|  | **panREPET** | 无需参考基因组即可检测泛基因组中共有转座子插入的流程，用于回溯一个物种内的插入动态。 | [forgemia.inra.fr/urgi-anagen/panREPET](https://forgemia.inra.fr/urgi-anagen/panREPET) | [10.1186/s13059-026-03984-5](https://doi.org/10.1186/s13059-026-03984-5) |
-|  | **pantera** | 从泛基因组变异图中的多态性识别转座子家族。 | [github.com/piosierra/pantera](https://github.com/piosierra/pantera) | [10.1186/s13100-024-00323-y](https://doi.org/10.1186/s13100-024-00323-y) |
-|  | **Pannagram** | 按题名匹配的预印本和官方说明，做泛基因组比对并呼叫活动组。是通用泛基因组工具，不只是转座子注释器。 | [github.com/iganna/pannagram](https://github.com/iganna/pannagram) | [10.1101/2025.02.07.637071](https://doi.org/10.1101/2025.02.07.637071) |
-|  | **PanGenie** | 针对泛基因组图中各类变异的短读分型工具。通用工具，不是转座子注释器。 | [github.com/eblerjana/pangenie](https://github.com/eblerjana/pangenie) | [10.1038/s41588-022-01043-w](https://doi.org/10.1038/s41588-022-01043-w) |
-|  | **Paragraph** | 面向短读数据的图结构变异分型工具。通用工具，不是转座子注释器。此处使用已发表 DOI。 | [github.com/Illumina/paragraph](https://github.com/Illumina/paragraph) | [10.1186/s13059-019-1909-7](https://doi.org/10.1186/s13059-019-1909-7) |
-|  | **SyRI** | 从全基因组组装中识别共线与重排区域以及局部序列差异。通用工具，不是转座子注释器。此处使用已发表 DOI，而非预印本。 | [github.com/schneebergerlab/syri](https://github.com/schneebergerlab/syri) | [10.1186/s13059-019-1911-0](https://doi.org/10.1186/s13059-019-1911-0) |
-|  | **MEGAnE** | Mobile Element Genotyping Analysis Environment：按官方说明，从短读全基因组数据识别并为多态可移动元件分型。官方说明引用该预印本；预印本题名未使用工具名。 | [github.com/shohei-kojima/MEGAnE](https://github.com/shohei-kojima/MEGAnE) | [10.1101/2022.03.25.485726](https://doi.org/10.1101/2022.03.25.485726) |
-|  | **TEfinder** | 利用双端测序中的不一致读段检测新的转座子插入的流程。 | [github.com/VistaSohrab/TEfinder](https://github.com/VistaSohrab/TEfinder) | [10.3390/genes12020224](https://doi.org/10.3390/genes12020224) |
-|  | **ITIS** | 从二代测序数据识别转座子插入位点的工具。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of bioinformatics.psc.ac.cn/software/ITIS](https://web.archive.org/web/20160825205722/http://bioinformatics.psc.ac.cn:80/software/ITIS/) | [10.1186/s12859-015-0507-2](https://doi.org/10.1186/s12859-015-0507-2) |
-|  | **TE-Tracker** | 从全基因组重测序系统识别转座事件。本次未确认到官方代码仓库。 | [web.archive.org snapshot of genoscope.cns.fr/externe/tetracker](https://web.archive.org/web/20170813054646/http://www.genoscope.cns.fr:80/externe/tetracker/) | [10.1186/s12859-014-0377-z](https://doi.org/10.1186/s12859-014-0377-z) |
-|  | **ELITE** | Efficiently Locating Insertions of Transposable Elements，一篇 ACM 方法论文。本次未确认到官方代码仓库。 | [github.com/Anwica/ELITE](https://github.com/Anwica/ELITE) | [10.1145/3307339.3342182](https://doi.org/10.1145/3307339.3342182) |
-|  | **TIF** | Transposon Insertion Finder：从短读数据检测新生转座并报告插入位置的程序，不依赖已有的转座子文库。 | [github.com/akiomiyao/tif](https://github.com/akiomiyao/tif) | [10.1186/1471-2105-15-71](https://doi.org/10.1186/1471-2105-15-71) |
-|  | **TEF** | Transposable Element Finder：通用的活性转座子检测程序，通过比较两个样本、或一个样本与参考基因组，利用接合读段或靶位点重复证据寻找活跃转座。 | [github.com/akiomiyao/tef](https://github.com/akiomiyao/tef) | [10.1186/s12859-022-05011-3](https://doi.org/10.1186/s12859-022-05011-3) |
-|  | **ITIPs** | 在白菜（Brassica rapa）泛基因组中检测转座子插入多态的流程，依赖 smartie-sv 和 bwa。 | [github.com/caixu0518/ITIPs](https://github.com/caixu0518/ITIPs) | [10.1111/pbi.13807](https://doi.org/10.1111/pbi.13807) |
-|  | **RTRIP** | 约 3,000 份水稻种质的转座子插入多态目录，并附有分析脚本。论文中的网站目前无法打开；已打开一份存档的官方页面。 | [web.archive.org snapshot of RTRIP](https://web.archive.org/web/20240226054850/http://ibi.zju.edu.cn/Rtrip/index.html) | [10.1111/pbi.13425](https://doi.org/10.1111/pbi.13425) |
-|  | **panTEvo** | 用于在棉花泛基因组中追踪 LTR 反转录转座子动态与插入多态的流程。 | [github.com/Lcamdom/panTEvo](https://github.com/Lcamdom/panTEvo) | [10.1186/s13059-025-03837-7](https://doi.org/10.1186/s13059-025-03837-7) |
-|  | **TEPEAK** | 用于在非模式物种群体中识别并刻画多态转座子的方法。不是植物专用工具。 | [github.com/ryanlayerlab/TEPEAK](https://github.com/ryanlayerlab/TEPEAK) | [10.1371/journal.pcbi.1013122](https://doi.org/10.1371/journal.pcbi.1013122) |
-|  | **TypeSINE** | 从短读数据检测 SINE 插入多态。题名匹配的预印本研究对象是猪，不是植物。当前可用仓库为 github.com/mobilome/TypeSINE。 | [github.com/mobilome/TypeSINE](https://github.com/mobilome/TypeSINE) | [10.1101/2025.05.21.653756](https://doi.org/10.1101/2025.05.21.653756) |
-|  | **AnchorWave** | 面向高序列多样性、广泛结构变异和全基因组复制的全基因组比对工具。不是转座子注释器；论文报告了玉米中转座子有无变异的召回情况。 | [github.com/baoxingsong/AnchorWave](https://github.com/baoxingsong/AnchorWave) | [10.1073/pnas.2113075119](https://doi.org/10.1073/pnas.2113075119) |
-|  | **SVIM-asm** | 面向单倍体和二倍体基因组组装的结构变异检测工具。不是转座子注释器。 | [github.com/eldariont/svim-asm](https://github.com/eldariont/svim-asm) | [10.1093/bioinformatics/btaa1034](https://doi.org/10.1093/bioinformatics/btaa1034) |
-| 转座子表达与小 RNA | **TEtranscripts** | 在批量 RNA-seq 差异表达分析中同时计入基因与转座子表达，并处理多重比对读段。 | [github.com/mhammell-laboratory/TEtranscripts](https://github.com/mhammell-laboratory/TEtranscripts) | [10.1093/bioinformatics/btv422](https://doi.org/10.1093/bioinformatics/btv422) |
-|  | **TElocal** | 按座位定量转座子表达，与 TEtranscripts 出自同一实验室。 | [github.com/mhammell-laboratory/TElocal](https://github.com/mhammell-laboratory/TElocal) | — |
-|  | **Telescope** | 用贝叶斯模型从 RNA-seq 按座位估计转座子表达。 | [github.com/mlbendall/telescope](https://github.com/mlbendall/telescope) | [10.1371/journal.pcbi.1006453](https://doi.org/10.1371/journal.pcbi.1006453) |
-|  | **SQuIRE** | 用于分散重复序列座位级定量的 RNA-seq 端到端流程。 | [github.com/wyang17/SQuIRE](https://github.com/wyang17/SQuIRE) | [10.1093/nar/gky1301](https://doi.org/10.1093/nar/gky1301) |
-|  | **SalmonTE** | 基于 Salmon 的准比对流程，用于从 RNA-seq 定量转座子表达。当前仓库重定向到 jeonglab-bcm/SalmonTE。 | [github.com/jeonglab-bcm/SalmonTE](https://github.com/jeonglab-bcm/SalmonTE) | [10.1142/9789813235533_0016](https://doi.org/10.1142/9789813235533_0016) |
-|  | **scTE** | 官方说明中用于从单细胞 RNA-seq 等数据定量转座子表达。 | [github.com/JiekaiLab/scTE](https://github.com/JiekaiLab/scTE) | — |
-|  | **SoloTE** | 在单细胞 RNA-seq 中按座位定量转座子表达。 | [github.com/bvaldebenitom/SoloTE](https://github.com/bvaldebenitom/SoloTE) | [10.1038/s42003-022-04020-5](https://doi.org/10.1038/s42003-022-04020-5) |
-|  | **TEtools** | 统计并比较转座子表达（TEcount 与 TEdiff），并提供 Galaxy 封装。 | [github.com/l-modolo/TEtools](https://github.com/l-modolo/TEtools) | [10.1093/nar/gkw953](https://doi.org/10.1093/nar/gkw953) |
-|  | **RepEnrich** | 结合唯一比对与多重比对读段，从 RNA-seq 或 ChIP-seq 估计重复序列亚家族的转录富集。本次未确认到官方仓库。 | — | [10.1186/1471-2164-15-583](https://doi.org/10.1186/1471-2164-15-583) |
-|  | **ShortStack** | 注释并定量小 RNA 基因，包括植物转座子沉默研究中常用的多重比对 21–24 nt siRNA。 | [github.com/MikeAxtell/ShortStack](https://github.com/MikeAxtell/ShortStack) | [10.1261/rna.035279.112](https://doi.org/10.1261/rna.035279.112) |
-|  | **piPipes** | 官方说明中介绍的一套流程，用于分析多种测序数据中的 piRNA 与转座子转录本。 | [github.com/bowhan/piPipes](https://github.com/bowhan/piPipes) | — |
-| 年龄、分歧度与景观 | **ParseRM** | 解析 RepeatMasker 的 .out 或 .align 文件，汇总组成、分歧度与景观。本次未匹配到独立方法论文的题名。 | [github.com/4ureliek/Parsing-RepeatMasker-Outputs](https://github.com/4ureliek/Parsing-RepeatMasker-Outputs) | — |
-|  | **VHICA** | Vertical and Horizontal Inheritance Consistence Analysis：通过比较转座子与宿主基因的分歧，区分垂直遗传与水平转移。 | [cran.r-project.org/package=vhica](https://cran.r-project.org/package=vhica) | [10.1093/molbev/msv341](https://doi.org/10.1093/molbev/msv341) |
-|  | **REANNOTATE** | 用于重建插入历史的重复序列自动古生物学注释。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of bioinformatics.org/reannotate](https://web.archive.org/web/20120208050248/http://www.bioinformatics.org/reannotate/) | [10.1186/1471-2164-9-614](https://doi.org/10.1186/1471-2164-9-614) |
-|  | **RepeatLandscape** | 解析 RepeatMasker 比对输出并绘制重复序列景观直方图或饼图的脚本。本次未匹配到独立方法论文的题名。 | [github.com/caballero/RepeatLandscape](https://github.com/caballero/RepeatLandscape) | — |
-|  | **TE_Density** | 按窗口计算相对于基因的转座子密度，用于研究转座子与基因的空间关系。 | [github.com/sjteresi/TE_Density](https://github.com/sjteresi/TE_Density) | [10.1186/s13100-022-00264-4](https://doi.org/10.1186/s13100-022-00264-4) |
-|  | **TEGRiP** | Transposable Elements Genes RelationshIps Pipeline：检测转座子与相邻基因的位置和方向关系。官方说明使用名称 TEGRiP。 | [github.com/marieBvr/TEs_genes_relationship_pipeline](https://github.com/marieBvr/TEs_genes_relationship_pipeline) | [10.24072/pcjournal.57](https://doi.org/10.24072/pcjournal.57) |
-|  | **Repeattools** | 按官方说明，比较不同物种的转座子组成和拷贝分歧。仓库说明引用的是 TEsorter 论文，该 DOI 未用在本条目。 | [github.com/AgustinAmata/Repeattools](https://github.com/AgustinAmata/Repeattools) | — |
-| 可视化 | **StainedGlass** | 为超大串联重复及其他高度重复区域生成交互式一致性热图。 | [github.com/vollgerlab/StainedGlass](https://github.com/vollgerlab/StainedGlass) | [10.1093/bioinformatics/btac018](https://doi.org/10.1093/bioinformatics/btac018) |
-|  | **ModDotPlot** | 用于串联重复和大段重复区间的快速交互式点阵图工具。 | [github.com/marbl/ModDotPlot](https://github.com/marbl/ModDotPlot) | [10.1093/bioinformatics/btae493](https://doi.org/10.1093/bioinformatics/btae493) |
-|  | **FlexiDot** | 可定制、能处理序列歧义的点阵图工具，可用于比较包含重复序列的序列。通用可视化工具，不是转座子注释器。 | [github.com/molbio-dresden/flexidot](https://github.com/molbio-dresden/flexidot) | [10.1093/bioinformatics/bty395](https://doi.org/10.1093/bioinformatics/bty395) |
-|  | **RepeatOBserver** | 可视化串联重复，并可标出可能的着丝粒。主要针对串联重复，不是转座子注释器。 | [github.com/celphin/RepeatOBserverV1](https://github.com/celphin/RepeatOBserverV1) | [10.1111/1755-0998.14084](https://doi.org/10.1111/1755-0998.14084) |
-|  | **LTRsift** | 用于对从头检测到的 LTR 反转录转座子做半自动分类和后处理的图形界面。 | [github.com/satta/ltrsift](https://github.com/satta/ltrsift) | [10.1186/1759-8753-3-18](https://doi.org/10.1186/1759-8753-3-18) |
-|  | **plotsr** | 可视化多个基因组组装之间的结构相似与重排。通用工具，不是转座子注释器。 | [github.com/schneebergerlab/plotsr](https://github.com/schneebergerlab/plotsr) | [10.1093/bioinformatics/btac196](https://doi.org/10.1093/bioinformatics/btac196) |
-| 模拟与评测 | **simuG** | 通用基因组模拟器，可引入 SNP、indel、结构变异和转座子插入，用于方法测试。 | [github.com/yjx1217/simuG](https://github.com/yjx1217/simuG) | [10.1093/bioinformatics/btz424](https://doi.org/10.1093/bioinformatics/btz424) |
-|  | **TEgenomeSimulator** | 用于按可配置的转座子景观模拟基因组的框架，供方法测试使用。 | [github.com/Plant-Food-Research-Open/TEgenomeSimulator](https://github.com/Plant-Food-Research-Open/TEgenomeSimulator) | [10.64898/2026.03.09.710711](https://doi.org/10.64898/2026.03.09.710711) |
-|  | **PrinTE** | 正向模拟框架，用于研究转座子如何导致基因组膨胀与收缩。 | [github.com/cwb14/PrinTE](https://github.com/cwb14/PrinTE) | [10.1101/2025.06.04.657780](https://doi.org/10.1101/2025.06.04.657780) |
-|  | **TEvarSim** | 转座子插入与缺失的基因组模拟器，也可模拟短读和长读数据。 | [github.com/daweili-lab/TEvarSim](https://github.com/daweili-lab/TEvarSim) | [10.1371/journal.pcbi.1013933](https://doi.org/10.1371/journal.pcbi.1013933) |
-|  | **TE_simu** | 按官方说明，模拟基因组序列中转座子插入、扩增与演化的脚本。本次未挂接题名匹配的方法论文。 | [github.com/unavailable-2374/TE_simu](https://github.com/unavailable-2374/TE_simu) | — |
-|  | **Hoen et al. 2015** | 呼吁系统评测转座子注释方法的方法学论文。这是论文，不是软件工具。 | — | [10.1186/s13100-015-0044-6](https://doi.org/10.1186/s13100-015-0044-6) |
-|  | **Rishishwar et al. 2016** | 针对多态转座子检测工具的评测论文。这是论文，不是软件工具。 | — | [10.1093/bib/bbw072](https://doi.org/10.1093/bib/bbw072) |
-|  | **Saha et al. 2008** | 对从头重复序列发现程序的实证比较。这是论文，不是软件工具。 | — | [10.1093/nar/gkn064](https://doi.org/10.1093/nar/gkn064) |
-| 多倍体亚基因组与串联重复 | **TRASH** | Tandem Repeat Annotation and Structural Hierarchy：注释串联重复，包括卫星阵列。不是转座子注释器。 | [github.com/vlothec/TRASH](https://github.com/vlothec/TRASH) | [10.1093/bioinformatics/btad308](https://doi.org/10.1093/bioinformatics/btad308) |
-|  | **SubPhaser** | 利用亚基因组特异 k-mer（主要来自转座子等重复序列）划分异源多倍体亚基因组。不是转座子注释器。 | [github.com/zhangrengang/SubPhaser](https://github.com/zhangrengang/SubPhaser) | [10.1111/nph.18173](https://doi.org/10.1111/nph.18173) |
-|  | **PolyCRACKER** | 利用重复序列演化信号，在无监督条件下划分多倍体亚基因组。见到过非官方代码镜像，未将其作为官方仓库。 | [bitbucket.org/berkeleylab/jgi-polycracker](https://bitbucket.org/berkeleylab/jgi-polycracker/) | [10.1186/s12864-019-5828-5](https://doi.org/10.1186/s12864-019-5828-5) |
-| 数据库与参考集 | **PlantRep** | 在数百个植物基因组中重新注释得到的植物重复序列一致性库。本次未能成功打开其公开网站。 | — | [10.1007/s00299-021-02817-y](https://doi.org/10.1007/s00299-021-02817-y) |
-|  | **RiTE-db** | 稻属转座子资源库。当前页面由旧的 genome.arizona.edu 地址重定向而来。 | [ava.genome.arizona.edu/cgi-bin/rite/index.cgi](https://ava.genome.arizona.edu/cgi-bin/rite/index.cgi) | [10.1186/s12864-015-1762-3](https://doi.org/10.1186/s12864-015-1762-3) |
-|  | **SINEBase** | 收录真核生物 SINE 一致性序列并提供结构分析的数据库与工具。 | [sines.eimb.ru](https://sines.eimb.ru/) | [10.1093/nar/gks1263](https://doi.org/10.1093/nar/gks1263) |
-|  | **SoyTEdb** | 大豆基因组转座子数据库。原域名现重定向到 SoyBase 的旧版页面。 | [legacy.soybase.org/soytedb](https://legacy.soybase.org/soytedb/) | [10.1186/1471-2164-11-113](https://doi.org/10.1186/1471-2164-11-113) |
-|  | **RepetDB** | 与 REPET 项目相关的转座子参考序列统一资源。 | [urgi.versailles.inrae.fr/repetdb](https://urgi.versailles.inrae.fr/repetdb) | [10.1186/s13100-019-0150-y](https://doi.org/10.1186/s13100-019-0150-y) |
-|  | **TREP** | 面向植物的人工精修转座子平台，附录B已有条目；此处补入方法目录。 | [trep-db.uzh.ch](https://trep-db.uzh.ch) | — |
-|  | **HTT-DB** | 水平转移转座子数据库，另有更新说明论文。本次尝试的公开网站未能成功打开。 | [web.archive.org snapshot of HTT-DB](https://web.archive.org/web/20220814084307/http://lpa.saogabriel.unipampa.edu.br:8080/httdatabase/) | [10.1093/bioinformatics/btv281](https://doi.org/10.1093/bioinformatics/btv281) |
-|  | **PlantLTRdb** | 收录 195 个植物物种完整 LTR 反转录转座子的交互式数据库。 | [bioinformatics.um6p.ma/PlantLTRdb/](https://bioinformatics.um6p.ma/PlantLTRdb/) | [10.3389/fpls.2023.1134627](https://doi.org/10.3389/fpls.2023.1134627) |
-|  | **DPTEdb** | 雌雄异株植物转座子综合数据库。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of DPTEdb](https://web.archive.org/web/20180812090334/http://genedenovoweb.ticp.net:81/DPTEdb/index.php) | [10.1093/database/baw078](https://doi.org/10.1093/database/baw078) |
-|  | **SPTEdb** | 杨柳科植物转座子数据库。本次未能成功打开论文中的网站。 | [web.archive.org snapshot of SPTEdb](https://web.archive.org/web/20180730000921/http://genedenovoweb.ticp.net:81/SPTEdb/index.php) | [10.1093/database/bay024](https://doi.org/10.1093/database/bay024) |
-|  | **RetrOryza** | 水稻 LTR 反转录转座子数据库。本次尝试的公开网站未能成功打开。 | — | [10.1093/nar/gkl780](https://doi.org/10.1093/nar/gkl780) |
-|  | **TIGR Plant Repeat Databases** | 历史上用于识别植物重复序列的汇总资源。本次未能成功打开原来的 TIGR 网址。 | [rice.uga.edu/pub/data/TIGR_Plant_Repeats/](https://rice.uga.edu/pub/data/TIGR_Plant_Repeats/) | [10.1093/nar/gkh099](https://doi.org/10.1093/nar/gkh099) |
-|  | **ConTEdb** | 针叶树转座子综合数据库。本次尝试的公开网站未能成功打开。 | [web.archive.org snapshot of ConTEdb](https://web.archive.org/web/20210921143932/http://genedenovoweb.ticp.net:81/conTEdb/index.php) | [10.1093/database/bay131](https://doi.org/10.1093/database/bay131) |
-|  | **AnnoTEP-DB** | 与 EDTA-GUI 论文相关的说明与预注释基因组资源。目录中已有 EDTA-GUI 软件条目，本次未改那一行。当前可用地址需要末尾斜杠。 | [plantgenomics.ncc.unesp.br/AnnoTEP-DB/](https://plantgenomics.ncc.unesp.br/AnnoTEP-DB/) | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
-|  | **MaizeGP** | 开放的玉米图泛基因组平台，含结构变异目录。这是物种泛基因组资源，不是专一的转座子数据库。 | [github.com/Jia-nianhua/Maize-Graph-Pangenome](https://github.com/Jia-nianhua/Maize-Graph-Pangenome) | [10.1111/jipb.70439](https://doi.org/10.1111/jipb.70439) |
-|  | **TE Hub** | 用于分享并连接转座子注释工具、数据、资源和方法的社区站点。 | [tehub.org](https://tehub.org/) | [10.1186/s13100-021-00244-0](https://doi.org/10.1186/s13100-021-00244-0) |
-|  | **awesome-transposable-elements** | 公开整理的转座子研究软件、数据库和其他资源清单。这是社区索引，不是原始数据库。 | [github.com/nixonlab/awesome-transposable-elements](https://github.com/nixonlab/awesome-transposable-elements) | — |
-|  | **GrapeGenomics Vitis RepeatMasker library** | 基于赤霞珠（Cabernet Sauvignon）的葡萄 RepeatMasker 自定义文库（Vitis_repeats.lib.gz），由 Cantu 实验室发布。这是可直接用于屏蔽的文库，不是可浏览检索的转座子数据库。未确认到正式的数据集 DOI。 | [grapegenomics.com/pages/repeats.php](https://grapegenomics.com/pages/repeats.php) | — |
-|  | **PN40024 T2T TE annotations** | 随 PN40024 端粒到端粒基因组发布的转座子注释文件（PN_T2T_TE.gff3）。论文已在本目录中；本行只收录注释文件。 | [zenodo.org/records/13741133](https://zenodo.org/records/13741133) | [10.5281/zenodo.13741133](https://doi.org/10.5281/zenodo.13741133) |
+旧表中列出的评测论文（是论文，不是软件）：Hoen 等 2015，呼吁对转座子注释方法做系统评测（[10.1186/s13100-015-0044-6](https://doi.org/10.1186/s13100-015-0044-6)）；Rishishwar 等 2016，多态转座子检测工具的评测（[10.1093/bib/bbw072](https://doi.org/10.1093/bib/bbw072)）；Saha 等 2008，从头重复序列发现程序的实测比较（[10.1093/nar/gkn064](https://doi.org/10.1093/nar/gkn064)）。
 
 ### 操作流程
 
