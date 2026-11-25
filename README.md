@@ -84,179 +84,367 @@ Shorter type-by-type notes, with figures, are in [`docs/types/README.md`](docs/t
 
 The default route is EDTA, then TEtrimmer, then TEsorter, then a CDS-gated trusted library, then soft-masking or panEDTA. The decision tree is in [`docs/WORKFLOW.md`](docs/WORKFLOW.md). Software by step, field difficulties, and the same route in more detail are in [`docs/detection/tools_and_pipelines.md`](docs/detection/tools_and_pipelines.md). Sequence signatures used to recognise each type are in [`docs/detection/signatures.md`](docs/detection/signatures.md). The soft-mask hand-off into gene annotation is in [`docs/detection/softmask_handoff.md`](docs/detection/softmask_handoff.md). Each catalogue row, with a link, a title-matched DOI where one exists, inputs, outputs, and when to use the tool, is in [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv). Tool versions are not pinned. A DOI is listed only when the Crossref title matches the intended paper (checked 2026-11-15, Asia/Shanghai, CST, UTC+8). Items without a title-matched DOI are listed by URL only, or marked [待确认].
 
-A reorganised software guide is in [`docs/software/README.md`](docs/software/README.md): complete pipelines and the steps they cover, then each analysis step, with the original paper, the lab named on it, and a citation-based authority indicator for every entry, and a visualization section. The per-entry data are in [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv).
+### Software by analysis step
 
-A separate line of plant LTR-retrotransposon software, not part of the default EDTA route, is the Inpactor series: [Inpactor](https://github.com/simonorozcoarias/Inpactor) and [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) classify intact LTR retrotransposons (Inpactor2 also detects them and assigns lineages), [InpactorDB](https://inpactordb.github.io) is a lineage-level plant LTR reference set, [SENMAP](https://github.com/simonorozcoarias/SENMAP) keeps intact LTR copies when curating a library, and [TIP_finder](https://github.com/simonorozcoarias/TIP_finder) calls insertion polymorphisms from short paired reads. Title-matched DOIs and repository links are listed below and in [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv).
+The 198 software tools, databases and workflows in this catalogue are listed below by analysis step. Each entry gives its original paper, lab and authority; the tool link goes to the official repository or site. Longer notes are in [`docs/software/README.md`](docs/software/README.md), per-entry data in [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv), and the check notes for each row in [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv).
 
-### Software by step
+**Default route:** [EDTA](https://github.com/oushujun/EDTA) → [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) → [TEsorter](https://github.com/zhangrengang/TEsorter) → a CDS-gated trusted library → soft-masking with [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker), or panEDTA for a panel of genomes. Only tools on this route are marked **default** in the tables. Where a step has no default, rows are ordered by paper citation count, which does not say which tool suits your genome.
 
-| Step | Use when | Tools in this catalogue |
-|------|----------|-------------------------|
-| De novo discovery | Starting from an assembly or haplotype | [EDTA](https://github.com/oushujun/EDTA) (default here), [RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler), [Earl Grey](https://github.com/TobyBaril/EarlGrey); family finders [RepeatScout](https://github.com/Dfam-consortium/RepeatScout), [RECON](https://github.com/Dfam-consortium/RECON), [PILER](https://www.drive5.com/piler/) |
-| Structural detection | Seeking intact LTR, TIR, MITE or Helitron copies | [LTR_FINDER](https://github.com/xzhub/LTR_FINDER), [LTR_FINDER_parallel](https://github.com/oushujun/LTR_FINDER_parallel), [LTRharvest](https://github.com/genometools/genometools), [LTR_retriever](https://github.com/oushujun/LTR_retriever); [HelitronScanner](https://sourceforge.net/projects/helitronscanner/); MITE-Hunter, [detectMITE](https://sourceforge.net/projects/detectmite/), [TIR-Learner](https://github.com/oushujun/TIR-Learner), [GRF](https://github.com/bioinfolabmu/GenericRepeatFinder), [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) |
-| Homology | Annotating or masking with a library | [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker) ([website](https://www.repeatmasker.org/)); libraries [Dfam](https://www.dfam.org/) and [Repbase](https://www.girinst.org/repbase/) |
-| Classification | Labelling a working library | [TEsorter](https://github.com/zhangrengang/TEsorter) + [REXdb](https://bitbucket.org/petrnovak/repex_tarean) (plant LTR lineages); [DeepTE](https://github.com/LiLabAtVT/DeepTE); [TEclass](https://bioinformatics.uni-muenster.de/tools/teclass/index.hbi); [Inpactor](https://github.com/simonorozcoarias/Inpactor), [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) |
-| Curation and consensus | Turning raw consensi into a working or trusted library | [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) (default here), [MCHelper](https://github.com/GonzalezLab/MCHelper), [SENMAP](https://github.com/simonorozcoarias/SENMAP), Goubert guide ([doi:10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7)), [CD-HIT](https://github.com/weizhongli/cdhit) |
-| Library QC | Removing non-TE repeats and checking assembly quality | [TRF](https://github.com/Benson-Genomics-Lab/TRF) (non-TE track; [website](https://tandem.bu.edu/trf/trf.html)); LAI after curated or pan annotation ([LTR_retriever](https://github.com/oushujun/LTR_retriever)) |
-| Masking | Handing a genome to gene annotation | [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker) `-xsmall` with the trusted library only; [BEDTools](https://github.com/arq5x/bedtools2) for track checks |
-| TE age / insertion time | Intact LTR pairs after curation | [LTR_retriever](https://github.com/oushujun/LTR_retriever); `scripts/01_ltr_insertion_age.py` for a toy demonstration |
-| Polymorphic TE calling | Population or long-read insertion calling, not library construction | [TEMP](https://github.com/JialiUMassWengLab/TEMP), [RelocaTE2](https://github.com/JinfengChen/RelocaTE2), [xTea](https://github.com/parklab/xTea), [Jitterbug](https://github.com/elzbth/jitterbug), [TIP_finder](https://github.com/simonorozcoarias/TIP_finder) |
-| Pangenome TE | A panel of haplotypes or genomes | [panEDTA](https://github.com/oushujun/EDTA) (`panEDTA.sh` in the EDTA repository) |
-| Visualization / defragmentation | Cleaning homology annotations | [RepeatCraft](https://github.com/niccw/repeatcraftp), [oneCodeToFindThemAll](https://doua.prabi.fr/software/one-code-to-find-them-all) |
+> **Tier rule (stated once):** the indicator is the OpenAlex citation count of the paper (retrieved 2026-11-25). standard: 500 or more; established: 100–499; newer: fewer than 100 and the paper is from 2023 or later; niche: fewer than 100 and from before 2023; no paper: the catalogue has no title-matched paper. General-purpose tools such as BEDTools and IGV have counts from every field. Lab is the corresponding author named in the paper metadata with the institution (first one shown, +N for further corresponding authors; the last author when none is flagged). DOIs were checked against Crossref; the exceptions are in the `doi_check` column of `catalog/SOFTWARE_AUTHORITY.tsv`. This section has 198 entries: standard 28, established 47, newer 42, niche 58, no paper 23.
 
-### Inpactor series (plant LTR retrotransposons)
+#### Complete pipelines and the steps they cover
 
-These entries are an alternative or complement to the default EDTA route. They are not a replacement for a CDS-gated trusted library.
+yes means the documentation of the pipeline, or its catalogue entry, states the step; a dash only means it is not stated. Paper and lab for each pipeline are in the first table after this one.
 
-| Name | Role | Repository | DOI |
-|------|------|------------|-----|
-| Inpactor | HPC pipeline to classify plant LTR retrotransposons, mark autonomous and non-autonomous copies, and estimate insertion time | [github.com/simonorozcoarias/Inpactor](https://github.com/simonorozcoarias/Inpactor) | [10.3390/biology7020032](https://doi.org/10.3390/biology7020032) |
-| Inpactor2 | Deep-learning and structure-based detection, filtering of fragments and nested copies, and classification of intact plant LTR retrotransposons to superfamily and lineage; input is an assembled genome | [github.com/simonorozcoarias/Inpactor2](https://github.com/simonorozcoarias/Inpactor2) | [10.1093/bib/bbac511](https://doi.org/10.1093/bib/bbac511) |
-| InpactorDB | Lineage-level plant LTR retrotransposon reference set (195 genomes, 108 species; 67,241 non-redundant elements in the published set) | [InpactorDB search page](https://inpactordb.github.io); dataset [10.5281/zenodo.4386317](https://doi.org/10.5281/zenodo.4386317) (a later snapshot is [10.5281/zenodo.5816833](https://doi.org/10.5281/zenodo.5816833)) | [10.3390/genes12020190](https://doi.org/10.3390/genes12020190) |
-| SENMAP | Convolutional network to keep intact LTR retrotransposon copies when curating a plant library | [github.com/simonorozcoarias/SENMAP](https://github.com/simonorozcoarias/SENMAP) | [10.1515/jib-2021-0036](https://doi.org/10.1515/jib-2021-0036) (journal article; conference report: [10.1109/ci-ibbi54220.2021.9626130](https://doi.org/10.1109/ci-ibbi54220.2021.9626130)) |
-| TIP_finder | HPC caller of transposable-element insertion polymorphisms from Illumina paired reads, a chromosome-level reference, and a TE consensus set | [github.com/simonorozcoarias/TIP_finder](https://github.com/simonorozcoarias/TIP_finder) | [10.3390/biology9090281](https://doi.org/10.3390/biology9090281) |
-| YORO | Convolutional genomic-object detector for transposable-element detection and classification | [github.com/simonorozcoarias/YORO](https://github.com/simonorozcoarias/YORO) | [10.1371/journal.pone.0291925](https://doi.org/10.1371/journal.pone.0291925) |
-| PanTEon | Cross-kingdom framework and database for designing and comparing transposable-element classifiers (preprint) | [github.com/simonorozcoarias/PanTEon](https://github.com/simonorozcoarias/PanTEon) | [10.64898/2026.04.01.715927](https://doi.org/10.64898/2026.04.01.715927) |
+| Pipeline | Library | Curation | Classification | Masking / annotation | Age / divergence | Panel of genomes | Tier · citations |
+|---|---|---|---|---|---|---|---|
+| **[EDTA](https://github.com/oushujun/EDTA)** (default route) | yes | yes | yes | yes | — | via panEDTA | standard · 1683 |
+| **[panEDTA](https://github.com/oushujun/EDTA/blob/master/panEDTA.sh)** (default route) | — | yes | — | yes | — | yes | newer · 84 |
+| [EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | as EDTA | as EDTA | yes | as EDTA | — | — | newer · 2 |
+| [RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler) | yes | yes | yes | — | — | — | standard · 4333 |
+| [Dfam TETools](https://github.com/Dfam-consortium/TETools) | via RepeatModeler | — | via RepeatModeler | via RepeatMasker | — | — | no paper |
+| [Earl Grey](https://github.com/TobyBaril/EarlGrey) | yes | yes | yes | yes | yes | ParTEA | established · 292 |
+| [ParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | — | — | — | yes | — | yes | newer · 0, preprint |
+| [HiTE](https://github.com/CSU-KangHu/HiTE) | yes | — | yes | yes | — | panHiTE | newer · 71 |
+| [panHiTE](https://github.com/CSU-KangHu/HiTE) | yes | — | — | — | — | yes | newer · 5 |
+| [REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | yes | yes | — | yes | — | — | standard · 589 |
+| [Tephra](https://github.com/sestaton/tephra) | yes | — | yes | yes | yes | — | no paper |
+| [CARP](https://github.com/carp-te/carp-documentation) | yes | yes | — | yes | — | — | niche · 36 |
+| [CLARI-TE](https://github.com/jdaron/CLARI-TE) | — | — | — | yes | — | — | no paper |
+| [PanTE](https://github.com/unavailable-2374/Pan_TE) | yes | — | yes | — | — | yes | newer · 2, preprint |
+
+#### Complete pipelines: paper, lab and authority
+
+| Tool | Role | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|---|
+| [EDTA](https://github.com/oushujun/EDTA) | **default** | *Genome biology* 2019 · [10.1186/s13059-019-1905-y](https://doi.org/10.1186/s13059-019-1905-y) | Ning Jiang, Michigan State University +2 | standard · 1683 |
+| [panEDTA](https://github.com/oushujun/EDTA/blob/master/panEDTA.sh) | **default** | *Genome Research* 2024 · [10.1101/gr.278131.123](https://doi.org/10.1101/gr.278131.123) | Matthew B. Hufford, Iowa State University +1 | newer · 84 |
+| [RepeatModeler2](https://github.com/Dfam-consortium/RepeatModeler) | alternative | *Proceedings of the National Academy of Sciences* 2020 · [10.1073/pnas.1921046117](https://doi.org/10.1073/pnas.1921046117) | Arian F. A. Smit, Institute for Systems Biology (last author) | standard · 4333 |
+| [REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | alternative | *PLoS ONE* 2011 · [10.1371/journal.pone.0016526](https://doi.org/10.1371/journal.pone.0016526) | Hadi Quesneville, Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement | standard · 589 |
+| [Earl Grey](https://github.com/TobyBaril/EarlGrey) | alternative | *Molecular Biology and Evolution* 2024 · [10.1093/molbev/msae068](https://doi.org/10.1093/molbev/msae068) | Tobias Baril, University of Exeter +1 | established · 292 |
+| [HiTE](https://github.com/CSU-KangHu/HiTE) | alternative | *Nature Communications* 2024 · [10.1038/s41467-024-49912-8](https://doi.org/10.1038/s41467-024-49912-8) | Bin Hu, Beijing Institute of Technology +1 | newer · 71 |
+| [CARP](https://github.com/carp-te/carp-documentation) | alternative | *PLoS ONE* 2018 · [10.1371/journal.pone.0193588](https://doi.org/10.1371/journal.pone.0193588) | David L. Adelson, The University of Adelaide | niche · 36 |
+| [panHiTE](https://github.com/CSU-KangHu/HiTE) | alternative | *Plant Communications* 2025 · [10.1016/j.xplc.2025.101669](https://doi.org/10.1016/j.xplc.2025.101669) | Jianxin Wang, Central South University | newer · 5 |
+| [EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | alternative | *BMC Genomics* 2026 · [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) | Alessandro M. Varani, Universidade Estadual Paulista (Unesp) +1 | newer · 2 |
+| [PanTE](https://github.com/unavailable-2374/Pan_TE) | alternative | *Research Square* 2025 · [10.21203/rs.3.rs-5867196/v1](https://doi.org/10.21203/rs.3.rs-5867196/v1) | Yiwen Wang, The University of Melbourne | newer · 2, preprint |
+| [ParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | alternative | *bioRxiv (Cold Spring Harbor Laboratory)* 2026 · [10.64898/2026.11.04.764261](https://doi.org/10.64898/2026.11.04.764261) | Tobias Baril, Swedish Museum of Natural History | newer · 0, preprint |
+| [CLARI-TE](https://github.com/jdaron/CLARI-TE) | alternative | — | — | no paper |
+| [Dfam TETools](https://github.com/Dfam-consortium/TETools) | alternative | — | — | no paper |
+| [Tephra](https://github.com/sestaton/tephra) | alternative | — | — | no paper |
+
+#### Family finders and read-based repeat discovery
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [RepeatScout](https://github.com/Dfam-consortium/RepeatScout) | *Bioinformatics* 2005 · [10.1093/bioinformatics/bti1018](https://doi.org/10.1093/bioinformatics/bti1018) | Alkes L. Price, University of California San Diego | standard · 2427 |
+| [RECON](https://github.com/Dfam-consortium/RECON) | *Genome Research* 2002 · [10.1101/gr.88502](https://doi.org/10.1101/gr.88502) | Sean R. Eddy, Howard Hughes Medical Institute | standard · 1126 |
+| [PILER](https://www.drive5.com/piler/) | *Bioinformatics* 2005 · [10.1093/bioinformatics/bti1003](https://doi.org/10.1093/bioinformatics/bti1003) | R. C. Edgar, bob@drive5.com | standard · 807 |
+| [TAREAN](https://repeatexplorer-elixir.cerit-sc.cz/galaxy/) | *Nucleic Acids Research* 2017 · [10.1093/nar/gkx257](https://doi.org/10.1093/nar/gkx257) | Jir̆í Macas, Institute of Plant Molecular Biology | established · 368 |
+| [RepeatExplorer2](https://repeatexplorer-elixir.cerit-sc.cz) | *Nature Protocols* 2020 · [10.1038/s41596-020-0400-y](https://doi.org/10.1038/s41596-020-0400-y) | Jir̆í Macas, Czech Academy of Sciences | established · 320 |
+| [Red](https://github.com/BioinformaticsToolsmith/Red) | *BMC Bioinformatics* 2015 · [10.1186/s12859-015-0654-5](https://doi.org/10.1186/s12859-015-0654-5) | Hani Z. Girgis, National Institutes of Health | established · 275 |
+| [dnaPipeTE](https://github.com/clemgoub/dnaPipeTE) | *Genome Biology and Evolution* 2015 · [10.1093/gbe/evv050](https://doi.org/10.1093/gbe/evv050) | Matthieu Boulesteix, Lyon 1 Université | established · 240 |
+| [Transposome](https://github.com/sestaton/Transposome) | *Bioinformatics* 2015 · [10.1093/bioinformatics/btv059](https://doi.org/10.1093/bioinformatics/btv059) | S. Evan Staton, University of Georgia | niche · 22 |
+
+#### LTR retrotransposon detection
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [LTR_FINDER](https://github.com/xzhub/LTR_FINDER) | *Nucleic Acids Research* 2007 · [10.1093/nar/gkm286](https://doi.org/10.1093/nar/gkm286) | Hao Wang, Fudan University | standard · 2933 |
+| [LTRharvest](https://github.com/genometools/genometools) | *BMC Bioinformatics* 2008 · [10.1186/1471-2105-9-18](https://doi.org/10.1186/1471-2105-9-18) | Ute Willhoeft, Universität Hamburg | standard · 1855 |
+| [LTR_retriever](https://github.com/oushujun/LTR_retriever) | *Plant Physiology* 2017 · [10.1104/pp.17.01310](https://doi.org/10.1104/pp.17.01310) | Ning Jiang, Michigan State University | standard · 1703 |
+| [LTRdigest](https://github.com/genometools/genometools) | *Nucleic Acids Research* 2009 · [10.1093/nar/gkp759](https://doi.org/10.1093/nar/gkp759) | Sascha Steinbiss, Universität Hamburg | established · 310 |
+| [LTR_FINDER_parallel](https://github.com/oushujun/LTR_FINDER_parallel) | *Mobile DNA* 2019 · [10.1186/s13100-019-0193-0](https://doi.org/10.1186/s13100-019-0193-0) | Ning Jiang, Michigan State University | established · 291 |
+| [DANTE and DANTE_LTR](https://github.com/kavonrtep/dante_ltr) | *NAR Genomics and Bioinformatics* 2024 · [10.1093/nargab/lqae113](https://doi.org/10.1093/nargab/lqae113) | Jir̆í Macas, Czech Academy of Sciences | newer · 42 |
+| [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) | *Briefings in Bioinformatics* 2022 · [10.1093/bib/bbac511](https://doi.org/10.1093/bib/bbac511) | Simón Orozco-Arias, Universidad de Caldas +3 | niche · 38 |
+| [LTRpred](https://github.com/drostlab/LTRpred) | *The Journal of Open Source Software* 2020 · [10.21105/joss.02170](https://doi.org/10.21105/joss.02170) | Hajk‐Georg Drost, University of Cambridge | niche · 28 |
+| [LtrDetector](https://github.com/BioinformaticsToolsmith/LtrDetector) | *BMC Genomics* 2019 · [10.1186/s12864-019-5796-9](https://doi.org/10.1186/s12864-019-5796-9) | Hani Z. Girgis, University of Tulsa | niche · 27 |
+| [TE-greedy-nester](https://gitlab.fi.muni.cz/lexa/nested) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa632](https://doi.org/10.1093/bioinformatics/btaa632) | Matej Lexa, Czech Academy of Sciences | niche · 24 |
+| [MegaLTR](https://github.com/MoradMMokhtar/MegaLTR) | *Frontiers in Plant Science* 2023 · [10.3389/fpls.2023.1237426](https://doi.org/10.3389/fpls.2023.1237426) | Morad M. Mokhtar, Université Mohammed VI Polytechnique +1 | newer · 9 |
+| [PhyLTR](https://github.com/mcsimenc/PhyLTR) | *Zenodo (CERN European Organization for Nuclear Research)* 2020 · [10.5281/zenodo.4256534](https://doi.org/10.5281/zenodo.4256534) | Der, JP. (last author) | niche · 0 |
+| [MGEScan](https://github.com/MGEScan/mgescan) | — | — | no paper |
+
+#### TIR, MITE, Helitron and SINE detection
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [MITE-Hunter](https://doi.org/10.1093/nar/gkq862) | *Nucleic Acids Research* 2010 · [10.1093/nar/gkq862](https://doi.org/10.1093/nar/gkq862) | S. R. Wessler, University of Georgia | standard · 759 |
+| [HelitronScanner](https://sourceforge.net/projects/helitronscanner/) | *Proceedings of the National Academy of Sciences* 2014 · [10.1073/pnas.1410068111](https://doi.org/10.1073/pnas.1410068111) | Chunguang Du, Montclair State University (last author) | established · 307 |
+| [TIR-Learner](https://github.com/oushujun/TIR-Learner) | *Molecular Plant* 2019 · [10.1016/j.molp.2019.02.008](https://doi.org/10.1016/j.molp.2019.02.008) | Thomas Peterson, Iowa State University | established · 175 |
+| [MITE Tracker](https://github.com/INTABiotechMJ/MITE-Tracker) | *BMC Bioinformatics* 2018 · [10.1186/s12859-018-2376-y](https://doi.org/10.1186/s12859-018-2376-y) | Leonardo Sebastian Vanzetti, Consejo Nacional de Investigaciones Científicas y Técnicas | established · 144 |
+| [Generic Repeat Finder (GRF)](https://github.com/bioinfolabmu/GenericRepeatFinder) | *Plant Physiology* 2019 · [10.1104/pp.19.00386](https://doi.org/10.1104/pp.19.00386) | Chun Liang, Miami University (last author) | established · 138 |
+| [SINE-Finder](https://doi.org/10.1105/tpc.111.088682) | *The Plant Cell* 2011 · [10.1105/tpc.111.088682](https://doi.org/10.1105/tpc.111.088682) | Thomas Schmidt, Technische Universität Dresden (last author) | established · 128 |
+| [detectMITE](https://sourceforge.net/projects/detectmite/) | *Scientific Reports* 2016 · [10.1038/srep19688](https://doi.org/10.1038/srep19688) | Guoli Ji, Xiamen University +1 | niche · 70 |
+| [SINE_Scan](https://github.com/maohlzj/SINE_Scan) | *Bioinformatics* 2016 · [10.1093/bioinformatics/btw718](https://doi.org/10.1093/bioinformatics/btw718) | Hao Wang, University of Georgia | niche · 57 |
+| [EAHelitron](https://github.com/dontkme/EAHelitron) | *BMC Bioinformatics* 2019 · [10.1186/s12859-019-2945-8](https://doi.org/10.1186/s12859-019-2945-8) | Yidan Ouyang, Huazhong Agricultural University +1 | niche · 50 |
+| [miteFinderII](https://github.com/jhu99/miteFinder) | *BMC Medical Genomics* 2018 · [10.1186/s12920-018-0418-y](https://doi.org/10.1186/s12920-018-0418-y) | Xuequn Shang, Northwestern Polytechnical University | niche · 49 |
+| [AnnoSINE](https://github.com/yangli557/AnnoSINE) | *Plant Physiology* 2021 · [10.1093/plphys/kiab524](https://doi.org/10.1093/plphys/kiab524) | Yanni Sun, City University of Hong Kong | niche · 23 |
+| [MUSTv2](https://doi.org/10.1515/jib-2017-0029) | *Berichte aus der medizinischen Informatik und Bioinformatik/Journal of integrative bioinformatics* 2017 · [10.1515/jib-2017-0029](https://doi.org/10.1515/jib-2017-0029) | Qing Wu, Hangzhou Dianzi University +1 | niche · 20 |
+| [AnnoSINE_v2](https://github.com/oushujun/AnnoSINE_v2) | *Mobile DNA* 2024 · [10.1101/2024.03.01.582874](https://doi.org/10.1101/2024.03.01.582874) | Yanni Sun, City University of Hong Kong +1 | newer · 4 |
+| [DeepHel](https://github.com/lyysxb/DeepHel) | *Bioinformatics* 2026 · [10.1093/bioinformatics/btag817](https://doi.org/10.1093/bioinformatics/btag817) | Jianxin Wang, Central South University | newer · 0 |
+
+#### Curation, redundancy reduction and library QC
+
+| Tool | Role | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|---|
+| [CD-HIT](https://github.com/weizhongli/cdhit) | **default** | *Bioinformatics* 2012 · [10.1093/bioinformatics/bts565](https://doi.org/10.1093/bioinformatics/bts565) | LiMin Fu, University of California San Diego +3 | standard · 12430 |
+| [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) | **default** | *Nature Communications* 2025 · [10.1038/s41467-025-63889-y](https://doi.org/10.1038/s41467-025-63889-y) | Stefan Kusch, Forschungszentrum Jülich +1 | newer · 37 |
+| [VSEARCH](https://github.com/torognes/vsearch) | alternative | *PeerJ* 2016 · [10.7717/peerj.2584](https://doi.org/10.7717/peerj.2584) | Frédéric Mahé, Centre de Coopération Internationale en Recherche Agronomique pour le Développement (last author) | standard · 12129 |
+| [Tandem Repeats Finder (TRF)](https://tandem.bu.edu/trf/trf.html) | alternative | *Nucleic Acids Research* 1999 · [10.1093/nar/27.2.573](https://doi.org/10.1093/nar/27.2.573) | Gary Benson, Icahn School of Medicine at Mount Sinai | standard · 10371 |
+| [MMseqs2](https://github.com/soedinglab/MMseqs2) | alternative | *Nature Biotechnology* 2017 · [10.1038/nbt.3988](https://doi.org/10.1038/nbt.3988) | Johannes Söding, Max Planck Institute for Biophysical Chemistry | standard · 5716 |
+| [LTR Assembly Index (LAI)](https://github.com/oushujun/LTR_retriever) | alternative | *Nucleic Acids Research* 2018 · [10.1093/nar/gky730](https://doi.org/10.1093/nar/gky730) | Shujun Ou, Michigan State University | standard · 947 |
+| [TE-Aid](https://github.com/clemgoub/TE-Aid) | alternative | *Mobile DNA* 2022 · [10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7) | Anna Victoria Protasio, University of Cambridge | established · 196 |
+| [MCHelper](https://github.com/GonzalezLab/MCHelper) | alternative | *Genome Research* 2024 · [10.1101/gr.278821.123](https://doi.org/10.1101/gr.278821.123) | Josefa González, Consejo Superior de Investigaciones Científicas | newer · 51 |
+| [SENMAP](https://github.com/simonorozcoarias/SENMAP) | alternative | *Berichte aus der medizinischen Informatik und Bioinformatik/Journal of integrative bioinformatics* 2022 · [10.1515/jib-2021-0036](https://doi.org/10.1515/jib-2021-0036) | Simón Orozco-Arias, Universidad de Caldas +6 | niche · 6 |
+| [ColabCuraTE](https://github.com/Ellison-Lab/ColabCuraTE) | alternative | *Mobile DNA* 2025 · [10.1186/s13100-025-00389-2](https://doi.org/10.1186/s13100-025-00389-2) | Christopher E. Ellison, Rutgers, The State University of New Jersey | newer · 2 |
+
+#### Classification
+
+| Tool | Role | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|---|
+| [TEsorter](https://github.com/zhangrengang/TEsorter) | **default** | *Horticulture Research* 2022 · [10.1093/hr/uhac017](https://doi.org/10.1093/hr/uhac017) | Rengang Zhang, Kunming Institute of Botany +2 | established · 376 |
+| [REXdb](https://bitbucket.org/petrnovak/repex_tarean) | alternative | *Mobile DNA* 2019 · [10.1186/s13100-018-0144-1](https://doi.org/10.1186/s13100-018-0144-1) | Pavel Neumann, Czech Academy of Sciences | established · 478 |
+| [TEclass](https://bioinformatics.uni-muenster.de/tools/teclass/index.hbi) | alternative | *Bioinformatics* 2009 · [10.1093/bioinformatics/btp084](https://doi.org/10.1093/bioinformatics/btp084) | György Abrusán, University of Münster | established · 443 |
+| [PASTEC](https://urgi.versailles.inrae.fr/Tools/REPET) | alternative | *PLoS ONE* 2014 · [10.1371/journal.pone.0091929](https://doi.org/10.1371/journal.pone.0091929) | Hadi Quesneville, Ressources génomique-info | established · 350 |
+| [DeepTE](https://github.com/LiLabAtVT/DeepTE) | alternative | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa519](https://doi.org/10.1093/bioinformatics/btaa519) | Song Li, Virginia Tech | established · 239 |
+| [TERL](https://github.com/muriloHoracio/TERL) | alternative | *Briefings in Bioinformatics* 2020 · [10.1093/bib/bbaa185](https://doi.org/10.1093/bib/bbaa185) | Murilo Horacio Pereira da Cruz, Universidade Tecnológica Federal do Paraná +1 | niche · 64 |
+| [Inpactor](https://github.com/simonorozcoarias/Inpactor) | alternative | *Biology* 2018 · [10.3390/biology7020032](https://doi.org/10.3390/biology7020032) | Romain Guyot, Centre de Coopération Internationale en Recherche Agronomique pour le Développement | niche · 34 |
+| [ClassifyTE](https://github.com/manisa/ClassifyTE) | alternative | *Bioinformatics* 2021 · [10.1093/bioinformatics/btab146](https://doi.org/10.1093/bioinformatics/btab146) | Md Tamjidul Hoque, LSU New Orleans +1 | niche · 25 |
+| [TEclass2](https://github.com/IOB-Muenster/TEclass2) | alternative | *Biology* 2025 · [10.3390/biology15010059](https://doi.org/10.3390/biology15010059) | Wojciech Makałowski, University of Münster | newer · 23 |
+| [CREATE](https://doi.org/10.1093/bib/bbaf608) | alternative | *Briefings in Bioinformatics* 2025 · [10.1093/bib/bbaf608](https://doi.org/10.1093/bib/bbaf608) | Xingyu Liao, Northwestern Polytechnical University +1 | newer · 11 |
+| [Terrier](https://doi.org/10.1093/bib/bbaf442) | alternative | *Briefings in Bioinformatics* 2025 · [10.1093/bib/bbaf442](https://doi.org/10.1093/bib/bbaf442) | Robert Turnbull, The University of Melbourne | newer · 10 |
+| [NeuralTE](https://github.com/CSU-KangHu/NeuralTE) | alternative | *ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics (ACM-BCB)* 2024 · [10.1145/3698587.3701346](https://doi.org/10.1145/3698587.3701346) | Jianxin Wang, Central South University | newer · 9 |
+| [YORO](https://github.com/simonorozcoarias/YORO) | alternative | *PLoS ONE* 2023 · [10.1371/journal.pone.0291925](https://doi.org/10.1371/journal.pone.0291925) | Romain Guyot, Centre de Coopération Internationale en Recherche Agronomique pour le Développement | newer · 5 |
+| [PanTEon](https://github.com/simonorozcoarias/PanTEon) | alternative | *bioRxiv (Cold Spring Harbor Laboratory)* 2026 · [10.64898/2026.04.01.715927](https://doi.org/10.64898/2026.04.01.715927) | Simón Orozco-Arias, Barcelona Supercomputing Center | newer · 1, preprint |
+
+#### Masking, annotation and cleaning of annotations
+
+| Tool | Role | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|---|
+| [RepeatMasker](https://www.repeatmasker.org/) | **default** | — | — | no paper |
+| [BEDTools](https://github.com/arq5x/bedtools2) | alternative | *Bioinformatics* 2010 · [10.1093/bioinformatics/btq033](https://doi.org/10.1093/bioinformatics/btq033) | Aaron R. Quinlan, University of Virginia +1 | standard · 30267 |
+| [MAKER-P](https://yandell-lab.org/software/maker-p/) | alternative | *Plant Physiology* 2013 · [10.1104/pp.113.230144](https://doi.org/10.1104/pp.113.230144) | Mark D. Yandell, Eccles Institute of Human Genetics (M.S.C., M.L., M.Y.) and (last author) | established · 451 |
+| [oneCodeToFindThemAll](https://doua.prabi.fr/software/one-code-to-find-them-all) | alternative | *Mobile DNA* 2014 · [10.1186/1759-8753-5-13](https://doi.org/10.1186/1759-8753-5-13) | Emmanuelle Lerat, Lyon 1 Université | established · 213 |
+| [RepeatCraft](https://github.com/niccw/repeatcraftp) | alternative | *Bioinformatics* 2018 · [10.1093/bioinformatics/bty745](https://doi.org/10.1093/bioinformatics/bty745) | Wai Yee Wong, University of Vienna | niche · 51 |
+| [Soft-mask hand-off (this repository)](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md) | alternative | — | — | no paper |
+
+#### Insertion age, landscape and horizontal transfer
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [VHICA](https://cran.r-project.org/package=vhica) | *Molecular Biology and Evolution* 2015 · [10.1093/molbev/msv341](https://doi.org/10.1093/molbev/msv341) | Gabriel Luz Wallau, Universidade Federal de Santa Maria | niche · 78 |
+| [HTT-DB](https://web.archive.org/web/20220814084307/http://lpa.saogabriel.unipampa.edu.br:8080/httdatabase/) | *Bioinformatics* 2015 · [10.1093/bioinformatics/btv281](https://doi.org/10.1093/bioinformatics/btv281) | Bruno Reis Dotto, Universidade Federal do Pampa +1 | niche · 62 |
+| [REANNOTATE](https://web.archive.org/web/20120208050248/http://www.bioinformatics.org/reannotate/) | *BMC Genomics* 2008 · [10.1186/1471-2164-9-614](https://doi.org/10.1186/1471-2164-9-614) | Vini Pereira, Quadram Institute | niche · 37 |
+| [TE_Density](https://github.com/sjteresi/TE_Density) | *Mobile DNA* 2022 · [10.1186/s13100-022-00264-4](https://doi.org/10.1186/s13100-022-00264-4) | Patrick P. Edger, Michigan State University | niche · 17 |
+| [TEGRiP](https://github.com/marieBvr/TEs_genes_relationship_pipeline) | *Peer Community Journal* 2021 · [10.24072/pcjournal.57](https://doi.org/10.24072/pcjournal.57) | Quynh-Trang Bui, Université de Bordeaux (last author) | niche · 7 |
+| [ParseRM](https://github.com/4ureliek/Parsing-RepeatMasker-Outputs) | — | — | no paper |
+| [RepeatLandscape](https://github.com/caballero/RepeatLandscape) | — | — | no paper |
+| [Repeattools](https://github.com/AgustinAmata/Repeattools) | — | — | no paper |
+
+#### Insertion polymorphism: short reads
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [MELT](https://melt.igs.umaryland.edu) | *Genome Research* 2017 · [10.1101/gr.218032.116](https://doi.org/10.1101/gr.218032.116) | Scott E. Devine, University of Maryland, Baltimore | established · 411 |
+| [TEPID](https://github.com/ListerLab/TEPID) | *eLife* 2016 · [10.7554/eLife.20777](https://doi.org/10.7554/eLife.20777) | Ryan Lister, The University of Western Australia | established · 261 |
+| [RetroSeq](https://github.com/tk2/RetroSeq) | *Bioinformatics* 2012 · [10.1093/bioinformatics/bts697](https://doi.org/10.1093/bioinformatics/bts697) | Thomas Keane, Wellcome Sanger Institute | established · 229 |
+| [TEMP](https://github.com/JialiUMassWengLab/TEMP) | *Nucleic Acids Research* 2014 · [10.1093/nar/gku323](https://doi.org/10.1093/nar/gku323) | William E. Theurkauf, University of Massachusetts Chan Medical School +1 | established · 146 |
+| [xTea](https://github.com/parklab/xTea) | *Nature Communications* 2021 · [10.1038/s41467-021-24041-8](https://doi.org/10.1038/s41467-021-24041-8) | Eunjung Alice Lee, Broad Institute +1 | established · 131 |
+| [PoPoolationTE2](https://doi.org/10.1093/molbev/msw137) | *Molecular Biology and Evolution* 2016 · [10.1093/molbev/msw137](https://doi.org/10.1093/molbev/msw137) | Christian Schlötterer, University of Veterinary Medicine Vienna | established · 129 |
+| [Mobster](https://github.com/jyhehir/mobster) | *Genome biology* 2014 · [10.1186/s13059-014-0488-x](https://doi.org/10.1186/s13059-014-0488-x) | Jayne Y. Hehir‐Kwa, Radboud University Medical Center | established · 118 |
+| [TEFLoN](https://github.com/jradrion/TEFLoN) | *Genome Biology and Evolution* 2017 · [10.1093/gbe/evx050](https://doi.org/10.1093/gbe/evx050) | Sarah Schaack, Reed College | niche · 91 |
+| [ITIS](https://web.archive.org/web/20160825205722/http://bioinformatics.psc.ac.cn:80/software/ITIS/) | *BMC Bioinformatics* 2015 · [10.1186/s12859-015-0507-2](https://doi.org/10.1186/s12859-015-0507-2) | Renyi Liu, Chinese Academy of Sciences +1 | niche · 66 |
+| [TEMP2](https://github.com/weng-lab/TEMP2) | *Nucleic Acids Research* 2021 · [10.1093/nar/gkab010](https://doi.org/10.1093/nar/gkab010) | William E. Theurkauf, University of Massachusetts Chan Medical School +2 | niche · 66 |
+| [MEGAnE](https://github.com/shohei-kojima/MEGAnE) | *Nature Genetics* 2023 · [10.1101/2022.03.25.485726](https://doi.org/10.1101/2022.03.25.485726) | Shohei Kojima, RIKEN +1 | newer · 64 |
+| [RelocaTE2](https://github.com/JinfengChen/RelocaTE2) | *PeerJ* 2017 · [10.7717/peerj.2942](https://doi.org/10.7717/peerj.2942) | J. Stajich, University of California, Riverside (last author) | niche · 56 |
+| [Jitterbug](https://github.com/elzbth/jitterbug) | *BMC Genomics* 2015 · [10.1186/s12864-015-1975-5](https://doi.org/10.1186/s12864-015-1975-5) | Josep Casacuberta, Center for Research in Agricultural Genomics +1 | niche · 53 |
+| [TIF](https://github.com/akiomiyao/tif) | *BMC Bioinformatics* 2014 · [10.1186/1471-2105-15-71](https://doi.org/10.1186/1471-2105-15-71) | Akio Miyao, Institute of Agrobiological Sciences | niche · 45 |
+| [TE-Tracker](https://web.archive.org/web/20170813054646/http://www.genoscope.cns.fr:80/externe/tetracker/) | *BMC Bioinformatics* 2014 · [10.1186/s12859-014-0377-z](https://doi.org/10.1186/s12859-014-0377-z) | Vincent Colot, Centre National de la Recherche Scientifique +1 | niche · 36 |
+| [ngs_te_mapper2](https://github.com/bergmanlab/ngs_te_mapper2) | *Genetics* 2021 · [10.1093/genetics/iyab113](https://doi.org/10.1093/genetics/iyab113) | Casey Bergman, University of Georgia | niche · 27 |
+| [T-lex3](https://github.com/GonzalezLab/T-lex3) | *Bioinformatics* 2019 · [10.1093/bioinformatics/btz727](https://doi.org/10.1093/bioinformatics/btz727) | Josefa González, Universitat Pompeu Fabra | niche · 27 |
+| [McClintock 2](https://github.com/bergmanlab/mcclintock) | *Mobile DNA* 2023 · [10.1186/s13100-023-00296-4](https://doi.org/10.1186/s13100-023-00296-4) | Casey Bergman, University of Georgia | newer · 21 |
+| [TEfinder](https://github.com/VistaSohrab/TEfinder) | *Genes* 2021 · [10.3390/genes12020224](https://doi.org/10.3390/genes12020224) | Li‐Jun Ma, University of Massachusetts Amherst +1 | niche · 19 |
+| [TIP_finder](https://github.com/simonorozcoarias/TIP_finder) | *Biology* 2020 · [10.3390/biology9090281](https://doi.org/10.3390/biology9090281) | Simón Orozco-Arias, Universidad de Caldas +1 | niche · 11 |
+| [TEF](https://github.com/akiomiyao/tef) | *BMC Bioinformatics* 2022 · [10.1186/s12859-022-05011-3](https://doi.org/10.1186/s12859-022-05011-3) | Akio Miyao, National Agriculture and Food Research Organization | niche · 6 |
+| [TypeSINE](https://github.com/mobilome/TypeSINE) | *bioRxiv (Cold Spring Harbor Laboratory)* 2025 · [10.1101/2025.05.21.653756](https://doi.org/10.1101/2025.05.21.653756) | Chengyi Song, Yangzhou University | newer · 2, preprint |
+| [ELITE](https://github.com/Anwica/ELITE) | *ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics (ACM-BCB)* 2019 · [10.1145/3307339.3342182](https://doi.org/10.1145/3307339.3342182) | Leonard McMillan, University of North Carolina at Chapel Hill (last author) | niche · 1 |
+| [TE-locate](https://sourceforge.net/projects/te-locate/) | — | — | no paper |
+| [TRACKPOSON](https://github.com/Markestine/TRACKPOSON) | — | — | no paper |
+
+#### Insertion polymorphism: long reads and call annotation
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [PALMER](https://github.com/WeichenZhou/PALMER) | *Nucleic Acids Research* 2019 · [10.1093/nar/gkz1173](https://doi.org/10.1093/nar/gkz1173) | Ryan E. Mills, University of Michigan | established · 104 |
+| [LoRTE](https://doi.org/10.1186/s13100-017-0088-x) | *Mobile DNA* 2017 · [10.1186/s13100-017-0088-x](https://doi.org/10.1186/s13100-017-0088-x) | Jonathan Filée, Centre National de la Recherche Scientifique (last author) | niche · 38 |
+| [TrEMOLO](https://github.com/DrosophilaGenomeEvolution/TrEMOLO) | *Genome biology* 2023 · [10.1186/s13059-023-02911-2](https://doi.org/10.1186/s13059-023-02911-2) | Anna-Sophie Fiston-Lavier, Centre National de la Recherche Scientifique +1 | newer · 34 |
+| [TELR](https://github.com/bergmanlab/telr) | *Nucleic Acids Research* 2022 · [10.1093/nar/gkac794](https://doi.org/10.1093/nar/gkac794) | Casey Bergman, University of Georgia | niche · 28 |
+| [rMETL](https://github.com/tjiangHIT/rMETL) | *Bioinformatics* 2019 · [10.1093/bioinformatics/btz106](https://doi.org/10.1093/bioinformatics/btz106) | Yadong Wang, Harbin Institute of Technology | niche · 25 |
+| [sTELLeR](https://github.com/kristinebilgrav/sTELLeR) | *Bioinformatics* 2024 · [10.1093/bioinformatics/btae686](https://doi.org/10.1093/bioinformatics/btae686) | Kristine Bilgrav Sæther, Science for Life Laboratory | newer · 12 |
+| [somrit](https://github.com/adcosta17/somrit) | *bioRxiv (Cold Spring Harbor Laboratory)* 2023 · [10.1101/2023.08.06.552193](https://doi.org/10.1101/2023.08.06.552193) | Jared T. Simpson, Ontario Institute for Cancer Research | newer · 3, preprint |
+| [MEIGA-PAV](https://github.com/MEIGA-tk/MEIGA-PAV) | — | — | no paper |
+| [SVAN](https://github.com/REPBIO-LAB/SVAN) | — | — | no paper |
+
+#### Insertion polymorphism: assemblies, pangenomes and graphs
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [SyRI](https://github.com/schneebergerlab/syri) | *Genome biology* 2019 · [10.1186/s13059-019-1911-0](https://doi.org/10.1186/s13059-019-1911-0) | Korbinian Schneeberger, Max Planck Institute for Plant Breeding Research | standard · 1256 |
+| [PanGenie](https://github.com/eblerjana/pangenie) | *Nature Genetics* 2022 · [10.1038/s41588-022-01043-w](https://doi.org/10.1038/s41588-022-01043-w) | Tobias Marschall, Heinrich Heine University Düsseldorf | established · 349 |
+| [Paragraph](https://github.com/Illumina/paragraph) | *Genome biology* 2019 · [10.1186/s13059-019-1909-7](https://doi.org/10.1186/s13059-019-1909-7) | Michael A. Eberle, Illumina (United States) | established · 246 |
+| [SVIM-asm](https://github.com/eldariont/svim-asm) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa1034](https://doi.org/10.1093/bioinformatics/btaa1034) | Martin Vingron, Max Planck Institute for Molecular Genetics | established · 232 |
+| [AnchorWave](https://github.com/baoxingsong/AnchorWave) | *Proceedings of the National Academy of Sciences* 2021 · [10.1073/pnas.2113075119](https://doi.org/10.1073/pnas.2113075119) | Baoxing Song, Cornell University +2 | established · 120 |
+| [ITIPs](https://github.com/caixu0518/ITIPs) | *Plant Biotechnology Journal* 2022 · [10.1111/pbi.13807](https://doi.org/10.1111/pbi.13807) | Jian Wu, Institute of Vegetables and Flowers +1 | niche · 87 |
+| [GraffiTE](https://github.com/cgroza/GraffiTE) | *Nature Communications* 2024 · [10.1038/s41467-024-53294-2](https://doi.org/10.1038/s41467-024-53294-2) | Clément Goubert, University of Arizona | newer · 54 |
+| [pantera](https://github.com/piosierra/pantera) | *Mobile DNA* 2024 · [10.1186/s13100-024-00323-y](https://doi.org/10.1186/s13100-024-00323-y) | Richard Michael Durbin, University of Cambridge | newer · 31 |
+| [panREPET](https://forgemia.inra.fr/urgi-anagen/panREPET) | *Genome biology* 2026 · [10.1186/s13059-026-03984-5](https://doi.org/10.1186/s13059-026-03984-5) | Hadi Quesneville, Institut National de Recherche pour l'Agriculture, l'Alimentation et l'Environnement | newer · 9 |
+| [panTEvo](https://github.com/Lcamdom/panTEvo) | *Genome biology* 2025 · [10.1186/s13059-025-03837-7](https://doi.org/10.1186/s13059-025-03837-7) | Lucía Campos, Universitat Autònoma de Barcelona +1 | newer · 9 |
+| [Pannagram](https://github.com/iganna/pannagram) | *bioRxiv (Cold Spring Harbor Laboratory)* 2025 · [10.1101/2025.02.07.637071](https://doi.org/10.1101/2025.02.07.637071) | Anna A. Igolkina, Gregor Mendel Institute of Molecular Plant Biology | newer · 6, preprint |
+
+#### Insertion polymorphism: plant resources and other inputs
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [RTRIP](https://web.archive.org/web/20240226054850/http://ibi.zju.edu.cn/Rtrip/index.html) | *Plant Biotechnology Journal* 2020 · [10.1111/pbi.13425](https://doi.org/10.1111/pbi.13425) | Jian‐Hong Xu, Zhejiang University | niche · 20 |
+| [TEPEAK](https://github.com/ryanlayerlab/TEPEAK) | *PLoS Computational Biology* 2026 · [10.1371/journal.pcbi.1013122](https://doi.org/10.1371/journal.pcbi.1013122) | Devin Burke, University of Colorado Boulder | newer · 1 |
+
+#### TE expression and small RNA
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [TEtranscripts](https://github.com/mhammell-laboratory/TEtranscripts) | *Bioinformatics* 2015 · [10.1093/bioinformatics/btv422](https://doi.org/10.1093/bioinformatics/btv422) | Molly Hammell, Cold Spring Harbor Laboratory | standard · 822 |
+| [ShortStack](https://github.com/MikeAxtell/ShortStack) | *Rna* 2013 · [10.1261/rna.035279.112](https://doi.org/10.1261/rna.035279.112) | Michael J. Axtell, Pennsylvania State University | standard · 579 |
+| [RepEnrich](https://doi.org/10.1186/1471-2164-15-583) | *BMC Genomics* 2014 · [10.1186/1471-2164-15-583](https://doi.org/10.1186/1471-2164-15-583) | Nicola Neretti, Brown University | established · 360 |
+| [SQuIRE](https://github.com/wyang17/SQuIRE) | *Nucleic Acids Research* 2019 · [10.1093/nar/gky1301](https://doi.org/10.1093/nar/gky1301) | Lindsay M. Payer, Johns Hopkins University +1 | established · 232 |
+| [Telescope](https://github.com/mlbendall/telescope) | *PLoS Computational Biology* 2019 · [10.1371/journal.pcbi.1006453](https://doi.org/10.1371/journal.pcbi.1006453) | Douglas F. Nixon, Weill Cornell Medicine | established · 227 |
+| [TEtools](https://github.com/l-modolo/TEtools) | *Nucleic Acids Research* 2016 · [10.1093/nar/gkw953](https://doi.org/10.1093/nar/gkw953) | Emmanuelle Lerat, Lyon 1 Université +3 | established · 149 |
+| [SalmonTE](https://github.com/jeonglab-bcm/SalmonTE) | *Pacific Symposium on Biocomputing (PSB)* 2017 · [10.1142/9789813235533_0016](https://doi.org/10.1142/9789813235533_0016) | Zhandong Liu, Baylor College of Medicine (last author) | established · 109 |
+| [SoloTE](https://github.com/bvaldebenitom/SoloTE) | *Communications Biology* 2022 · [10.1038/s42003-022-04020-5](https://doi.org/10.1038/s42003-022-04020-5) | Braulio Valdebenito‐Maturana, Icahn School of Medicine at Mount Sinai | niche · 76 |
+| [piPipes](https://github.com/bowhan/piPipes) | — | — | no paper |
+| [scTE](https://github.com/JiekaiLab/scTE) | — | — | no paper |
+| [TElocal](https://github.com/mhammell-laboratory/TElocal) | — | — | no paper |
+
+#### Visualization
+
+Grouped by purpose. General-purpose entries are not limited to transposable elements; the TE use is that you supply the TE coordinates or track.
+
+**TE-specific views, landscapes and nesting diagrams**
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [TEnest](https://github.com/cmdcolin/TEnest) | *Plant Physiology* 2007 · [10.1104/pp.107.110353](https://doi.org/10.1104/pp.107.110353) | Roger P. Wise, Agricultural Research Service | niche · 81 |
+| [UCSC Repeat Browser](https://repeatbrowser.ucsc.edu) | *Mobile DNA* 2020 · [10.1186/s13100-020-00208-w](https://doi.org/10.1186/s13100-020-00208-w) | Sofie R. Salama, Howard Hughes Medical Institute +1 | niche · 53 |
+| [RepeatOBserver](https://github.com/celphin/RepeatOBserverV1) | *Molecular Ecology Resources* 2025 · [10.1111/1755-0998.14084](https://doi.org/10.1111/1755-0998.14084) | Cassandra Elphinstone, University of British Columbia | newer · 32 |
+| [LTRsift](https://github.com/satta/ltrsift) | *Mobile DNA* 2012 · [10.1186/1759-8753-3-18](https://doi.org/10.1186/1759-8753-3-18) | Stefan Kurtz, Universität Hamburg | niche · 13 |
+| [DfamTEBrowser](https://github.com/Dfam-consortium/DfamTEBrowser) | — | — | no paper |
+| [RepeatMasker landscape utilities (calcDivergenceFromAlign.pl, createRepeatLandscape.pl)](https://github.com/Dfam-consortium/RepeatMasker/blob/master/util/createRepeatLandscape.pl) | — | R. M. Hubley, J. Caballero, Institute for Systems Biology (script headers) | no paper |
+
+**Dotplots and identity heatmaps for repeats**
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [StainedGlass](https://github.com/vollgerlab/StainedGlass) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac018](https://doi.org/10.1093/bioinformatics/btac018) | Mitchell Robert Vollger, University of Washington +1 | established · 177 |
+| [FlexiDot](https://github.com/molbio-dresden/flexidot) | *Bioinformatics* 2018 · [10.1093/bioinformatics/bty395](https://doi.org/10.1093/bioinformatics/bty395) | Tony Heitkam, Technische Universität Dresden | niche · 95 |
+| [ModDotPlot](https://github.com/marbl/ModDotPlot) | *Bioinformatics* 2024 · [10.1093/bioinformatics/btae493](https://doi.org/10.1093/bioinformatics/btae493) | Alexander P. Sweeten, National Institutes of Health +1 | newer · 86 |
+
+**Density and karyotype (ideogram) plots**
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [karyoploteR](https://github.com/bernatgel/karyoploteR) | *Bioinformatics* 2017 · [10.1093/bioinformatics/btx346](https://doi.org/10.1093/bioinformatics/btx346) | Bernat Gel, Institut d'Investigació en Ciències de la Salut Germans Trias i Pujol | standard · 845 |
+| [RIdeogram](https://github.com/TickingClock1992/RIdeogram) | *PeerJ Computer Science* 2020 · [10.7717/peerj-cs.251](https://doi.org/10.7717/peerj-cs.251) | Guangchuang Yu, Southern Medical University +1 | standard · 633 |
+| [chromoMap](https://github.com/lakshay-anand/chromoMap) | *BMC Bioinformatics* 2022 · [10.1186/s12859-021-04556-z](https://doi.org/10.1186/s12859-021-04556-z) | Lakshay Anand, University of Kentucky | established · 261 |
+
+**Circos-style circular plots**
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [circlize](https://github.com/jokergoo/circlize) | *Bioinformatics* 2014 · [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393) | Benedikt Brors, German Cancer Research Center | standard · 4971 |
+| [interacCircos](https://github.com/mrcuizhe/interacCircos) | *Bioinformatics* 2021 · [10.1093/bioinformatics/btab232](https://doi.org/10.1093/bioinformatics/btab232) | Tianyi Zang, Harbin Institute of Technology +1 | niche · 19 |
+
+**Genome-browser tracks**
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [IGV](https://github.com/igvteam/igv) | *Briefings in Bioinformatics* 2012 · [10.1093/bib/bbs017](https://doi.org/10.1093/bib/bbs017) | J. T. Robinson, Broad Institute | standard · 10150 |
+| [JBrowse 2](https://github.com/GMOD/jbrowse-components) | *Genome biology* 2023 · [10.1186/s13059-023-02914-z](https://doi.org/10.1186/s13059-023-02914-z) | Ian H Holmes, University of California, Berkeley | standard · 907 |
+| [igv.js](https://github.com/igvteam/igv.js) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac830](https://doi.org/10.1093/bioinformatics/btac830) | James T Robinson, University of California San Diego | standard · 648 |
+| [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692) | Fidel Ramírez, Max Planck Institute of Immunobiology and Epigenetics | standard · 575 |
+
+**Synteny, assembly-alignment and pangenome-graph views**
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [plotsr](https://github.com/schneebergerlab/plotsr) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac196](https://doi.org/10.1093/bioinformatics/btac196) | Korbinian Schneeberger, Ludwig-Maximilians-Universität München | established · 383 |
+| [ODGI](https://github.com/pangenome/odgi) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac308](https://doi.org/10.1093/bioinformatics/btac308) | Erik P. Garrison, University of Tennessee Health Science Center | established · 233 |
+| [NGenomeSyn](https://github.com/hewm2008/NGenomeSyn) | *Bioinformatics* 2023 · [10.1093/bioinformatics/btad121](https://doi.org/10.1093/bioinformatics/btad121) | Xiaodong Fang, BGI Group (China) | established · 195 |
+| [SVbyEye](https://github.com/daewoooo/SVbyEye) | *Bioinformatics* 2025 · [10.1093/bioinformatics/btaf332](https://doi.org/10.1093/bioinformatics/btaf332) | David Porubskỳ, University of Washington | newer · 71 |
+
+Related entries in other steps: ParseRM, RepeatLandscape, Repeattools, TE_Density, TE-Aid.
+
+#### Polyploid subgenomes and tandem repeats
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [SubPhaser](https://github.com/zhangrengang/SubPhaser) | *New Phytologist* 2022 · [10.1111/nph.18173](https://doi.org/10.1111/nph.18173) | Jian‐Feng Mao, Beijing Forestry University (last author) | established · 179 |
+| [TRASH](https://github.com/vlothec/TRASH) | *Bioinformatics* 2023 · [10.1093/bioinformatics/btad308](https://doi.org/10.1093/bioinformatics/btad308) | Ian R. Henderson, University of Cambridge | established · 115 |
+| [PolyCRACKER](https://bitbucket.org/berkeleylab/jgi-polycracker/) | *BMC Genomics* 2019 · [10.1186/s12864-019-5828-5](https://doi.org/10.1186/s12864-019-5828-5) | Sean Gordon, Joint Genome Institute +1 | niche · 20 |
+
+#### Databases and libraries: general
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [Repbase Update](https://www.girinst.org/repbase/) | *Cytogenetic and Genome Research* 2005 · [10.1159/000084979](https://doi.org/10.1159/000084979) | Jolanta Walichiewicz, Genetic Information Research Institute (last author) | standard · 3782 |
+| [Dfam (Storer et al. 2021)](https://www.dfam.org/) | *Mobile DNA* 2021 · [10.1186/s13100-020-00230-y](https://doi.org/10.1186/s13100-020-00230-y) | Jessica M. Storer, Institute for Systems Biology +2 | standard · 838 |
+| [SINEBase](https://sines.eimb.ru/) | *Nucleic Acids Research* 2012 · [10.1093/nar/gks1263](https://doi.org/10.1093/nar/gks1263) | Dmitri A. Kramerov, Engelhardt Institute of Molecular Biology | established · 229 |
+| [RepetDB](https://urgi.versailles.inrae.fr/repetdb) | *Mobile DNA* 2019 · [10.1186/s13100-019-0150-y](https://doi.org/10.1186/s13100-019-0150-y) | Joëlle Amselem, Université Paris-Saclay | niche · 72 |
+| [TREP](https://trep-db.uzh.ch) | — | — | no paper |
+
+#### Databases and libraries: plants
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [TIGR Plant Repeat Databases](https://rice.uga.edu/pub/data/TIGR_Plant_Repeats/) | *Nucleic Acids Research* 2003 · [10.1093/nar/gkh099](https://doi.org/10.1093/nar/gkh099) | Shu Ouyang, The Institute for Genomic Research, 9712 Medical Center Drive, Rockville, MD 20850, USA | established · 335 |
+| [SoyTEdb](https://legacy.soybase.org/soytedb/) | *BMC Genomics* 2010 · [10.1186/1471-2164-11-113](https://doi.org/10.1186/1471-2164-11-113) | Randy C. Shoemaker, Agricultural Research Service +1 | established · 157 |
+| [RiTE-db](https://ava.genome.arizona.edu/cgi-bin/rite/index.cgi) | *BMC Genomics* 2015 · [10.1186/s12864-015-1762-3](https://doi.org/10.1186/s12864-015-1762-3) | Rod A. Wing, University of Arizona | niche · 84 |
+| RetrOryza | *Nucleic Acids Research* 2006 · [10.1093/nar/gkl780](https://doi.org/10.1093/nar/gkl780) | Olivier Panaud, University of Arizona | niche · 66 |
+| [PlantRep](https://doi.org/10.1007/s00299-021-02817-y) | *Plant Cell Reports* 2022 · [10.1007/s00299-021-02817-y](https://doi.org/10.1007/s00299-021-02817-y) | Yu Zhang, Sun Yat-sen University | niche · 47 |
+| [DPTEdb](https://web.archive.org/web/20180812090334/http://genedenovoweb.ticp.net:81/DPTEdb/index.php) | *Database* 2016 · [10.1093/database/baw078](https://doi.org/10.1093/database/baw078) | Lianfeng Gu, Fujian Agriculture and Forestry University +1 | niche · 24 |
+| [InpactorDB](https://inpactordb.github.io) | *Genes* 2021 · [10.3390/genes12020190](https://doi.org/10.3390/genes12020190) | Simón Orozco-Arias, Universidad de Caldas +1 | niche · 24 |
+| [SPTEdb](https://web.archive.org/web/20180730000921/http://genedenovoweb.ticp.net:81/SPTEdb/index.php) | *Database* 2018 · [10.1093/database/bay024](https://doi.org/10.1093/database/bay024) | Wenjun Ma, Chinese Academy of Forestry +1 | niche · 22 |
+| [PlantLTRdb](https://bioinformatics.um6p.ma/PlantLTRdb/) | *Frontiers in Plant Science* 2023 · [10.3389/fpls.2023.1134627](https://doi.org/10.3389/fpls.2023.1134627) | Morad M. Mokhtar, Université Mohammed VI Polytechnique +1 | newer · 21 |
+| [ConTEdb](https://web.archive.org/web/20210921143932/http://genedenovoweb.ticp.net:81/conTEdb/index.php) | *Database* 2018 · [10.1093/database/bay131](https://doi.org/10.1093/database/bay131) | Fangqun Ouyang, Chinese Academy of Forestry +1 | niche · 20 |
+| [AnnoTEP-DB](https://plantgenomics.ncc.unesp.br/AnnoTEP-DB/) | *BMC Genomics* 2026 · [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) | Alessandro M. Varani, Universidade Estadual Paulista (Unesp) +1 | newer · 2 |
+| [MaizeGP](https://github.com/Jia-nianhua/Maize-Graph-Pangenome) | *Journal of Integrative Plant Biology* 2026 · [10.1111/jipb.70439](https://doi.org/10.1111/jipb.70439) | Shaojiang Chen, China Agricultural University +2 | newer · 0 |
+
+#### Databases and libraries: grapevine (Vitis)
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [PN40024 T2T TE annotations](https://zenodo.org/records/13741133) | *DIGITAL.CSIC (Spanish National Research Council (CSIC))* 2023 · [10.5281/zenodo.13741133](https://doi.org/10.5281/zenodo.13741133) | ShiXiaoya | newer · 1 |
+| [GrapeGenomics Vitis RepeatMasker library](https://grapegenomics.com/pages/repeats.php) | — | — | no paper |
+
+#### Simulation and benchmarking
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [simuG](https://github.com/yjx1217/simuG) | *Bioinformatics* 2019 · [10.1093/bioinformatics/btz424](https://doi.org/10.1093/bioinformatics/btz424) | Jia‐Xing Yue, Centre National de la Recherche Scientifique +1 | niche · 61 |
+| [PrinTE](https://github.com/cwb14/PrinTE) | *Nature Communications* 2026 · [10.1101/2025.06.04.657780](https://doi.org/10.1101/2025.06.04.657780) | Shujun Ou, The Ohio State University | newer · 2 |
+| [TEgenomeSimulator](https://github.com/Plant-Food-Research-Open/TEgenomeSimulator) | *bioRxiv (Cold Spring Harbor Laboratory)* 2026 · [10.64898/2026.03.09.710711](https://doi.org/10.64898/2026.03.09.710711) | Ting-Hsuan Chen, Bioeconomy Science Institute | newer · 2, preprint |
+| [TEvarSim](https://github.com/daweili-lab/TEvarSim) | *PLoS Computational Biology* 2026 · [10.1371/journal.pcbi.1013933](https://doi.org/10.1371/journal.pcbi.1013933) | Dawei Li, Texas Tech University | newer · 2 |
+| [TE_Bench](https://doi.org/10.1186/s13100-026-00405-z) | *Mobile DNA* 2026 · [10.1186/s13100-026-00405-z](https://doi.org/10.1186/s13100-026-00405-z) | Hannah Kania, Duke University | newer · 1 |
+| [TE_simu](https://github.com/unavailable-2374/TE_simu) | — | — | no paper |
+
+#### Community indexes and cross-links
+
+| Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
+|---|---|---|---|
+| [TE Hub](https://tehub.org/) | *Mobile DNA* 2021 · [10.1186/s13100-021-00244-0](https://doi.org/10.1186/s13100-021-00244-0) | Travis J. Wheeler, University of Montana | niche · 42 |
+| [awesome-transposable-elements](https://github.com/nixonlab/awesome-transposable-elements) | — | — | no paper |
+| [gene-structure-annotation TE_LIBRARY.md](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md) | — | — | no paper |
 
 Related publications in the same line of work (not standalone tools): a survey of plant retrotransposon structure, identification and classification ([10.3390/ijms20153837](https://doi.org/10.3390/ijms20153837)); a systematic survey of machine-learning methods for transposable-element detection and classification ([10.7717/peerj.8311](https://doi.org/10.7717/peerj.8311)); a k-mer machine-learning method to classify plant LTR retrotransposons ([10.7717/peerj.11456](https://doi.org/10.7717/peerj.11456)); and a comparison of performance metrics for those tasks ([10.3390/pr8060638](https://doi.org/10.3390/pr8060638)). Companion experiment repositories: [MLinTEs](https://github.com/simonorozcoarias/MLinTEs) and [MachineLearningInTEs](https://github.com/simonorozcoarias/MachineLearningInTEs).
 
-### Additional software and databases by analysis step
-
-These entries supplement the software table above. They do not change the default EDTA, TEtrimmer and TEsorter route. Each row has a paper DOI that was opened, or an official code or data site that returned a successful response. Candidates without a verifiable source were left out.
-
-| Step | Name | Role | Repository or site | DOI |
-|------|------|------|-------------------|-----|
-| De novo detection (including LTR, TIR, MITE, Helitron, LINE/SINE, and read-based discovery) | **RepeatExplorer2** | Graph-based clustering of short reads to identify and quantify repetitive DNA without a genome assembly, with a Galaxy interface. | [repeatexplorer-elixir.cerit-sc.cz](https://repeatexplorer-elixir.cerit-sc.cz) | [10.1038/s41596-020-0400-y](https://doi.org/10.1038/s41596-020-0400-y) |
-|  | **dnaPipeTE** | Assembles, annotates and quantifies transposable elements from low-coverage raw short reads, without a genome assembly. | [github.com/clemgoub/dnaPipeTE](https://github.com/clemgoub/dnaPipeTE) | [10.1093/gbe/evv050](https://doi.org/10.1093/gbe/evv050) |
-|  | **REPET** | Package containing the TEdenovo and TEannot pipelines for de novo detection, clustering and annotation of transposable-element families in assembled genomes. | [urgi.versailles.inrae.fr/Tools/REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | [10.1371/journal.pone.0016526](https://doi.org/10.1371/journal.pone.0016526) |
-|  | **EAHelitron** | Structural Helitron annotator that uses conserved terminal motifs and a GC-rich hairpin. The paper abstract names the software EAHelitron. | [github.com/dontkme/EAHelitron](https://github.com/dontkme/EAHelitron) | [10.1186/s12859-019-2945-8](https://doi.org/10.1186/s12859-019-2945-8) |
-|  | **MITE Tracker** | Finds and classifies MITEs in large genomes by nearby inverted repeats, family clustering and flanking-sequence filters. | [github.com/INTABiotechMJ/MITE-Tracker](https://github.com/INTABiotechMJ/MITE-Tracker) | [10.1186/s12859-018-2376-y](https://doi.org/10.1186/s12859-018-2376-y) |
-|  | **miteFinderII** | Identifies MITEs hidden in eukaryotic genomes. The live repository redirects from screamer/miteFinder to jhu99/miteFinder. | [github.com/jhu99/miteFinder](https://github.com/jhu99/miteFinder) | [10.1186/s12920-018-0418-y](https://doi.org/10.1186/s12920-018-0418-y) |
-|  | **AnnoSINE** | SINE annotation tool for plant genomes that combines homology and structure, then filters false positives to build a SINE library. | [github.com/yangli557/AnnoSINE](https://github.com/yangli557/AnnoSINE) | [10.1093/plphys/kiab524](https://doi.org/10.1093/plphys/kiab524) |
-|  | **AnnoSINE_v2** | Faster successor for de novo SINE annotation in plant and animal genomes (preprint). | [github.com/oushujun/AnnoSINE_v2](https://github.com/oushujun/AnnoSINE_v2) | [10.1101/2024.03.01.582874](https://doi.org/10.1101/2024.03.01.582874) |
-|  | **SINE_Scan** | Discovers SINE families in large genomic data sets. | [github.com/maohlzj/SINE_Scan](https://github.com/maohlzj/SINE_Scan) | [10.1093/bioinformatics/btw718](https://doi.org/10.1093/bioinformatics/btw718) |
-|  | **SINE-Finder** | Tool named in the paper for targeted discovery of tRNA-derived SINEs in plant genomes. No live official code repository was confirmed in this pass. | — | [10.1105/tpc.111.088682](https://doi.org/10.1105/tpc.111.088682) |
-|  | **LtrDetector** | De novo detector of LTR retrotransposons. The live repository redirects from TulsaBioinformaticsToolsmith/LtrDetector. | [github.com/BioinformaticsToolsmith/LtrDetector](https://github.com/BioinformaticsToolsmith/LtrDetector) | [10.1186/s12864-019-5796-9](https://doi.org/10.1186/s12864-019-5796-9) |
-|  | **MUSTv2** | Improved de novo detector of recently active MITEs. No live official code repository was confirmed in this pass. | — | [10.1515/jib-2017-0029](https://doi.org/10.1515/jib-2017-0029) |
-|  | **LTRdigest** | Annotates protein domains, primer-binding sites and polypurine tracts of putative LTR retrotransposons. Distributed with GenomeTools, the same package as LTRharvest. | [github.com/genometools/genometools](https://github.com/genometools/genometools) | [10.1093/nar/gkp759](https://doi.org/10.1093/nar/gkp759) |
-|  | **LTRpred** | R package for de novo annotation of intact LTR retrotransposons. The live repository redirects from HajkD/LTRpred to drostlab/LTRpred. | [github.com/drostlab/LTRpred](https://github.com/drostlab/LTRpred) | [10.21105/joss.02170](https://doi.org/10.21105/joss.02170) |
-|  | **MGEScan** | Galaxy-based system, described in the official README, for identifying LTR and non-LTR retrotransposons. | [github.com/MGEScan/mgescan](https://github.com/MGEScan/mgescan) | — |
-|  | **Red** | Library-free de novo detector of repetitive DNA on a genomic scale. | [github.com/BioinformaticsToolsmith/Red](https://github.com/BioinformaticsToolsmith/Red) | [10.1186/s12859-015-0654-5](https://doi.org/10.1186/s12859-015-0654-5) |
-|  | **EDTA-GUI** | Graphical, plant-oriented implementation of the EDTA pipeline, with lineage-level classification. No official code repository was confirmed in this pass. | [github.com/Marcos-Fernando/EDTA-GUI](https://github.com/Marcos-Fernando/EDTA-GUI) | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
-|  | **Tephra** | Command-line pipeline to discover transposable-element families from a genome assembly and describe their structure and evolution, without requiring a reference library. The official citation on the README is the repository itself; no title-matched journal article was used. | [github.com/sestaton/tephra](https://github.com/sestaton/tephra) | — |
-|  | **Transposome** | Annotates transposable-element families from unassembled paired-end whole-genome shotgun reads. | [github.com/sestaton/Transposome](https://github.com/sestaton/Transposome) | [10.1093/bioinformatics/btv059](https://doi.org/10.1093/bioinformatics/btv059) |
-|  | **CARP** | Comprehensive ab initio Repeat Pipeline for identifying, clustering and annotating transposable elements and segmental duplications from genome assemblies. No official code repository returned HTTP 200 in this pass. | [github.com/carp-te/carp-documentation](https://github.com/carp-te/carp-documentation) | [10.1371/journal.pone.0193588](https://doi.org/10.1371/journal.pone.0193588) |
-|  | **MegaLTR** | Web server and standalone pipeline for detecting intact LTR retrotransposons and calculating the LTR Assembly Index in plant genomes. The companion web server did not respond successfully in this pass; the GitHub repository did. | [github.com/MoradMMokhtar/MegaLTR](https://github.com/MoradMMokhtar/MegaLTR) | [10.3389/fpls.2023.1237426](https://doi.org/10.3389/fpls.2023.1237426) |
-|  | **TE-greedy-nester** | Structure-based detection of LTR retrotransposons and reconstruction of their nesting order. | [gitlab.fi.muni.cz/lexa/nested](https://gitlab.fi.muni.cz/lexa/nested) | [10.1093/bioinformatics/btaa632](https://doi.org/10.1093/bioinformatics/btaa632) |
-|  | **PhyLTR** | Pipeline for phylogenetic analysis of LTR retrotransposons, as described in the official README. A Zenodo software record was confirmed; no separately title-matched journal article was used. | [github.com/mcsimenc/PhyLTR](https://github.com/mcsimenc/PhyLTR) | [10.5281/zenodo.4256534](https://doi.org/10.5281/zenodo.4256534) |
-|  | **TAREAN** | Computational tool for identification and characterization of satellite DNA from unassembled short reads. It is available through the RepeatExplorer Galaxy service. RepeatExplorer2 itself is already listed separately. | [repeatexplorer-elixir.cerit-sc.cz/galaxy/](https://repeatexplorer-elixir.cerit-sc.cz/galaxy/) | [10.1093/nar/gkx257](https://doi.org/10.1093/nar/gkx257) |
-|  | **CLARI-TE** | Script for transposable-element annotation in complex genomes such as wheat, as described in the official README. No title-matched journal article was confirmed in this pass. | [github.com/jdaron/CLARI-TE](https://github.com/jdaron/CLARI-TE) | — |
-|  | **Dfam TETools** | Container that provides a working RepeatMasker and RepeatModeler installation maintained by the Dfam consortium. It packages tools already listed in this catalogue; it is not a new annotator. | [github.com/Dfam-consortium/TETools](https://github.com/Dfam-consortium/TETools) | — |
-|  | **PanTE** | Pan-genome transposable-element annotation pipeline that combines complementary de novo tracks into a classified library, as described in the official README and in the title-matched preprint. | [github.com/unavailable-2374/Pan_TE](https://github.com/unavailable-2374/Pan_TE) | [10.21203/rs.3.rs-5867196/v1](https://doi.org/10.21203/rs.3.rs-5867196/v1) |
-|  | **ParTEA** | Earl Grey pangenome pipeline (ParTEA) for consistent transposable-element annotation across many genomes. Earl Grey itself is already listed separately. | [github.com/TobyBaril/EarlGreyParTEA](https://github.com/TobyBaril/EarlGreyParTEA) | [10.64898/2026.11.04.764261](https://doi.org/10.64898/2026.11.04.764261) |
-|  | **MAKER-P** | Plant gene-annotation toolkit, not a transposable-element annotator. It can use repeat libraries when annotating plant genomes. No official MAKER-P page returned HTTP 200 in this pass; the general MAKER repository was not treated as a MAKER-P homepage. | [yandell-lab.org/software/maker-p/](https://yandell-lab.org/software/maker-p/) | [10.1104/pp.113.230144](https://doi.org/10.1104/pp.113.230144) |
-| Library building, curation and redundancy reduction | **VSEARCH** | General-purpose open-source tool for sequence clustering and dereplication; sometimes used to reduce redundancy in a TE library. It is not a TE annotator. | [github.com/torognes/vsearch](https://github.com/torognes/vsearch) | [10.7717/peerj.2584](https://doi.org/10.7717/peerj.2584) |
-|  | **MMseqs2** | General-purpose sequence search and clustering suite; sometimes used for large TE-family clustering. It is not a TE annotator. | [github.com/soedinglab/MMseqs2](https://github.com/soedinglab/MMseqs2) | [10.1038/nbt.3988](https://doi.org/10.1038/nbt.3988) |
-|  | **TE-Aid** | Helper that draws coverage, divergence, self-dotplot and ORF panels to support manual consensus curation. Presented in the beginner curation guide already listed as a paper in this catalogue. | [github.com/clemgoub/TE-Aid](https://github.com/clemgoub/TE-Aid) | [10.1186/s13100-021-00259-7](https://doi.org/10.1186/s13100-021-00259-7) |
-| Classification (including deep learning) | **NeuralTE** | Deep-learning classifier of transposable-element superfamilies using multiple sequence features. | [github.com/CSU-KangHu/NeuralTE](https://github.com/CSU-KangHu/NeuralTE) | [10.1145/3698587.3701346](https://doi.org/10.1145/3698587.3701346) |
-|  | **TERL** | Convolutional-network classifier of transposable elements from raw sequences. | [github.com/muriloHoracio/TERL](https://github.com/muriloHoracio/TERL) | [10.1093/bib/bbaa185](https://doi.org/10.1093/bib/bbaa185) |
-|  | **ClassifyTE** | Stacking-based hierarchical classifier of transposable elements. | [github.com/manisa/ClassifyTE](https://github.com/manisa/ClassifyTE) | [10.1093/bioinformatics/btab146](https://doi.org/10.1093/bioinformatics/btab146) |
-|  | **PASTEC** | Automatic classifier of transposable elements to the order level, distributed as a REPET module or standalone program. | [urgi.versailles.inrae.fr/Tools/REPET](https://urgi.versailles.inrae.fr/Tools/REPET) | [10.1371/journal.pone.0091929](https://doi.org/10.1371/journal.pone.0091929) |
-| Insertion polymorphism (short-read, long-read and related callers) | **McClintock 2** | Meta-pipeline that installs and runs multiple short-read transposable-element insertion detectors and includes a simulation framework. | [github.com/bergmanlab/mcclintock](https://github.com/bergmanlab/mcclintock) | [10.1186/s13100-023-00296-4](https://doi.org/10.1186/s13100-023-00296-4) |
-|  | **TEMP2** | Detects germline transposon insertions from short reads and can estimate frequencies of de novo singleton insertions. Already listed in appendix B. | [github.com/weng-lab/TEMP2](https://github.com/weng-lab/TEMP2) | [10.1093/nar/gkab010](https://doi.org/10.1093/nar/gkab010) |
-|  | **MELT** | Population-scale mobile-element insertion discovery from short-read data. Already listed in appendix B. | [melt.igs.umaryland.edu](https://melt.igs.umaryland.edu) | [10.1101/gr.218032.116](https://doi.org/10.1101/gr.218032.116) |
-|  | **TEPID** | Maps transposable-element insertion diversity in plant populations from short reads. Already listed in appendix B. The official README cites this eLife paper. | [github.com/ListerLab/TEPID](https://github.com/ListerLab/TEPID) | [10.7554/eLife.20777](https://doi.org/10.7554/eLife.20777) |
-|  | **PoPoolationTE2** | Compares transposable-element insertion polymorphism from Pool-Seq data. No live official repository was confirmed in this pass. | — | [10.1093/molbev/msw137](https://doi.org/10.1093/molbev/msw137) |
-|  | **RetroSeq** | Detects non-reference transposable-element insertions from Illumina paired-end whole-genome sequencing. | [github.com/tk2/RetroSeq](https://github.com/tk2/RetroSeq) | [10.1093/bioinformatics/bts697](https://doi.org/10.1093/bioinformatics/bts697) |
-|  | **TEFLoN** | Short-read caller used to discover transposable-element insertions and deletions and to estimate rates. The official README cites this paper; the paper title does not contain the tool name. | [github.com/jradrion/TEFLoN](https://github.com/jradrion/TEFLoN) | [10.1093/gbe/evx050](https://doi.org/10.1093/gbe/evx050) |
-|  | **T-lex3** | Genotypes reference transposable-element insertions and estimates population frequencies from short-read data. | [github.com/GonzalezLab/T-lex3](https://github.com/GonzalezLab/T-lex3) | [10.1093/bioinformatics/btz727](https://doi.org/10.1093/bioinformatics/btz727) |
-|  | **ngs_te_mapper2** | Detects transposable-element insertions from short-read data, including split-read support. The official README says the method is described in this Genetics paper. | [github.com/bergmanlab/ngs_te_mapper2](https://github.com/bergmanlab/ngs_te_mapper2) | [10.1093/genetics/iyab113](https://doi.org/10.1093/genetics/iyab113) |
-|  | **Mobster** | Detects mobile-element insertions from next-generation sequencing data using discordant pairs and split reads. | [github.com/jyhehir/mobster](https://github.com/jyhehir/mobster) | [10.1186/s13059-014-0488-x](https://doi.org/10.1186/s13059-014-0488-x) |
-|  | **TE-locate** | Paired-end short-read tool for locating non-reference transposable-element insertions. No methods DOI was title-matched in this pass. | [sourceforge.net/projects/te-locate](https://sourceforge.net/projects/te-locate/) | — |
-|  | **TRACKPOSON** | Pipeline, described in its official README, for detecting transposable-element insertion polymorphisms and building a presence-absence matrix. | [github.com/Markestine/TRACKPOSON](https://github.com/Markestine/TRACKPOSON) | — |
-|  | **TrEMOLO** | Estimates transposable-element allele frequencies from long-read data by combining assembly and mapping. | [github.com/DrosophilaGenomeEvolution/TrEMOLO](https://github.com/DrosophilaGenomeEvolution/TrEMOLO) | [10.1186/s13059-023-02911-2](https://doi.org/10.1186/s13059-023-02911-2) |
-|  | **PALMER** | Long-read caller of non-reference mobile-element insertions. The official README cites this paper as the primary methods citation. | [github.com/WeichenZhou/PALMER](https://github.com/WeichenZhou/PALMER) | [10.1093/nar/gkz1173](https://doi.org/10.1093/nar/gkz1173) |
-|  | **LoRTE** | Detects transposon-induced variants from low-coverage PacBio long reads. No official code repository returned HTTP 200 in this pass. | — | [10.1186/s13100-017-0088-x](https://doi.org/10.1186/s13100-017-0088-x) |
-|  | **rMETL** | Detects mobile-element insertions from long reads by realignment. | [github.com/tjiangHIT/rMETL](https://github.com/tjiangHIT/rMETL) | [10.1093/bioinformatics/btz106](https://doi.org/10.1093/bioinformatics/btz106) |
-|  | **sTELLeR** | Fast caller of transposable-element insertions from long-read genomes, with VCF output. | [github.com/kristinebilgrav/sTELLeR](https://github.com/kristinebilgrav/sTELLeR) | [10.1093/bioinformatics/btae686](https://doi.org/10.1093/bioinformatics/btae686) |
-|  | **TELR** | Detects non-reference transposable-element insertions from long reads, with local assembly of insertion sequences. The official README cites this paper. | [github.com/bergmanlab/telr](https://github.com/bergmanlab/telr) | [10.1093/nar/gkac794](https://doi.org/10.1093/nar/gkac794) |
-|  | **somrit** | Toolkit for identifying and analysing somatic retrotransposon insertions from long reads. | [github.com/adcosta17/somrit](https://github.com/adcosta17/somrit) | [10.1101/2023.08.06.552193](https://doi.org/10.1101/2023.08.06.552193) |
-|  | **SVAN** | Annotates and classifies sequence-resolved insertions and deletions, including mobile-element insertions, as described in the official README. No title-matched methods DOI was attached in this pass. | [github.com/REPBIO-LAB/SVAN](https://github.com/REPBIO-LAB/SVAN) | — |
-|  | **MEIGA-PAV** | Annotates mobile-element insertions in a VCF of sequence-resolved structural-variant calls, as described in the official README. | [github.com/MEIGA-tk/MEIGA-PAV](https://github.com/MEIGA-tk/MEIGA-PAV) | — |
-|  | **panREPET** | Reference-free pipeline for detecting transposable-element insertions shared across a pan-genome, so their dynamics can be retraced within a species. | [forgemia.inra.fr/urgi-anagen/panREPET](https://forgemia.inra.fr/urgi-anagen/panREPET) | [10.1186/s13059-026-03984-5](https://doi.org/10.1186/s13059-026-03984-5) |
-|  | **pantera** | Identifies transposable-element families from polymorphisms stored in a pangenome variation graph. | [github.com/piosierra/pantera](https://github.com/piosierra/pantera) | [10.1186/s13100-024-00323-y](https://doi.org/10.1186/s13100-024-00323-y) |
-|  | **Pannagram** | Pangenome alignment and mobilome calling, as described in the title-matched preprint and the official README. General pangenome machinery; not only a transposable-element annotator. | [github.com/iganna/pannagram](https://github.com/iganna/pannagram) | [10.1101/2025.02.07.637071](https://doi.org/10.1101/2025.02.07.637071) |
-|  | **PanGenie** | Short-read genotyper for variants represented in a pangenome graph. General-purpose; not a transposable-element annotator. | [github.com/eblerjana/pangenie](https://github.com/eblerjana/pangenie) | [10.1038/s41588-022-01043-w](https://doi.org/10.1038/s41588-022-01043-w) |
-|  | **Paragraph** | Graph-based structural-variant genotyper for short-read data. General-purpose; not a transposable-element annotator. The published DOI was used. | [github.com/Illumina/paragraph](https://github.com/Illumina/paragraph) | [10.1186/s13059-019-1909-7](https://doi.org/10.1186/s13059-019-1909-7) |
-|  | **SyRI** | Finds syntenic and rearranged regions, and local sequence differences, from whole-genome assemblies. General-purpose; not a transposable-element annotator. The published DOI was used rather than the preprint. | [github.com/schneebergerlab/syri](https://github.com/schneebergerlab/syri) | [10.1186/s13059-019-1911-0](https://doi.org/10.1186/s13059-019-1911-0) |
-|  | **MEGAnE** | Mobile Element Genotyping Analysis Environment: identifies and genotypes polymorphic mobile elements from short-read whole-genome data, as described in the official README. The official README cites this preprint; the preprint title does not use the tool name. | [github.com/shohei-kojima/MEGAnE](https://github.com/shohei-kojima/MEGAnE) | [10.1101/2022.03.25.485726](https://doi.org/10.1101/2022.03.25.485726) |
-|  | **TEfinder** | Pipeline for detecting novel transposable-element insertions from discordant reads in paired-end sequencing data. | [github.com/VistaSohrab/TEfinder](https://github.com/VistaSohrab/TEfinder) | [10.3390/genes12020224](https://doi.org/10.3390/genes12020224) |
-|  | **ITIS** | Tool for identifying transposon insertion sites from next-generation sequencing data. The published site did not respond successfully in this pass. | [web.archive.org snapshot of bioinformatics.psc.ac.cn/software/ITIS](https://web.archive.org/web/20160825205722/http://bioinformatics.psc.ac.cn:80/software/ITIS/) | [10.1186/s12859-015-0507-2](https://doi.org/10.1186/s12859-015-0507-2) |
-|  | **TE-Tracker** | Systematic identification of transposition events from whole-genome resequencing. No official code repository was confirmed in this pass. | [web.archive.org snapshot of genoscope.cns.fr/externe/tetracker](https://web.archive.org/web/20170813054646/http://www.genoscope.cns.fr:80/externe/tetracker/) | [10.1186/s12859-014-0377-z](https://doi.org/10.1186/s12859-014-0377-z) |
-|  | **ELITE** | Efficiently Locating Insertions of Transposable Elements, an ACM methods paper. No official code repository was confirmed in this pass. | [github.com/Anwica/ELITE](https://github.com/Anwica/ELITE) | [10.1145/3307339.3342182](https://doi.org/10.1145/3307339.3342182) |
-|  | **TIF** | Transposon Insertion Finder: a short-read program that detects de novo transpositions and reports insertion positions without requiring a prior transposable-element library. | [github.com/akiomiyao/tif](https://github.com/akiomiyao/tif) | [10.1186/1471-2105-15-71](https://doi.org/10.1186/1471-2105-15-71) |
-|  | **TEF** | Transposable Element Finder: a general-purpose detector of active transposable elements that compares two samples, or one sample and a reference, using junction or target-site-duplication evidence. | [github.com/akiomiyao/tef](https://github.com/akiomiyao/tef) | [10.1186/s12859-022-05011-3](https://doi.org/10.1186/s12859-022-05011-3) |
-|  | **ITIPs** | Pipeline for calling transposable-element insertion polymorphisms across a Brassica rapa pan-genome. It depends on smartie-sv and bwa. | [github.com/caixu0518/ITIPs](https://github.com/caixu0518/ITIPs) | [10.1111/pbi.13807](https://doi.org/10.1111/pbi.13807) |
-|  | **RTRIP** | Profile of transposon insertion polymorphisms in about 3,000 rice accessions, with companion analysis scripts. The published website did not respond; an archived official page was opened. | [web.archive.org snapshot of RTRIP](https://web.archive.org/web/20240226054850/http://ibi.zju.edu.cn/Rtrip/index.html) | [10.1111/pbi.13425](https://doi.org/10.1111/pbi.13425) |
-|  | **panTEvo** | Workflow for tracing LTR retrotransposon dynamics and insertion polymorphisms in a cotton pangenome. | [github.com/Lcamdom/panTEvo](https://github.com/Lcamdom/panTEvo) | [10.1186/s13059-025-03837-7](https://doi.org/10.1186/s13059-025-03837-7) |
-|  | **TEPEAK** | Method for identifying and characterizing polymorphic transposable elements in populations of non-model species. It is not plant-specific. | [github.com/ryanlayerlab/TEPEAK](https://github.com/ryanlayerlab/TEPEAK) | [10.1371/journal.pcbi.1013122](https://doi.org/10.1371/journal.pcbi.1013122) |
-|  | **TypeSINE** | Detector of SINE insertion polymorphisms from short-read data. The title-matched preprint studies pigs, not plants. The live repository is github.com/mobilome/TypeSINE. | [github.com/mobilome/TypeSINE](https://github.com/mobilome/TypeSINE) | [10.1101/2025.05.21.653756](https://doi.org/10.1101/2025.05.21.653756) |
-|  | **AnchorWave** | Sensitive whole-genome aligner for assemblies with high sequence diversity, structural polymorphism and whole-genome duplication. It is not a transposable-element annotator; the paper reports transposable-element presence/absence recall in maize. | [github.com/baoxingsong/AnchorWave](https://github.com/baoxingsong/AnchorWave) | [10.1073/pnas.2113075119](https://doi.org/10.1073/pnas.2113075119) |
-|  | **SVIM-asm** | Structural-variant caller for haploid and diploid genome assemblies. It is not a transposable-element annotator. | [github.com/eldariont/svim-asm](https://github.com/eldariont/svim-asm) | [10.1093/bioinformatics/btaa1034](https://doi.org/10.1093/bioinformatics/btaa1034) |
-| Transposable-element expression and small RNA | **TEtranscripts** | Includes gene and transposable-element expression, with multi-mapping reads, in differential expression analysis of bulk RNA-seq. | [github.com/mhammell-laboratory/TEtranscripts](https://github.com/mhammell-laboratory/TEtranscripts) | [10.1093/bioinformatics/btv422](https://doi.org/10.1093/bioinformatics/btv422) |
-|  | **TElocal** | Locus-specific quantification of transposable-element expression, from the same laboratory as TEtranscripts. | [github.com/mhammell-laboratory/TElocal](https://github.com/mhammell-laboratory/TElocal) | — |
-|  | **Telescope** | Bayesian locus-specific estimation of transposable-element expression from RNA-seq. | [github.com/mlbendall/telescope](https://github.com/mlbendall/telescope) | [10.1371/journal.pcbi.1006453](https://doi.org/10.1371/journal.pcbi.1006453) |
-|  | **SQuIRE** | End-to-end RNA-seq workflow for locus-specific quantification of interspersed repeat expression. | [github.com/wyang17/SQuIRE](https://github.com/wyang17/SQuIRE) | [10.1093/nar/gky1301](https://doi.org/10.1093/nar/gky1301) |
-|  | **SalmonTE** | Quasi-mapping pipeline, based on Salmon, for quantifying transposable-element expression from RNA-seq. The live repository redirects to jeonglab-bcm/SalmonTE. | [github.com/jeonglab-bcm/SalmonTE](https://github.com/jeonglab-bcm/SalmonTE) | [10.1142/9789813235533_0016](https://doi.org/10.1142/9789813235533_0016) |
-|  | **scTE** | Quantifies transposable-element expression from single-cell RNA-seq and related assays, as described in the official README. | [github.com/JiekaiLab/scTE](https://github.com/JiekaiLab/scTE) | — |
-|  | **SoloTE** | Locus-specific quantification of transposable-element expression in single-cell RNA-seq. | [github.com/bvaldebenitom/SoloTE](https://github.com/bvaldebenitom/SoloTE) | [10.1038/s42003-022-04020-5](https://doi.org/10.1038/s42003-022-04020-5) |
-|  | **TEtools** | Counts and compares transposable-element expression (TEcount and TEdiff), including a Galaxy wrapper. | [github.com/l-modolo/TEtools](https://github.com/l-modolo/TEtools) | [10.1093/nar/gkw953](https://doi.org/10.1093/nar/gkw953) |
-|  | **RepEnrich** | Estimates transcriptional enrichment of repetitive-element subfamilies from RNA-seq or ChIP-seq by using uniquely mapping and multi-mapping reads. No official repository was confirmed in this pass. | — | [10.1186/1471-2164-15-583](https://doi.org/10.1186/1471-2164-15-583) |
-|  | **ShortStack** | Annotates and quantifies small RNA genes, including multi-mapping 21-24 nt siRNAs often used in plant transposable-element silencing studies. | [github.com/MikeAxtell/ShortStack](https://github.com/MikeAxtell/ShortStack) | [10.1261/rna.035279.112](https://doi.org/10.1261/rna.035279.112) |
-|  | **piPipes** | Set of pipelines, described in the official README, for analysing piRNAs and transposon transcripts across several sequencing assays. | [github.com/bowhan/piPipes](https://github.com/bowhan/piPipes) | — |
-| Age, divergence and landscape | **ParseRM** | Perl scripts that parse RepeatMasker .out or .align files to summarise composition, divergence and landscape. No standalone methods paper was title-matched in this pass. | [github.com/4ureliek/Parsing-RepeatMasker-Outputs](https://github.com/4ureliek/Parsing-RepeatMasker-Outputs) | — |
-|  | **VHICA** | Vertical and Horizontal Inheritance Consistence Analysis: discriminates vertical and horizontal transposon transfer by contrasting transposable-element divergence with that of host genes. | [cran.r-project.org/package=vhica](https://cran.r-project.org/package=vhica) | [10.1093/molbev/msv341](https://doi.org/10.1093/molbev/msv341) |
-|  | **REANNOTATE** | Automated paleontology of repetitive DNA, used to reconstruct insertion history. The published site did not respond successfully in this pass. | [web.archive.org snapshot of bioinformatics.org/reannotate](https://web.archive.org/web/20120208050248/http://www.bioinformatics.org/reannotate/) | [10.1186/1471-2164-9-614](https://doi.org/10.1186/1471-2164-9-614) |
-|  | **RepeatLandscape** | Scripts that parse RepeatMasker alignment output and plot repeat-landscape histograms or charts. No standalone methods paper was title-matched in this pass. | [github.com/caballero/RepeatLandscape](https://github.com/caballero/RepeatLandscape) | — |
-|  | **TE_Density** | Calculates transposable-element density in windows relative to genes, for studies of TE-gene spatial biology. | [github.com/sjteresi/TE_Density](https://github.com/sjteresi/TE_Density) | [10.1186/s13100-022-00264-4](https://doi.org/10.1186/s13100-022-00264-4) |
-|  | **TEGRiP** | Transposable Elements Genes RelationshIps Pipeline: detects positional and directional relationships between transposable elements and adjacent genes. The official README uses the name TEGRiP. | [github.com/marieBvr/TEs_genes_relationship_pipeline](https://github.com/marieBvr/TEs_genes_relationship_pipeline) | [10.24072/pcjournal.57](https://doi.org/10.24072/pcjournal.57) |
-|  | **Repeattools** | Compares transposable-element profiles and copy divergence across species, as described in the official README. The README cites a TEsorter paper; that DOI was not used here. | [github.com/AgustinAmata/Repeattools](https://github.com/AgustinAmata/Repeattools) | — |
-| Visualization | **StainedGlass** | Builds interactive identity heatmaps of massive tandem-repeat and other highly repetitive regions. | [github.com/vollgerlab/StainedGlass](https://github.com/vollgerlab/StainedGlass) | [10.1093/bioinformatics/btac018](https://doi.org/10.1093/bioinformatics/btac018) |
-|  | **ModDotPlot** | Fast interactive dot-plot viewer for tandem repeats and large repetitive intervals. | [github.com/marbl/ModDotPlot](https://github.com/marbl/ModDotPlot) | [10.1093/bioinformatics/btae493](https://doi.org/10.1093/bioinformatics/btae493) |
-|  | **FlexiDot** | Customizable, ambiguity-aware dot plots for visual sequence comparison, including repetitive sequences. General-purpose visualization; not a transposable-element annotator. | [github.com/molbio-dresden/flexidot](https://github.com/molbio-dresden/flexidot) | [10.1093/bioinformatics/bty395](https://doi.org/10.1093/bioinformatics/bty395) |
-|  | **RepeatOBserver** | Visualises tandem repeats and can highlight putative centromeres. Focused on tandem repeats rather than transposable-element annotation. | [github.com/celphin/RepeatOBserverV1](https://github.com/celphin/RepeatOBserverV1) | [10.1111/1755-0998.14084](https://doi.org/10.1111/1755-0998.14084) |
-|  | **LTRsift** | Graphical interface for semi-automatic classification and post-processing of de novo detected LTR retrotransposons. | [github.com/satta/ltrsift](https://github.com/satta/ltrsift) | [10.1186/1759-8753-3-18](https://doi.org/10.1186/1759-8753-3-18) |
-|  | **plotsr** | Visualizes structural similarities and rearrangements between multiple genome assemblies. General-purpose; not a transposable-element annotator. | [github.com/schneebergerlab/plotsr](https://github.com/schneebergerlab/plotsr) | [10.1093/bioinformatics/btac196](https://doi.org/10.1093/bioinformatics/btac196) |
-| Simulation and benchmarking | **simuG** | General-purpose genome simulator that can introduce SNPs, indels, structural variants and transposable-element insertions for method testing. | [github.com/yjx1217/simuG](https://github.com/yjx1217/simuG) | [10.1093/bioinformatics/btz424](https://doi.org/10.1093/bioinformatics/btz424) |
-|  | **TEgenomeSimulator** | Framework for simulating genomes with configurable transposable-element landscapes, for method testing. | [github.com/Plant-Food-Research-Open/TEgenomeSimulator](https://github.com/Plant-Food-Research-Open/TEgenomeSimulator) | [10.64898/2026.03.09.710711](https://doi.org/10.64898/2026.03.09.710711) |
-|  | **PrinTE** | Forward simulation framework for studying how transposable elements contribute to genome expansion and contraction. | [github.com/cwb14/PrinTE](https://github.com/cwb14/PrinTE) | [10.1101/2025.06.04.657780](https://doi.org/10.1101/2025.06.04.657780) |
-|  | **TEvarSim** | Genome simulator for transposable-element insertions and deletions, including simulated short-read and long-read data. | [github.com/daweili-lab/TEvarSim](https://github.com/daweili-lab/TEvarSim) | [10.1371/journal.pcbi.1013933](https://doi.org/10.1371/journal.pcbi.1013933) |
-|  | **TE_simu** | Scripts for simulating insertion, amplification and evolution of transposable elements in genomic sequences, as described in the official README. No title-matched methods paper was attached in this pass. | [github.com/unavailable-2374/TE_simu](https://github.com/unavailable-2374/TE_simu) | — |
-|  | **Hoen et al. 2015** | Methods paper calling for systematic benchmarking of transposable-element annotation methods. It is a paper, not a software tool. | — | [10.1186/s13100-015-0044-6](https://doi.org/10.1186/s13100-015-0044-6) |
-|  | **Rishishwar et al. 2016** | Benchmark of computational tools for polymorphic transposable-element detection. It is a paper, not a software tool. | — | [10.1093/bib/bbw072](https://doi.org/10.1093/bib/bbw072) |
-|  | **Saha et al. 2008** | Empirical comparison of ab initio repeat-finding programs. It is a paper, not a software tool. | — | [10.1093/nar/gkn064](https://doi.org/10.1093/nar/gkn064) |
-| Polyploid subgenomes and tandem repeats | **TRASH** | Tandem Repeat Annotation and Structural Hierarchy: annotates tandem repeats, including satellite arrays. Not a transposable-element annotator. | [github.com/vlothec/TRASH](https://github.com/vlothec/TRASH) | [10.1093/bioinformatics/btad308](https://doi.org/10.1093/bioinformatics/btad308) |
-|  | **SubPhaser** | Phases allopolyploid subgenomes using subgenome-specific k-mers, mainly from repetitive sequences such as transposable elements. Not a transposable-element annotator. | [github.com/zhangrengang/SubPhaser](https://github.com/zhangrengang/SubPhaser) | [10.1111/nph.18173](https://doi.org/10.1111/nph.18173) |
-|  | **PolyCRACKER** | Unsupervised partitioning of polyploid subgenomes by signatures of repetitive-DNA evolution. An unofficial code mirror was seen and was not used as the official repository. | [bitbucket.org/berkeleylab/jgi-polycracker](https://bitbucket.org/berkeleylab/jgi-polycracker/) | [10.1186/s12864-019-5828-5](https://doi.org/10.1186/s12864-019-5828-5) |
-| Databases and reference sets | **PlantRep** | Database of plant repetitive-element consensus sequences re-annotated across hundreds of plant genomes. The public website did not respond successfully in this pass. | — | [10.1007/s00299-021-02817-y](https://doi.org/10.1007/s00299-021-02817-y) |
-|  | **RiTE-db** | Resource database of Oryza transposable elements. The live page redirects from the older genome.arizona.edu address. | [ava.genome.arizona.edu/cgi-bin/rite/index.cgi](https://ava.genome.arizona.edu/cgi-bin/rite/index.cgi) | [10.1186/s12864-015-1762-3](https://doi.org/10.1186/s12864-015-1762-3) |
-|  | **SINEBase** | Database and tool for SINE consensus sequences and structural analysis across eukaryotes. | [sines.eimb.ru](https://sines.eimb.ru/) | [10.1093/nar/gks1263](https://doi.org/10.1093/nar/gks1263) |
-|  | **SoyTEdb** | Database of transposable elements in the soybean genome. The published hostname now redirects to this SoyBase legacy page. | [legacy.soybase.org/soytedb](https://legacy.soybase.org/soytedb/) | [10.1186/1471-2164-11-113](https://doi.org/10.1186/1471-2164-11-113) |
-|  | **RepetDB** | Unified resource for transposable-element reference sequences associated with the REPET project. | [urgi.versailles.inrae.fr/repetdb](https://urgi.versailles.inrae.fr/repetdb) | [10.1186/s13100-019-0150-y](https://doi.org/10.1186/s13100-019-0150-y) |
-|  | **TREP** | Plant-oriented curated transposable-element platform already listed in appendix B; added here so the methods catalogue has a matching resource row. | [trep-db.uzh.ch](https://trep-db.uzh.ch) | — |
-|  | **HTT-DB** | Database of horizontally transferred transposable elements, with a later update paper. Public sites tried in this pass did not respond successfully. | [web.archive.org snapshot of HTT-DB](https://web.archive.org/web/20220814084307/http://lpa.saogabriel.unipampa.edu.br:8080/httdatabase/) | [10.1093/bioinformatics/btv281](https://doi.org/10.1093/bioinformatics/btv281) |
-|  | **PlantLTRdb** | Interactive database of intact LTR retrotransposons across 195 plant species. | [bioinformatics.um6p.ma/PlantLTRdb/](https://bioinformatics.um6p.ma/PlantLTRdb/) | [10.3389/fpls.2023.1134627](https://doi.org/10.3389/fpls.2023.1134627) |
-|  | **DPTEdb** | Integrative database of transposable elements in dioecious plants. The published site did not respond successfully in this pass. | [web.archive.org snapshot of DPTEdb](https://web.archive.org/web/20180812090334/http://genedenovoweb.ticp.net:81/DPTEdb/index.php) | [10.1093/database/baw078](https://doi.org/10.1093/database/baw078) |
-|  | **SPTEdb** | Database of transposable elements in salicaceous plants. The published site did not respond successfully in this pass. | [web.archive.org snapshot of SPTEdb](https://web.archive.org/web/20180730000921/http://genedenovoweb.ticp.net:81/SPTEdb/index.php) | [10.1093/database/bay024](https://doi.org/10.1093/database/bay024) |
-|  | **RetrOryza** | Database of rice LTR retrotransposons. Public sites tried in this pass did not respond successfully. | — | [10.1093/nar/gkl780](https://doi.org/10.1093/nar/gkl780) |
-|  | **TIGR Plant Repeat Databases** | Historical collective resource for identifying repetitive sequences in plants. The original TIGR URL did not respond successfully in this pass. | [rice.uga.edu/pub/data/TIGR_Plant_Repeats/](https://rice.uga.edu/pub/data/TIGR_Plant_Repeats/) | [10.1093/nar/gkh099](https://doi.org/10.1093/nar/gkh099) |
-|  | **ConTEdb** | Comprehensive database of transposable elements in conifers. Public sites tried in this pass did not respond successfully. | [web.archive.org snapshot of ConTEdb](https://web.archive.org/web/20210921143932/http://genedenovoweb.ticp.net:81/conTEdb/index.php) | [10.1093/database/bay131](https://doi.org/10.1093/database/bay131) |
-|  | **AnnoTEP-DB** | Documentation and pre-processed genome resource associated with the EDTA-GUI paper. The software row for EDTA-GUI is already in this catalogue and was not edited. The live address requires a trailing slash. | [plantgenomics.ncc.unesp.br/AnnoTEP-DB/](https://plantgenomics.ncc.unesp.br/AnnoTEP-DB/) | [10.1186/s12864-026-12588-z](https://doi.org/10.1186/s12864-026-12588-z) |
-|  | **MaizeGP** | Open graph-based maize pangenome platform, including a structural-variant catalogue. It is a species pangenome resource, not a transposable-element-only database. | [github.com/Jia-nianhua/Maize-Graph-Pangenome](https://github.com/Jia-nianhua/Maize-Graph-Pangenome) | [10.1111/jipb.70439](https://doi.org/10.1111/jipb.70439) |
-|  | **TE Hub** | Community site for sharing and connecting tools, data, resources and methods for transposable-element annotation. | [tehub.org](https://tehub.org/) | [10.1186/s13100-021-00244-0](https://doi.org/10.1186/s13100-021-00244-0) |
-|  | **awesome-transposable-elements** | Curated public list of software, databases and other resources for transposable-element research. It is a community index, not a primary database. | [github.com/nixonlab/awesome-transposable-elements](https://github.com/nixonlab/awesome-transposable-elements) | — |
-|  | **GrapeGenomics Vitis RepeatMasker library** | Custom Vitis RepeatMasker library (Vitis_repeats.lib.gz) based on Cabernet Sauvignon and distributed by the Cantu Laboratory. This is a ready-to-use masking library, not a searchable transposable-element database. No formal dataset DOI was confirmed. | [grapegenomics.com/pages/repeats.php](https://grapegenomics.com/pages/repeats.php) | — |
-|  | **PN40024 T2T TE annotations** | Transposable-element annotation files (PN_T2T_TE.gff3) released with the PN40024 telomere-to-telomere grapevine genome. The paper is already in this catalogue; this row is the annotation files only. | [zenodo.org/records/13741133](https://zenodo.org/records/13741133) | [10.5281/zenodo.13741133](https://doi.org/10.5281/zenodo.13741133) |
+Benchmark papers listed in the old tables (papers, not software tools): Hoen et al. 2015, on systematic benchmarking of transposable-element annotation methods ([10.1186/s13100-015-0044-6](https://doi.org/10.1186/s13100-015-0044-6)); Rishishwar et al. 2016, a benchmark of tools for polymorphic transposable-element detection ([10.1093/bib/bbw072](https://doi.org/10.1093/bib/bbw072)); and Saha et al. 2008, an empirical comparison of ab initio repeat-finding programs ([10.1093/nar/gkn064](https://doi.org/10.1093/nar/gkn064)).
 
 ### Practical workflow
 
