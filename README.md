@@ -86,9 +86,42 @@ The default route is EDTA, then TEtrimmer, then TEsorter, then a CDS-gated trust
 
 ### Software by analysis step
 
+Contents of this section: links to each step are below. The number in parentheses is the number of entries in that table. The tier rule and the pipeline coverage table are included. This section has 198 entries.
+
+- [Tier rule](#tier-rule)
+- [Complete pipelines and the steps they cover](#complete-pipelines-and-the-steps-they-cover) (14)
+- [Complete pipelines: paper, lab and authority](#complete-pipelines-paper-lab-and-authority) (14)
+- [Family finders and read-based repeat discovery](#family-finders-and-read-based-repeat-discovery) (8)
+- [LTR retrotransposon detection](#ltr-retrotransposon-detection) (13)
+- [TIR, MITE, Helitron and SINE detection](#tir-mite-helitron-and-sine-detection) (14)
+- [Curation, redundancy reduction and library QC](#curation-redundancy-reduction-and-library-qc) (10)
+- [Classification](#classification) (14)
+- [Masking, annotation and cleaning of annotations](#masking-annotation-and-cleaning-of-annotations) (6)
+- [Insertion age, landscape and horizontal transfer](#insertion-age-landscape-and-horizontal-transfer) (8)
+- [Insertion polymorphism: short reads](#insertion-polymorphism-short-reads) (25)
+- [Insertion polymorphism: long reads and call annotation](#insertion-polymorphism-long-reads-and-call-annotation) (9)
+- [Insertion polymorphism: assemblies, pangenomes and graphs](#insertion-polymorphism-assemblies-pangenomes-and-graphs) (11)
+- [Insertion polymorphism: plant resources and other inputs](#insertion-polymorphism-plant-resources-and-other-inputs) (2)
+- [TE expression and small RNA](#te-expression-and-small-rna) (11)
+- [Visualization](#visualization) (22)
+  - [TE-specific views, landscapes and nesting diagrams](#te-specific-views-landscapes-and-nesting-diagrams) (6)
+  - [Dotplots and identity heatmaps for repeats](#dotplots-and-identity-heatmaps-for-repeats) (3)
+  - [Density and karyotype (ideogram) plots](#density-and-karyotype-ideogram-plots) (3)
+  - [Circos-style circular plots](#circos-style-circular-plots) (2)
+  - [Genome-browser tracks](#genome-browser-tracks) (4)
+  - [Synteny, assembly-alignment and pangenome-graph views](#synteny-assembly-alignment-and-pangenome-graph-views) (4)
+- [Polyploid subgenomes and tandem repeats](#polyploid-subgenomes-and-tandem-repeats) (3)
+- [Databases and libraries: general](#databases-and-libraries-general) (5)
+- [Databases and libraries: plants](#databases-and-libraries-plants) (11)
+- [Databases and libraries: grapevine (Vitis)](#databases-and-libraries-grapevine-vitis) (2)
+- [Simulation and benchmarking](#simulation-and-benchmarking) (6)
+- [Community indexes and cross-links](#community-indexes-and-cross-links) (3)
+
 The 198 software tools, databases and workflows in this catalogue are listed below by analysis step. Each entry gives its original paper, lab and authority; the tool link goes to the official repository or site. Longer notes are in [`docs/software/README.md`](docs/software/README.md), per-entry data in [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv), and the check notes for each row in [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv).
 
 **Default route:** [EDTA](https://github.com/oushujun/EDTA) → [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) → [TEsorter](https://github.com/zhangrengang/TEsorter) → a CDS-gated trusted library → soft-masking with [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker), or panEDTA for a panel of genomes. Only tools on this route are marked **default** in the tables. Where a step has no default, rows are ordered by paper citation count, which does not say which tool suits your genome.
+
+#### Tier rule
 
 > **Tier rule (stated once):** the indicator is the OpenAlex citation count of the paper (retrieved 2026-11-25). standard: 500 or more; established: 100–499; newer: fewer than 100 and the paper is from 2023 or later; niche: fewer than 100 and from before 2023; no paper: the catalogue has no title-matched paper. General-purpose tools such as BEDTools and IGV have counts from every field. Lab is the corresponding author named in the paper metadata with the institution (first one shown, +N for further corresponding authors; the last author when none is flagged). DOIs were checked against Crossref; the exceptions are in the `doi_check` column of `catalog/SOFTWARE_AUTHORITY.tsv`. This section has 198 entries: standard 28, established 47, newer 42, niche 58, no paper 23.
 
@@ -327,7 +360,7 @@ yes means the documentation of the pipeline, or its catalogue entry, states the 
 
 Grouped by purpose. General-purpose entries are not limited to transposable elements; the TE use is that you supply the TE coordinates or track.
 
-**TE-specific views, landscapes and nesting diagrams**
+##### TE-specific views, landscapes and nesting diagrams
 
 | Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
 |---|---|---|---|
@@ -338,7 +371,7 @@ Grouped by purpose. General-purpose entries are not limited to transposable elem
 | [DfamTEBrowser](https://github.com/Dfam-consortium/DfamTEBrowser) | — | — | no paper |
 | [RepeatMasker landscape utilities (calcDivergenceFromAlign.pl, createRepeatLandscape.pl)](https://github.com/Dfam-consortium/RepeatMasker/blob/master/util/createRepeatLandscape.pl) | — | R. M. Hubley, J. Caballero, Institute for Systems Biology (script headers) | no paper |
 
-**Dotplots and identity heatmaps for repeats**
+##### Dotplots and identity heatmaps for repeats
 
 | Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
 |---|---|---|---|
@@ -346,7 +379,7 @@ Grouped by purpose. General-purpose entries are not limited to transposable elem
 | [FlexiDot](https://github.com/molbio-dresden/flexidot) | *Bioinformatics* 2018 · [10.1093/bioinformatics/bty395](https://doi.org/10.1093/bioinformatics/bty395) | Tony Heitkam, Technische Universität Dresden | niche · 95 |
 | [ModDotPlot](https://github.com/marbl/ModDotPlot) | *Bioinformatics* 2024 · [10.1093/bioinformatics/btae493](https://doi.org/10.1093/bioinformatics/btae493) | Alexander P. Sweeten, National Institutes of Health +1 | newer · 86 |
 
-**Density and karyotype (ideogram) plots**
+##### Density and karyotype (ideogram) plots
 
 | Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
 |---|---|---|---|
@@ -354,14 +387,14 @@ Grouped by purpose. General-purpose entries are not limited to transposable elem
 | [RIdeogram](https://github.com/TickingClock1992/RIdeogram) | *PeerJ Computer Science* 2020 · [10.7717/peerj-cs.251](https://doi.org/10.7717/peerj-cs.251) | Guangchuang Yu, Southern Medical University +1 | standard · 633 |
 | [chromoMap](https://github.com/lakshay-anand/chromoMap) | *BMC Bioinformatics* 2022 · [10.1186/s12859-021-04556-z](https://doi.org/10.1186/s12859-021-04556-z) | Lakshay Anand, University of Kentucky | established · 261 |
 
-**Circos-style circular plots**
+##### Circos-style circular plots
 
 | Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
 |---|---|---|---|
 | [circlize](https://github.com/jokergoo/circlize) | *Bioinformatics* 2014 · [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393) | Benedikt Brors, German Cancer Research Center | standard · 4971 |
 | [interacCircos](https://github.com/mrcuizhe/interacCircos) | *Bioinformatics* 2021 · [10.1093/bioinformatics/btab232](https://doi.org/10.1093/bioinformatics/btab232) | Tianyi Zang, Harbin Institute of Technology +1 | niche · 19 |
 
-**Genome-browser tracks**
+##### Genome-browser tracks
 
 | Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
 |---|---|---|---|
@@ -370,7 +403,7 @@ Grouped by purpose. General-purpose entries are not limited to transposable elem
 | [igv.js](https://github.com/igvteam/igv.js) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac830](https://doi.org/10.1093/bioinformatics/btac830) | James T Robinson, University of California San Diego | standard · 648 |
 | [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692) | Fidel Ramírez, Max Planck Institute of Immunobiology and Epigenetics | standard · 575 |
 
-**Synteny, assembly-alignment and pangenome-graph views**
+##### Synteny, assembly-alignment and pangenome-graph views
 
 | Tool | Paper (journal year, DOI) | Lab (corresponding author, institution) | Tier · citations |
 |---|---|---|---|

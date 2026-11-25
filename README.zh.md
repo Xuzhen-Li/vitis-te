@@ -118,9 +118,42 @@
 
 ### 按分析步骤划分的软件
 
+本节目录：各步骤的链接如下。括号中的数字是该表中的条目数。权威度规则和整套流程覆盖表也列在这里。本节共 198 条。
+
+- [权威度规则](#权威度规则)
+- [整套流程及其覆盖的步骤](#整套流程及其覆盖的步骤)（14）
+- [整套流程：论文、实验室与权威度](#整套流程论文实验室与权威度)（14）
+- [重复家族发现工具与基于读段的发现](#重复家族发现工具与基于读段的发现)（8）
+- [LTR 反转录转座子检测](#ltr-反转录转座子检测)（13）
+- [TIR、MITE、Helitron 与 SINE 检测](#tirmitehelitron-与-sine-检测)（14）
+- [精修、去冗余与文库质控](#精修去冗余与文库质控)（10）
+- [分类](#分类)（14）
+- [屏蔽、注释与注释结果整理](#屏蔽注释与注释结果整理)（6）
+- [插入年龄、景观与水平转移](#插入年龄景观与水平转移)（8）
+- [插入多态：短读长](#插入多态短读长)（25）
+- [插入多态：长读长与结果注释](#插入多态长读长与结果注释)（9）
+- [插入多态：组装、泛基因组与图基因组](#插入多态组装泛基因组与图基因组)（11）
+- [插入多态：植物资源与其他输入](#插入多态植物资源与其他输入)（2）
+- [转座子表达与小 RNA](#转座子表达与小-rna)（11）
+- [可视化](#可视化)（22）
+  - [转座子专用视图、景观图与嵌套结构图](#转座子专用视图景观图与嵌套结构图)（6）
+  - [重复序列点图与一致性热图](#重复序列点图与一致性热图)（3）
+  - [密度图与核型（染色体示意）图](#密度图与核型染色体示意图)（3）
+  - [Circos 风格的环形图](#circos-风格的环形图)（2）
+  - [基因组浏览器轨道](#基因组浏览器轨道)（4）
+  - [共线性、组装比对与泛基因组图视图](#共线性组装比对与泛基因组图视图)（4）
+- [多倍体亚基因组与串联重复](#多倍体亚基因组与串联重复)（3）
+- [数据库与文库：通用](#数据库与文库通用)（5）
+- [数据库与文库：植物](#数据库与文库植物)（11）
+- [数据库与文库：葡萄（Vitis）](#数据库与文库葡萄vitis)（2）
+- [模拟与评测](#模拟与评测)（6）
+- [社区索引与交叉链接](#社区索引与交叉链接)（3）
+
 下面按分析步骤列出本目录的 198 个软件、数据库和流程。每个条目给出原始论文、实验室和权威度；链接指向官方仓库或站点。更长的说明见 [`docs/software/README.zh.md`](docs/software/README.zh.md)，逐条数据见 [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv)，每条的核对说明见 [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv)。
 
 **默认路线：** [EDTA](https://github.com/oushujun/EDTA) → [TEtrimmer](https://github.com/qjiangzhao/TEtrimmer) → [TEsorter](https://github.com/zhangrengang/TEsorter) → 经 CDS 过滤的 trusted 文库 → [RepeatMasker](https://github.com/Dfam-consortium/RepeatMasker) 软屏蔽，或用 panEDTA 处理多基因组。下表中只有这条路线上的工具标「默认」；没有默认的步骤，各行按论文被引次数排序，这不说明哪个工具更适合你的基因组。
+
+#### 权威度规则
 
 > **权威度规则（只在此处说明一次）：** 权威度取 OpenAlex 的论文被引次数（2026-11-25 取数）。标准：500 次及以上；成熟：100–499 次；较新：少于 100 次且论文发表于 2023 年或之后；小众：少于 100 次且发表于 2023 年之前；无论文：目录中没有题名匹配的论文。BEDTools、IGV 这类通用工具的引用数来自所有学科。实验室取论文元数据中的通讯作者及其机构（多个通讯作者时写第一位并以 +N 表示其余人数；没有标注时写末位作者）；DOI 已用 Crossref 核对，例外见 `catalog/SOFTWARE_AUTHORITY.tsv` 的 `doi_check` 列。本节共 198 条：标准 28、成熟 47、较新 42、小众 58、无论文 23。
 
@@ -359,7 +392,7 @@
 
 按用途分组。标为通用工具的条目不限于转座子，转座子的用法是用户自己提供 TE 坐标或轨道。
 
-**转座子专用视图、景观图与嵌套结构图**
+##### 转座子专用视图、景观图与嵌套结构图
 
 | 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
 |---|---|---|---|
@@ -370,7 +403,7 @@
 | [DfamTEBrowser](https://github.com/Dfam-consortium/DfamTEBrowser) | — | — | 无论文 |
 | [RepeatMasker landscape utilities (calcDivergenceFromAlign.pl, createRepeatLandscape.pl)](https://github.com/Dfam-consortium/RepeatMasker/blob/master/util/createRepeatLandscape.pl) | — | R. M. Hubley, J. Caballero, Institute for Systems Biology（脚本头部署名） | 无论文 |
 
-**重复序列点图与一致性热图**
+##### 重复序列点图与一致性热图
 
 | 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
 |---|---|---|---|
@@ -378,7 +411,7 @@
 | [FlexiDot](https://github.com/molbio-dresden/flexidot) | *Bioinformatics* 2018 · [10.1093/bioinformatics/bty395](https://doi.org/10.1093/bioinformatics/bty395) | Tony Heitkam, Technische Universität Dresden | 小众 · 95 次 |
 | [ModDotPlot](https://github.com/marbl/ModDotPlot) | *Bioinformatics* 2024 · [10.1093/bioinformatics/btae493](https://doi.org/10.1093/bioinformatics/btae493) | Alexander P. Sweeten, National Institutes of Health +1 | 较新 · 86 次 |
 
-**密度图与核型（染色体示意）图**
+##### 密度图与核型（染色体示意）图
 
 | 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
 |---|---|---|---|
@@ -386,14 +419,14 @@
 | [RIdeogram](https://github.com/TickingClock1992/RIdeogram) | *PeerJ Computer Science* 2020 · [10.7717/peerj-cs.251](https://doi.org/10.7717/peerj-cs.251) | Guangchuang Yu, Southern Medical University +1 | 标准 · 633 次 |
 | [chromoMap](https://github.com/lakshay-anand/chromoMap) | *BMC Bioinformatics* 2022 · [10.1186/s12859-021-04556-z](https://doi.org/10.1186/s12859-021-04556-z) | Lakshay Anand, University of Kentucky | 成熟 · 261 次 |
 
-**Circos 风格的环形图**
+##### Circos 风格的环形图
 
 | 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
 |---|---|---|---|
 | [circlize](https://github.com/jokergoo/circlize) | *Bioinformatics* 2014 · [10.1093/bioinformatics/btu393](https://doi.org/10.1093/bioinformatics/btu393) | Benedikt Brors, German Cancer Research Center | 标准 · 4971 次 |
 | [interacCircos](https://github.com/mrcuizhe/interacCircos) | *Bioinformatics* 2021 · [10.1093/bioinformatics/btab232](https://doi.org/10.1093/bioinformatics/btab232) | Tianyi Zang, Harbin Institute of Technology +1 | 小众 · 19 次 |
 
-**基因组浏览器轨道**
+##### 基因组浏览器轨道
 
 | 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
 |---|---|---|---|
@@ -402,7 +435,7 @@
 | [igv.js](https://github.com/igvteam/igv.js) | *Bioinformatics* 2022 · [10.1093/bioinformatics/btac830](https://doi.org/10.1093/bioinformatics/btac830) | James T Robinson, University of California San Diego | 标准 · 648 次 |
 | [pyGenomeTracks](https://github.com/deeptools/pyGenomeTracks) | *Bioinformatics* 2020 · [10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692) | Fidel Ramírez, Max Planck Institute of Immunobiology and Epigenetics | 标准 · 575 次 |
 
-**共线性、组装比对与泛基因组图视图**
+##### 共线性、组装比对与泛基因组图视图
 
 | 工具 | 原始论文（期刊 年份 · DOI） | 实验室（通讯作者，机构） | 权威度（档位 · 被引） |
 |---|---|---|---|
