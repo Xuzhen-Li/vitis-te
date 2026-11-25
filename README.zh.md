@@ -116,6 +116,8 @@
 
 默认路线是 EDTA，再到 TEtrimmer，再到 TEsorter，再到经过 CDS 过滤的 trusted 文库，最后用于软屏蔽或 panEDTA。带判断节点的决策树见 [`docs/WORKFLOW.zh.md`](docs/WORKFLOW.zh.md)。按步骤划分的软件、行业难点，以及同一路线的更详细说明见 [`docs/detection/tools_and_pipelines.zh.md`](docs/detection/tools_and_pipelines.zh.md)。用于识别各类型的序列特征见 [`docs/detection/signatures.zh.md`](docs/detection/signatures.zh.md)。交给基因注释的软屏蔽说明见 [`docs/detection/softmask_handoff.zh.md`](docs/detection/softmask_handoff.zh.md)。每一行的链接、标题匹配的 DOI（如有）、输入、输出和适用场合见 [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv)。此处未锁定工具版本。只在 Crossref 题名与目标论文一致时收录 DOI（核对于 2026-11-15，Asia/Shanghai，CST，UTC+8）。没有题名匹配 DOI 的条目只写网址，或标 [待确认]。
 
+按分析步骤重新整理的软件指南见 [`docs/software/README.zh.md`](docs/software/README.zh.md)：先是整套流程及其覆盖的步骤，再是每个分析步骤，每个条目带原始论文、论文署名的实验室和基于引用数的权威度指标，并含可视化一节。逐条数据见 [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv)。
+
 与上面默认的 EDTA 路线并列、但不取代它的，是 Inpactor 这一组面向植物 LTR 反转录转座子的工具：[Inpactor](https://github.com/simonorozcoarias/Inpactor) 和 [Inpactor2](https://github.com/simonorozcoarias/Inpactor2) 用于完整 LTR 元件的分类（Inpactor2 还能做检测并分到谱系），[InpactorDB](https://inpactordb.github.io) 是谱系级的植物 LTR 参考集，[SENMAP](https://github.com/simonorozcoarias/SENMAP) 在整理文库时保留完整拷贝，[TIP_finder](https://github.com/simonorozcoarias/TIP_finder) 用短读长双端数据检测插入多态。题名核对过的 DOI 和代码仓库链接见下方，以及 [`catalog/CATALOG.tsv`](catalog/CATALOG.tsv)。
 
 ### 按步骤划分的软件
