@@ -16,6 +16,10 @@
 
 **第三类：基于结构特征的从头预测策略。** 该策略直接将第3章与第4章总结的转座子分子生物学结构规则编码为计算机搜索算法，完全不依赖拷贝数高低，也不依赖外部同源库。只要基因组中存在哪怕**唯一一个**结构完整的拷贝，算法就能依据其特有的序列几何特征（如成对同向LTR、末端反向重复TIR、保守末端二核苷酸、特征长度的TSD、PBS/PPT以及保守蛋白编码域）将其精准定位。结构预测的优势在于能直接获得边界精确到单碱基的完整自主型或非自主型元件，但它的盲区也显而易见：它对发生内部缺失、5'端截短、嵌套打断或古老退化的碎片化拷贝几乎完全失明。
 
+![Which tools for which question](../../figures/guide/te_question_to_tools.png)
+
+*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；每个工具的论文、实验室和权威度见 README 的“按分析步骤划分的软件”各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools.svg`](../../figures/guide/te_question_to_tools.svg)。*
+
 ### 7.1.2 代表性结构预测工具的算法核心
 
 为了克服不同转座子目在分子结构上的巨大差异，生物信息学家针对LTR反转录转座子、TIR DNA转座子和Helitron分别开发了高度专业化的结构预测工具。理解这些核心工具的底层算法，有助于在实践中合理调参并精准排查假阳性。
@@ -81,6 +85,14 @@
    - 随后，利用蛋白质编码序列（CDS）数据库对候选转座子文库进行比对过滤，剔除误判的宿主蛋白质编码基因。
 3. **第三阶段：残余重复序列的补充性从头聚类（Optional RepeatModeler rescue）**。由于第一阶段的结构预测模块仅覆盖LTR、TIR和Helitron，天然遗漏了非LTR反转录转座子（LINE和SINE）以及高度退化、已丧失完整结构的古老家族。因此，EDTA（doi:10.1186/s13059-019-1905-y）将前两阶段构建的高置信度结构文库用于初步屏蔽基因组，再对剩余未被屏蔽的基因组区域运行**RepeatModeler**（该工具家族的后续更新版本为2020年发表的RepeatModeler2，doi:10.1073/pnas.1921046117，现今流程中亦常直接调用），专门打捞残留的LINE、SINE及古老高拷贝重复家族，经去冗余和蛋白域分类后并入最终一致性文库。
 4. **第四阶段：全基因组同源注释与汇总（Whole-genome annotation）**。最后，EDTA将汇总并去冗余后的**物种特异性非冗余一致性文库**（`*.TElib.fa`）交由**RepeatMasker**对目标基因组进行全基因组同源扫描，再结合第一阶段检出的完整结构注释（`*.intact.gff3`）进行坐标整合与重叠消解，最终输出包含完整拷贝与碎片化拷贝的全基因组转座子注释文件（GFF3）及各超家族占比汇总表（doi:10.1186/s13059-019-1905-y）。
+
+![EDTA pipeline](../illustrated_v3_p2d/figures/ou2019_edta_fig5.png)
+
+*图：EDTA 流程：先分别找出并过滤 LTR、TIR 与 Helitron 候选，遮盖基因组后把其余部分交给 RepeatModeler，最后汇成分类文库。原图未修改，引自 Ou S、Su W、Liao Y 等（2019），Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline，Genome Biology 20:275，Fig. 5，doi:10.1186/s13059-019-1905-y，PMC6913007，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
+![Earl Grey workflow](../../figures/guide/published/earlgrey_2024_fig1.jpg)
+
+*图：Earl Grey 流程：基因组预处理，可选用 Repbase 或 Dfam 子集遮盖已知重复，运行 RepeatModeler，用 BEAT 延伸一致性序列，可选用 CD-HIT-EST 去冗余，建成 TE 文库，再经 RepeatMasker、LTR_FINDER 和 rcMergeRepeats 得到 BED 与 GFF3 注释及汇总图。粉色框为可选步骤。原图未修改，引自 Baril T、Galbraith J、Hayward A（2024），Earl Grey: a fully automated user-friendly transposable element annotation and analysis pipeline，Molecular Biology and Evolution 41:msae068，Fig. 1，doi:10.1093/molbev/msae068，PMC11003543，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。*
 
 ### 7.2.2 一致性序列文库构建的关键技术步骤
 

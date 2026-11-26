@@ -1,5 +1,9 @@
 # 第11章 实践工作流：以葡萄基因组为例的端到端分析
 
+![TE library workflow](../../figures/guide/te_workflow.png)
+
+*图：把操作流程画成一张图：从逐个单倍型运行 EDTA 到下游分析共七步，并标出哪种产物可以用作 `--curatedlib` 或基因 soft-mask（只有通过门控的可信文库可以）。示意图，据 README 操作流程为本仓库绘制；可编辑 SVG：[`te_workflow.svg`](../../figures/guide/te_workflow.svg)。*
+
 ## 11.1 数据准备、软件环境与单基因组转座子从头注释实战
 
 ### 11.1.1 公开葡萄参考基因组的获取、完整性检查与头文件标准化清理

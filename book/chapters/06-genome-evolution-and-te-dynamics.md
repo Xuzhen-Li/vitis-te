@@ -24,6 +24,14 @@ $$K = -\frac{1}{2}\ln(1 - 2P - Q) - \frac{1}{4}\ln(1 - 2Q)$$
 
 第二是**元件内基因转换（intra-element gene conversion）导致的年代低估**。基因转换是指在DNA双链断裂修复过程中，同源序列之间发生的非互惠信息拷贝。对于同一条LTR反转录转座子而言，其5'-LTR与3'-LTR互为高度相似的同源序列，在演化过程中可能发生基因转换——即其中一侧LTR的局部区段被另一侧LTR的序列直接覆盖重写。这种“同质化”事件会人为抹平两端LTR原本已经积累的碱基差异，使测得的 $K$ 值异常偏小，导致一个原本插入于数百万年前的古老元件被误判为近期才插入的“年轻”拷贝[待确认]。此外，部分LTR元件在整合后可能与邻近同源拷贝发生异位重组形成嵌合体，使其5'-LTR和3'-LTR源自不同的母本，反而造成 $K$ 值异常虚高。因此，在利用 $T = K / (2r)$ 推断物种演化史时，应以整个家族的大量完整拷贝的分布峰值作为宏观趋势参考，切忌对单个拷贝的绝对年龄数字过度迷信。
 
+![Dating an LTR insertion](../../figures/guide/te_ltr_age_concept.png)
+
+*图：用两端 LTR 估计 LTR 反转录转座子的插入时间：插入时两端相同，此后各自独立积累替换，因此 K = 2rT，T = K/(2r)。演示数字取自 `testdata/ltr_age.tsv`（由 `scripts/01_ltr_insertion_age.py` 在不给替代率时写出）。示意图，为本仓库绘制。*
+
+![Earl Grey summary and repeat landscape](../../figures/guide/published/earlgrey_2024_fig2.jpg)
+
+*图：Earl Grey 对一个 840 Mb 模拟基因组的输出示例：各类转座子占基因组的比例（a），以及重复景观图，即基因组占比对与家族一致性序列的 Kimura 距离（CpG 校正）作图，越靠右越年轻（b）。原图未修改，引自 Baril T、Galbraith J、Hayward A（2024），Molecular Biology and Evolution 41:msae068，Fig. 2，doi:10.1093/molbev/msae068，PMC11003543，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。*
+
 ### 6.1.2 “膨胀与收缩”平衡模型：爆发、不等同源重组与非法重组
 
 在20世纪90年代末，随着玉米等大型植物基因组中海量近期爆发LTR反转录转座子的发现，植物演化学界一度产生过一种担忧：既然Ⅰ类转座子采用“复制-粘贴”机制只增不减，植物基因组是否注定走向一条“单行道式的肥胖之路”（one-way ticket to genomic obesity）[待确认]？然而，比较基因组学很快证实，植物基因组大小在生命之树上既能剧烈扩张，也能显著收缩。为此，Bennetzen与Devos等人提出了经典的**“膨胀与收缩”（obesity and diet）动态平衡模型**：一个物种的基因组大小并非静态特征，而是由**转座子阶段性爆发（膨胀动力）**与**DNA重组介导的序列清除（收缩动力）**这两股相互拮抗的力量长期博弈的结果[待确认]。

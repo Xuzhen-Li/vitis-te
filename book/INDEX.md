@@ -31,3 +31,13 @@
 - 第13章 [`chapters/13-observed-forms.md`](chapters/13-observed-forms.md)，sha256 `e9f9f92b636183594bb37e5dcfbbe4429a56dc5d2fd7e6dc87b0704fdceb9783`，汉字 17322，DOI 去重 23，[待确认] 103。
 - 转座子类型逐类详解 [`chapters/types-catalogue.md`](chapters/types-catalogue.md)，sha256 `b5f1ae6f52d1ee4b4aba519bb9015c7ffd700908e61f084d370a92404753c289`，汉字 111290，DOI 去重 199，[待确认] 606。
 - 配图合订本 [`illustrated_v3_p2d/TE_BOOK_illustrated_v3_p2d.md`](illustrated_v3_p2d/TE_BOOK_illustrated_v3_p2d.md)，sha256 `a3088b4f1436611a6f1c5072f3a6e8193e0e4e3e19b31f41c80ac13f173fc1ba`，汉字 284718，DOI 去重 224，[待确认] 992。合订本与分章有重叠，故不宜与上表加总。
+
+本页原表未改。2026-11-26 13:31 CST 在下列文件中插入了配图和图注（正文未删改），sha256 因此变化，现值如下；上表汉字与 DOI 计数为插图前的值：
+
+- [`TE_BOOK_full.md`](TE_BOOK_full.md)，sha256 `787806485b1c97702eb6622fee08b0cb1993802f6a894605b91c99218940755e`
+- [`chapters/02-classification-and-nomenclature.md`](chapters/02-classification-and-nomenclature.md)，sha256 `01aeb6c89ea72a3d574cf1b97655ccc7a03fe8b313f7a57ae11e1f18efb92dfc`
+- [`chapters/06-genome-evolution-and-te-dynamics.md`](chapters/06-genome-evolution-and-te-dynamics.md)，sha256 `7d02684b56cb6db9b99793bf451e18a4fe4ba539ebeb4d8919726bc1a53995f1`
+- [`chapters/07-detection-annotation-and-libraries.md`](chapters/07-detection-annotation-and-libraries.md)，sha256 `8cca5ac2f30b80fd97a07385f488443f7e3733edbcc99cf348a9026b202fb82d`
+- [`chapters/08-insertion-polymorphisms-tips.md`](chapters/08-insertion-polymorphisms-tips.md)，sha256 `d1907ed2110e19ecc68892dab5155c7d643a2e273d4bd9231e7b3e9545b594b8`
+- [`chapters/10-vitis-as-worked-example.md`](chapters/10-vitis-as-worked-example.md)，sha256 `7fb5d5918545a199931cc05e66144d094ea18e35537790dd900db61ef643a685`
+- [`chapters/11-practical-workflow.md`](chapters/11-practical-workflow.md)，sha256 `5eff1255ba67e7ca9cf989fbf688fbd47419c5ca89273a7ed31408ca63206a25`

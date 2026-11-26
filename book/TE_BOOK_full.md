@@ -222,6 +222,10 @@ Wicker统一分类体系发表后迅速在植物基因组学界获得广泛采�
 
 尽管蛋白质结构域系统发育是目前最严谨的高阶分类依据，研究者也必须清醒地认识到其固有的应用局限。第一，真核生物基因组中大量存在的非自主型元件（如MITEs、SINEs、LARDs、TRIMs）以及高度退化的古老碎片根本不包含任何编码区，完全无法通过蛋白质结构域直接定类，只能退而求其次，依据末端非编码结构特征或与已知自主型元件的局部核酸同源性进行间接归类。第二，转座子在漫长演化中也存在模块重组（domain shuffling）现象，例如某些反转录元件的*gag*基因、*env*样基因与*pol*基因可能拥有不同的演化来源，因此单凭单一结构域建树有时会掩盖嵌合起源的复杂历史，必要时需结合多结构域联合系统发育分析加以核验。
 
+![Classification of eukaryotic TEs](illustrated_v3_p2d/figures/bourque2018_fig1.png)
+
+*图：真核转座子的分类总图，按转座中间体和关键酶分出Ⅰ类与Ⅱ类，并画出各类的典型结构模块。原图未修改，引自 Bourque G、Burns KH、Gehring M 等（2018），Ten things you should know about transposable elements，Genome Biology 19:199，Fig. 1，doi:10.1186/s13059-018-1577-z，PMC6240941，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
 ## 2.2 统一分类框架中的层级与边界争议
 
 ### 2.2.1 80-80-80规则的实用价值与理论局限
@@ -885,6 +889,14 @@ $$K = -\frac{1}{2}\ln(1 - 2P - Q) - \frac{1}{4}\ln(1 - 2Q)$$
 
 第二是**元件内基因转换（intra-element gene conversion）导致的年代低估**。基因转换是指在DNA双链断裂修复过程中，同源序列之间发生的非互惠信息拷贝。对于同一条LTR反转录转座子而言，其5'-LTR与3'-LTR互为高度相似的同源序列，在演化过程中可能发生基因转换——即其中一侧LTR的局部区段被另一侧LTR的序列直接覆盖重写。这种“同质化”事件会人为抹平两端LTR原本已经积累的碱基差异，使测得的 $K$ 值异常偏小，导致一个原本插入于数百万年前的古老元件被误判为近期才插入的“年轻”拷贝[待确认]。此外，部分LTR元件在整合后可能与邻近同源拷贝发生异位重组形成嵌合体，使其5'-LTR和3'-LTR源自不同的母本，反而造成 $K$ 值异常虚高。因此，在利用 $T = K / (2r)$ 推断物种演化史时，应以整个家族的大量完整拷贝的分布峰值作为宏观趋势参考，切忌对单个拷贝的绝对年龄数字过度迷信。
 
+![Dating an LTR insertion](../figures/guide/te_ltr_age_concept.png)
+
+*图：用两端 LTR 估计 LTR 反转录转座子的插入时间：插入时两端相同，此后各自独立积累替换，因此 K = 2rT，T = K/(2r)。演示数字取自 `testdata/ltr_age.tsv`（由 `scripts/01_ltr_insertion_age.py` 在不给替代率时写出）。示意图，为本仓库绘制。*
+
+![Earl Grey summary and repeat landscape](../figures/guide/published/earlgrey_2024_fig2.jpg)
+
+*图：Earl Grey 对一个 840 Mb 模拟基因组的输出示例：各类转座子占基因组的比例（a），以及重复景观图，即基因组占比对与家族一致性序列的 Kimura 距离（CpG 校正）作图，越靠右越年轻（b）。原图未修改，引自 Baril T、Galbraith J、Hayward A（2024），Molecular Biology and Evolution 41:msae068，Fig. 2，doi:10.1093/molbev/msae068，PMC11003543，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。*
+
 ### 6.1.2 “膨胀与收缩”平衡模型：爆发、不等同源重组与非法重组
 
 在20世纪90年代末，随着玉米等大型植物基因组中海量近期爆发LTR反转录转座子的发现，植物演化学界一度产生过一种担忧：既然Ⅰ类转座子采用“复制-粘贴”机制只增不减，植物基因组是否注定走向一条“单行道式的肥胖之路”（one-way ticket to genomic obesity）[待确认]？然而，比较基因组学很快证实，植物基因组大小在生命之树上既能剧烈扩张，也能显著收缩。为此，Bennetzen与Devos等人提出了经典的**“膨胀与收缩”（obesity and diet）动态平衡模型**：一个物种的基因组大小并非静态特征，而是由**转座子阶段性爆发（膨胀动力）**与**DNA重组介导的序列清除（收缩动力）**这两股相互拮抗的力量长期博弈的结果[待确认]。
@@ -1061,6 +1073,10 @@ $$K = -\frac{1}{2}\ln(1 - 2P - Q) - \frac{1}{4}\ln(1 - 2Q)$$
 
 **第三类：基于结构特征的从头预测策略。** 该策略直接将第3章与第4章总结的转座子分子生物学结构规则编码为计算机搜索算法，完全不依赖拷贝数高低，也不依赖外部同源库。只要基因组中存在哪怕**唯一一个**结构完整的拷贝，算法就能依据其特有的序列几何特征（如成对同向LTR、末端反向重复TIR、保守末端二核苷酸、特征长度的TSD、PBS/PPT以及保守蛋白编码域）将其精准定位。结构预测的优势在于能直接获得边界精确到单碱基的完整自主型或非自主型元件，但它的盲区也显而易见：它对发生内部缺失、5'端截短、嵌套打断或古老退化的碎片化拷贝几乎完全失明。
 
+![Which tools for which question](../figures/guide/te_question_to_tools.png)
+
+*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；每个工具的论文、实验室和权威度见 README 的“按分析步骤划分的软件”各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools.svg`](../figures/guide/te_question_to_tools.svg)。*
+
 ### 7.1.2 代表性结构预测工具的算法核心
 
 为了克服不同转座子目在分子结构上的巨大差异，生物信息学家针对LTR反转录转座子、TIR DNA转座子和Helitron分别开发了高度专业化的结构预测工具。理解这些核心工具的底层算法，有助于在实践中合理调参并精准排查假阳性。
@@ -1126,6 +1142,14 @@ $$K = -\frac{1}{2}\ln(1 - 2P - Q) - \frac{1}{4}\ln(1 - 2Q)$$
    - 随后，利用蛋白质编码序列（CDS）数据库对候选转座子文库进行比对过滤，剔除误判的宿主蛋白质编码基因。
 3. **第三阶段：残余重复序列的补充性从头聚类（Optional RepeatModeler rescue）**。由于第一阶段的结构预测模块仅覆盖LTR、TIR和Helitron，天然遗漏了非LTR反转录转座子（LINE和SINE）以及高度退化、已丧失完整结构的古老家族。因此，EDTA（doi:10.1186/s13059-019-1905-y）将前两阶段构建的高置信度结构文库用于初步屏蔽基因组，再对剩余未被屏蔽的基因组区域运行**RepeatModeler**（该工具家族的后续更新版本为2020年发表的RepeatModeler2，doi:10.1073/pnas.1921046117，现今流程中亦常直接调用），专门打捞残留的LINE、SINE及古老高拷贝重复家族，经去冗余和蛋白域分类后并入最终一致性文库。
 4. **第四阶段：全基因组同源注释与汇总（Whole-genome annotation）**。最后，EDTA将汇总并去冗余后的**物种特异性非冗余一致性文库**（`*.TElib.fa`）交由**RepeatMasker**对目标基因组进行全基因组同源扫描，再结合第一阶段检出的完整结构注释（`*.intact.gff3`）进行坐标整合与重叠消解，最终输出包含完整拷贝与碎片化拷贝的全基因组转座子注释文件（GFF3）及各超家族占比汇总表（doi:10.1186/s13059-019-1905-y）。
+
+![EDTA pipeline](illustrated_v3_p2d/figures/ou2019_edta_fig5.png)
+
+*图：EDTA 流程：先分别找出并过滤 LTR、TIR 与 Helitron 候选，遮盖基因组后把其余部分交给 RepeatModeler，最后汇成分类文库。原图未修改，引自 Ou S、Su W、Liao Y 等（2019），Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline，Genome Biology 20:275，Fig. 5，doi:10.1186/s13059-019-1905-y，PMC6913007，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
+![Earl Grey workflow](../figures/guide/published/earlgrey_2024_fig1.jpg)
+
+*图：Earl Grey 流程：基因组预处理，可选用 Repbase 或 Dfam 子集遮盖已知重复，运行 RepeatModeler，用 BEAT 延伸一致性序列，可选用 CD-HIT-EST 去冗余，建成 TE 文库，再经 RepeatMasker、LTR_FINDER 和 rcMergeRepeats 得到 BED 与 GFF3 注释及汇总图。粉色框为可选步骤。原图未修改，引自 Baril T、Galbraith J、Hayward A（2024），Earl Grey: a fully automated user-friendly transposable element annotation and analysis pipeline，Molecular Biology and Evolution 41:msae068，Fig. 1，doi:10.1093/molbev/msae068，PMC11003543，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。*
 
 ### 7.2.2 一致性序列文库构建的关键技术步骤
 
@@ -1250,6 +1274,10 @@ $$\text{raw LAI} = \frac{\text{完整LTR反转录转座子总长度}}{\text{全�
 然而，仅凭DRP信号无法确定精确到单碱基的插入断点，也无法直接验证靶位点重复（TSD）。此时需要引入**分裂读长（SR）信号**。当单条150 bp的读长本身直接跨越转座子与宿主基因组的连接点时，BWA-MEM等局部比对软件会将该读长位于宿主侧翼的部分正常比对到参考基因组，而将落入转座子内部的部分进行软裁剪（soft-clipping，在BAM文件的CIGAR字符串中标记为`S`）。在插入位点的精确坐标上，来自上游的读长在3'端发生软裁剪，形成一条整齐的右裁剪边界；来自下游的读长在5'端发生软裁剪，形成一条整齐的左裁剪边界。算法提取所有软裁剪序列并与转座子一致性文库比对，若左裁剪序列匹配转座子3'端、右裁剪序列匹配转座子5'端，即可在单碱基精度上锁定插入断点。更具诊断价值的是，由于真实转座插入会在两侧生成一对完全相同的TSD，上游右裁剪边界与下游左裁剪边界在参考基因组坐标上并不会严丝合缝地对接在同一个碱基上，而是会形成一段长度恰好等于TSD（例如LTR转座子为5 bp）的**坐标重叠区**。这种由SR信号直接还原的TSD重叠，是排除假阳性结构重排的最强证据。
 
 在检测**参考缺失**时，DRP与SR信号的几何形态则恰好反转。当被测个体缺乏参考基因组上某段长度为 $L_{\text{TE}}$ 的转座子时，跨过该空位点的双端测序片段比对回参考基因组后，其两端的比对坐标会被参考基因组中那段额外的转座子强行撑开，导致观测到的模板跨度（TLEN）显著大于正常测序文库的插入片段均值（约等于正常插入片段长度加上 $L_{\text{TE}}$），且跨越该转座子内部的测序覆盖深度骤降至零（纯合缺失）或降至正常背景深度的一半（杂合缺失）。与此同时，直接跨越空位点接缝的单条读长会产生经典的缺失型分裂读长信号：读长的前半段精确比对至参考转座子的5'侧翼，后半段跳跃过整个转座子长度精确比对至3'侧翼，且缺失区间的起止坐标与参考基因组上该转座子的注释边界（包含一份TSD）高度吻合。
+
+![Detecting TE insertions from reads](illustrated_v3_p2d/figures/chu2021_xtea_fig1.png)
+
+*图：短读长双端、linked reads 与长读长如何找到候选插入位点（不一致配对读长与劈裂读长），随后过滤、分型和注释。材料以人类数据为主。原图未修改，引自 Chu C、Borges-Monroy R、Viswanadham VV 等（2021），Comprehensive identification of transposable element insertions using multiple sequencing technologies，Nature Communications 12:3836，Fig. 1，doi:10.1038/s41467-021-24041-8，PMC8219666，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
 
 ### 8.1.2 主流短读长TIPs检测工具的工作逻辑与高重复植物基因组误差来源
 
@@ -1620,6 +1648,10 @@ Studer等人通过严密的分子功能与群体遗传学证据，完整还原�
 
 在阅读不同年代发表的葡萄基因组文献时，初学者必须警惕一个极为常见的误区：2007年早期PN40024草图报道的重复序列比例与近年T2T无间隙基因组报道的转座子比例往往存在数个百分点的差异，甚至同一份基因组在不同论文中报道的*Helitron*或*Unknown*占比也大相径庭。这绝非葡萄基因组本身在十几年间发生了演化，而是由**组装完整度提升（补齐了着丝粒高重复区）**以及**注释算法与文库构建策略不同（如早期仅用公共库RepeatMasker vs 现代EDTA整合注释，doi:10.1186/s13059-019-1905-y）**共同造成的计算口径差异。
 
+![PN40024 T2T assembly and TE composition](illustrated_v3_p2d/figures/shi2023_uhad061_fig1.jpg)
+
+*图：PN40024 端粒到端粒组装概览；(D) 为该参考基因组中各类转座子的类型与比例。原图未修改，引自 Shi X、Cao S、Wang X 等（2023），The complete reference genome for grapevine (Vitis vinifera L.) genetics and breeding，Horticulture Research 10:uhad061，Fig. 1，doi:10.1093/hr/uhad061，PMC10199708，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
 ### 10.1.3 葡萄属不同野生种与欧亚种之间的转座子分化特征
 
 葡萄属（*Vitis*）是研究多年生木本植物演化与作物驯化的理想属级体系。按传统分类学，葡萄属分为两大亚属：染色体基数为19（$2n = 38$）的**真葡萄亚属（*Euvitis*）**与染色体基数为20（$2n = 40$）的**圆叶葡萄亚属（*Muscadinia*，以圆叶葡萄 *V. rotundifolia* 为代表）**。在物种最为丰富的真葡萄亚属内部，依据地理分布与系统发育关系，通常可清晰划分为三大主要演化支系：**欧亚群**（包含欧亚野生葡萄 *V. vinifera* subsp. *sylvestris* 及其驯化后代欧亚栽培葡萄 *V. vinifera* subsp. *vinifera*）、**北美群**（如河岸葡萄 *V. riparia*、沙地葡萄 *V. rupestris*、美洲葡萄 *V. labrusca* 等）以及**东亚群**（如山葡萄 *V. amurensis*、刺葡萄 *V. davidii*、毛葡萄 *V. quinquangularis* 等）[待确认]。
@@ -1758,6 +1790,10 @@ Studer等人通过严密的分子功能与群体遗传学证据，完整还原�
 - Carrier, G., Le Cunff, L., Dereeper, A., et al. (2012). Transposable Elements Are a Major Cause of Somatic Polymorphism in Vitis vinifera L. *PLoS ONE*. doi:10.1371/journal.pone.0032973
 
 # 第11章 实践工作流：以葡萄基因组为例的端到端分析
+
+![TE library workflow](../figures/guide/te_workflow.png)
+
+*图：把操作流程画成一张图：从逐个单倍型运行 EDTA 到下游分析共七步，并标出哪种产物可以用作 `--curatedlib` 或基因 soft-mask（只有通过门控的可信文库可以）。示意图，据 README 操作流程为本仓库绘制；可编辑 SVG：[`te_workflow.svg`](../figures/guide/te_workflow.svg)。*
 
 ## 11.1 数据准备、软件环境与单基因组转座子从头注释实战
 

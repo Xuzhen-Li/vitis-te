@@ -52,6 +52,10 @@ Wicker统一分类体系发表后迅速在植物基因组学界获得广泛采�
 
 尽管蛋白质结构域系统发育是目前最严谨的高阶分类依据，研究者也必须清醒地认识到其固有的应用局限。第一，真核生物基因组中大量存在的非自主型元件（如MITEs、SINEs、LARDs、TRIMs）以及高度退化的古老碎片根本不包含任何编码区，完全无法通过蛋白质结构域直接定类，只能退而求其次，依据末端非编码结构特征或与已知自主型元件的局部核酸同源性进行间接归类。第二，转座子在漫长演化中也存在模块重组（domain shuffling）现象，例如某些反转录元件的*gag*基因、*env*样基因与*pol*基因可能拥有不同的演化来源，因此单凭单一结构域建树有时会掩盖嵌合起源的复杂历史，必要时需结合多结构域联合系统发育分析加以核验。
 
+![Classification of eukaryotic TEs](../illustrated_v3_p2d/figures/bourque2018_fig1.png)
+
+*图：真核转座子的分类总图，按转座中间体和关键酶分出Ⅰ类与Ⅱ类，并画出各类的典型结构模块。原图未修改，引自 Bourque G、Burns KH、Gehring M 等（2018），Ten things you should know about transposable elements，Genome Biology 19:199，Fig. 1，doi:10.1186/s13059-018-1577-z，PMC6240941，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
 ## 2.2 统一分类框架中的层级与边界争议
 
 ### 2.2.1 80-80-80规则的实用价值与理论局限
