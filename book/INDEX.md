@@ -41,3 +41,10 @@
 - [`chapters/08-insertion-polymorphisms-tips.md`](chapters/08-insertion-polymorphisms-tips.md)，sha256 `d1907ed2110e19ecc68892dab5155c7d643a2e273d4bd9231e7b3e9545b594b8`
 - [`chapters/10-vitis-as-worked-example.md`](chapters/10-vitis-as-worked-example.md)，sha256 `7fb5d5918545a199931cc05e66144d094ea18e35537790dd900db61ef643a685`
 - [`chapters/11-practical-workflow.md`](chapters/11-practical-workflow.md)，sha256 `5eff1255ba67e7ca9cf989fbf688fbd47419c5ca89273a7ed31408ca63206a25`
+
+本页原表未改。2026-11-26 14:12 CST 仅将若干配图链接改为指向后来新增的修订文件，sha256 因此变化，现值如下：
+
+- [`TE_BOOK_full.md`](TE_BOOK_full.md)，sha256 `926c3f922e242cd2e50bdb1bb7f4ac50c9bfe4bd09c68c02cdfeca7383a1e6f5`
+- [`chapters/06-genome-evolution-and-te-dynamics.md`](chapters/06-genome-evolution-and-te-dynamics.md)，sha256 `6f6b854b7aefe440d061d492b870679f4c7f3f61b398f9d1548fd4d6c7e14f41`
+- [`chapters/07-detection-annotation-and-libraries.md`](chapters/07-detection-annotation-and-libraries.md)，sha256 `f8057819ee712f1ecd6235865fc1348aa083d9a9004923a60463fcc783127856`
+- [`chapters/11-practical-workflow.md`](chapters/11-practical-workflow.md)，sha256 `0dfd36591114e449d95e7fcb4e4b1ae3a82027bc35573aa076b0375e9b3a9147`

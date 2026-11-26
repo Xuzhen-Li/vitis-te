@@ -889,13 +889,13 @@ $$K = -\frac{1}{2}\ln(1 - 2P - Q) - \frac{1}{4}\ln(1 - 2Q)$$
 
 第二是**元件内基因转换（intra-element gene conversion）导致的年代低估**。基因转换是指在DNA双链断裂修复过程中，同源序列之间发生的非互惠信息拷贝。对于同一条LTR反转录转座子而言，其5'-LTR与3'-LTR互为高度相似的同源序列，在演化过程中可能发生基因转换——即其中一侧LTR的局部区段被另一侧LTR的序列直接覆盖重写。这种“同质化”事件会人为抹平两端LTR原本已经积累的碱基差异，使测得的 $K$ 值异常偏小，导致一个原本插入于数百万年前的古老元件被误判为近期才插入的“年轻”拷贝[待确认]。此外，部分LTR元件在整合后可能与邻近同源拷贝发生异位重组形成嵌合体，使其5'-LTR和3'-LTR源自不同的母本，反而造成 $K$ 值异常虚高。因此，在利用 $T = K / (2r)$ 推断物种演化史时，应以整个家族的大量完整拷贝的分布峰值作为宏观趋势参考，切忌对单个拷贝的绝对年龄数字过度迷信。
 
-![Dating an LTR insertion](../figures/guide/te_ltr_age_concept.png)
+![Dating an LTR insertion](../figures/guide/te_ltr_age_concept_v2.png)
 
 *图：用两端 LTR 估计 LTR 反转录转座子的插入时间：插入时两端相同，此后各自独立积累替换，因此 K = 2rT，T = K/(2r)。演示数字取自 `testdata/ltr_age.tsv`（由 `scripts/01_ltr_insertion_age.py` 在不给替代率时写出）。示意图，为本仓库绘制。*
 
 ![Earl Grey summary and repeat landscape](../figures/guide/published/earlgrey_2024_fig2.jpg)
 
-*图：Earl Grey 对一个 840 Mb 模拟基因组的输出示例：各类转座子占基因组的比例（a），以及重复景观图，即基因组占比对与家族一致性序列的 Kimura 距离（CpG 校正）作图，越靠右越年轻（b）。原图未修改，引自 Baril T、Galbraith J、Hayward A（2024），Molecular Biology and Evolution 41:msae068，Fig. 2，doi:10.1093/molbev/msae068，PMC11003543，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。*
+*图：Earl Grey 对一个 840 Mb 模拟基因组的输出示例：各类转座子占基因组的比例（a），以及重复景观图，即基因组占比对与家族一致性序列的 Kimura 距离（CpG 校正）作图，越靠右越年轻（b）。原图未修改，引自 Baril T、Galbraith J、Hayward A（2024），Earl Grey: a fully automated user-friendly transposable element annotation and analysis pipeline，Molecular Biology and Evolution 41:msae068，Fig. 2，doi:10.1093/molbev/msae068，PMC11003543，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。*
 
 ### 6.1.2 “膨胀与收缩”平衡模型：爆发、不等同源重组与非法重组
 
@@ -1073,9 +1073,9 @@ $$K = -\frac{1}{2}\ln(1 - 2P - Q) - \frac{1}{4}\ln(1 - 2Q)$$
 
 **第三类：基于结构特征的从头预测策略。** 该策略直接将第3章与第4章总结的转座子分子生物学结构规则编码为计算机搜索算法，完全不依赖拷贝数高低，也不依赖外部同源库。只要基因组中存在哪怕**唯一一个**结构完整的拷贝，算法就能依据其特有的序列几何特征（如成对同向LTR、末端反向重复TIR、保守末端二核苷酸、特征长度的TSD、PBS/PPT以及保守蛋白编码域）将其精准定位。结构预测的优势在于能直接获得边界精确到单碱基的完整自主型或非自主型元件，但它的盲区也显而易见：它对发生内部缺失、5'端截短、嵌套打断或古老退化的碎片化拷贝几乎完全失明。
 
-![Which tools for which question](../figures/guide/te_question_to_tools.png)
+![Which tools for which question](../figures/guide/te_question_to_tools_v2.png)
 
-*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；每个工具的论文、实验室和权威度见 README 的“按分析步骤划分的软件”各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools.svg`](../figures/guide/te_question_to_tools.svg)。*
+*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；每个工具的论文、实验室和权威度见 README 的“按分析步骤划分的软件”各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools_v2.svg`](../figures/guide/te_question_to_tools_v2.svg)。*
 
 ### 7.1.2 代表性结构预测工具的算法核心
 
@@ -1791,9 +1791,9 @@ Studer等人通过严密的分子功能与群体遗传学证据，完整还原�
 
 # 第11章 实践工作流：以葡萄基因组为例的端到端分析
 
-![TE library workflow](../figures/guide/te_workflow.png)
+![TE library workflow](../figures/guide/te_workflow_v2.png)
 
-*图：把操作流程画成一张图：从逐个单倍型运行 EDTA 到下游分析共七步，并标出哪种产物可以用作 `--curatedlib` 或基因 soft-mask（只有通过门控的可信文库可以）。示意图，据 README 操作流程为本仓库绘制；可编辑 SVG：[`te_workflow.svg`](../figures/guide/te_workflow.svg)。*
+*图：把操作流程画成一张图：从逐个单倍型运行 EDTA 到下游分析共七步，并标出哪种产物可以用作 `--curatedlib` 或基因 soft-mask（只有通过门控的可信文库可以）。示意图，据 README 操作流程为本仓库绘制；可编辑 SVG：[`te_workflow_v2.svg`](../figures/guide/te_workflow_v2.svg)。*
 
 ## 11.1 数据准备、软件环境与单基因组转座子从头注释实战
 

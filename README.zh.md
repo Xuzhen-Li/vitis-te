@@ -120,9 +120,9 @@
 
 本节目录：各步骤的链接如下。括号中的数字是该表中的条目数。权威度规则和整套流程覆盖表也列在这里。本节共 198 条。
 
-![Which tools for which question](figures/guide/te_question_to_tools.png)
+![Which tools for which question](figures/guide/te_question_to_tools_v2.png)
 
-*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；论文、实验室和权威度见下方各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools.svg`](figures/guide/te_question_to_tools.svg)。*
+*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；论文、实验室和权威度见下方各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools_v2.svg`](figures/guide/te_question_to_tools_v2.svg)。*
 
 - [权威度规则](#权威度规则)
 - [整套流程及其覆盖的步骤](#整套流程及其覆盖的步骤)（14）
@@ -161,11 +161,11 @@
 
 > **权威度规则（只在此处说明一次）：** 权威度取 OpenAlex 的论文被引次数（2026-11-25 取数）。标准：500 次及以上；成熟：100–499 次；较新：少于 100 次且论文发表于 2023 年或之后；小众：少于 100 次且发表于 2023 年之前；无论文：目录中没有题名匹配的论文。BEDTools、IGV 这类通用工具的引用数来自所有学科。实验室取论文元数据中的通讯作者及其机构（多个通讯作者时写第一位并以 +N 表示其余人数；没有标注时写末位作者）；DOI 已用 Crossref 核对，例外见 `catalog/SOFTWARE_AUTHORITY.tsv` 的 `doi_check` 列。本节共 198 条：标准 28、成熟 47、较新 42、小众 58、无论文 23。
 
-![Catalogue entries per step by tier](figures/guide/te_catalog_by_step.png)
+![Catalogue entries per step by tier](figures/guide/te_catalog_by_step_v2.png)
 
 *图：各分析步骤的目录条目数，按权威度着色（规则见上）。数字由 `figures/guide/src/make_catalog_charts.py` 从 `catalog/SOFTWARE_AUTHORITY.tsv` 计算（198 条；OpenAlex 被引数于 2026-11-25 取得）。*
 
-![Publication year against citations](figures/guide/te_catalog_year_citations.png)
+![Publication year against citations](figures/guide/te_catalog_year_citations_v2.png)
 
 *图：175 条有论文的目录条目的发表年份与 OpenAlex 被引数；菱形为本仓库默认工具（RepeatMasker 没有论文，未画出）。被引数不代表在你的基因组上的准确度。数据：`catalog/SOFTWARE_AUTHORITY.tsv`；脚本 `figures/guide/src/make_catalog_charts.py`。*
 
@@ -525,9 +525,9 @@
 
 ### 操作流程
 
-![TE library workflow](figures/guide/te_workflow.png)
+![TE library workflow](figures/guide/te_workflow_v2.png)
 
-*图：把操作流程画成一张图：从逐个单倍型运行 EDTA 到下游分析共七步，并标出哪种产物可以用作 `--curatedlib` 或基因 soft-mask（只有通过门控的可信文库可以）。示意图，据 README 操作流程为本仓库绘制；可编辑 SVG：[`te_workflow.svg`](figures/guide/te_workflow.svg)。*
+*图：把操作流程画成一张图：从逐个单倍型运行 EDTA 到下游分析共七步，并标出哪种产物可以用作 `--curatedlib` 或基因 soft-mask（只有通过门控的可信文库可以）。示意图，据 README 操作流程为本仓库绘制；可编辑 SVG：[`te_workflow_v2.svg`](figures/guide/te_workflow_v2.svg)。*
 
 ![EDTA pipeline](book/illustrated_v3_p2d/figures/ou2019_edta_fig5.png)
 
