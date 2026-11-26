@@ -1,6 +1,12 @@
 # Changelog
 
-This is the public summary of changes to the teaching files in `vitis-te`. Detailed logs are not part of this repository.
+This is the public summary of changes to the teaching files in TE-Lib (formerly `vitis-te`). Detailed logs are not part of this repository.
+
+## 2026-11-26 — A general TE library, and licence
+
+- The repository is now named TE-Lib (formerly vitis-te); GitHub redirects the old links. The home page title, opening paragraph and About line describe a general library of TE knowledge, software and workflows. Grapevine stays as the worked example, and no grapevine page was removed.
+- The home page has a new table on how the repository is organised. New [`docs/KNOWLEDGE_MAP.md`](docs/KNOWLEDGE_MAP.md) and its Chinese version index every page by topic.
+- Code is under the MIT License; text, tables and figures made for this repository are under CC BY 4.0; figures reproduced from papers keep their own licence. See [`NOTICE.md`](NOTICE.md).
 
 ## 2026-11-15 — Wicker markers
 

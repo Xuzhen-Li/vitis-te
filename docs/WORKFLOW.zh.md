@@ -1,4 +1,4 @@
-# 流程 - vitis-te
+# 流程 - TE-Lib
 
 本页是操作决策树（对应 README 第 9 节）。仓库首页从什么是 TE、它们怎样被发现讲起，再讲移动机制、分类、序列特征、与宿主的关系、葡萄基因组、行业难点和软件，最后落到本页。它补充、但不替代 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md) 中的公开交接说明。
 

@@ -1,10 +1,30 @@
-# vitis-te
+# TE-Lib
+<a id="vitis-te"></a>
 
 English | [中文](README.zh.md)
 
-This repository holds a Chinese book, a methods catalogue, and small scripts on transposable elements (TEs) in grapevine (*Vitis*) and other plants. The book is the place to learn what TEs are, how they are classified, and what is known in grapevine. The workflow, software catalogue, and scripts are the place to see how an analysis is done. This repository also points to a *Vitis* TE library used for gene soft-masking, documented in [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
+TE-Lib is a general library of knowledge, software and workflows for transposable elements (TEs) in plant and other eukaryotic genomes. It has a book in Chinese on what TEs are, how they are classified and how they interact with their hosts; pages on each TE type and on how each is detected; a catalogue of TE software by analysis step; and one tested route from raw TE discovery to a trusted TE library, with small scripts and test data. Grapevine (*Vitis*) is the worked example throughout, and its pages are kept; the methods apply to other genomes. The grapevine TE library used for gene soft-masking is documented in [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md). This repository was formerly named vitis-te; GitHub redirects the old links.
 
 Gene-model annotation is handled by [gene-structure-annotation](https://github.com/Xuzhen-Li/gene-structure-annotation). Functional annotation belongs to [gene-function-annotation](https://github.com/Xuzhen-Li/gene-function-annotation). PAV graphs and the long graph-tool list are covered by [vitis-pangenome](https://github.com/Xuzhen-Li/vitis-pangenome). This repository is not a dump of raw TE calls from other research groups. Private laboratory drafts and teaching notes that are not already public on GitHub are not copied here.
+
+## How this repository is organised
+
+Knowledge first, then software, then workflow. Every page is indexed by topic in [`docs/KNOWLEDGE_MAP.md`](docs/KNOWLEDGE_MAP.md).
+
+| Part | Use it to | Where |
+|---|---|---|
+| Book (in Chinese) | learn TE biology, classification, host effects and what is known in grapevine | [`book/`](book/README.md); contents below |
+| Topics | find everything on one topic in one place | [`docs/KNOWLEDGE_MAP.md`](docs/KNOWLEDGE_MAP.md) |
+| TE types | read one page per TE class or order | [`docs/types/`](docs/types/README.md) |
+| Detection | sequence signatures, tools and pipelines, and the soft-mask hand-off | [`signatures.md`](docs/detection/signatures.md); [`tools_and_pipelines.md`](docs/detection/tools_and_pipelines.md); [`softmask_handoff.md`](docs/detection/softmask_handoff.md) |
+| Host effects | how hosts silence TEs and how TEs affect genes | [`docs/host/`](docs/host/README.md) |
+| Software | compare 198 tools, pipelines and databases by analysis step | [Software by analysis step](#software-by-analysis-step); [`docs/software/`](docs/software/README.md); [`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv) |
+| Workflow | follow one route from discovery to a trusted library | [`docs/WORKFLOW.md`](docs/WORKFLOW.md) |
+| Grapevine example | grapevine genomes, libraries and known results | [`docs/vitis/`](docs/vitis/README.md) |
+| Scripts and test data | run a small toy pipeline | [`scripts/`](scripts/README.md); [`testdata/`](testdata/README.md) |
+| Figures | see the schematics | [`figures/`](figures/README.md) |
+| Sources and checks | see which sources were read and which DOIs were checked | [`SOURCES_READ.tsv`](SOURCES_READ.tsv); [`DOI_CHECKS.tsv`](DOI_CHECKS.tsv); [`CHANGELOG.md`](CHANGELOG.md) |
+| Chinese pages | read the same structure in Chinese | [`README.zh.md`](README.zh.md) |
 
 ## Book contents
 
@@ -548,3 +568,6 @@ DOI title-match checks are in [`DOI_CHECKS.tsv`](DOI_CHECKS.tsv), with a short n
 
 Author: Xuzhen Li, [ORCID](https://orcid.org/0000-0003-3670-6657)
 
+## Licence
+
+Code in this repository (scripts, pipeline files, configuration examples and tests) is under the [MIT License](LICENSE). Text, tables and figures made for this repository are under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Figures reproduced from published papers keep the licence of their source, as given in each caption. Details are in [`NOTICE.md`](NOTICE.md).

@@ -1,4 +1,4 @@
-# Workflow - vitis-te
+# Workflow - TE-Lib
 
 This page is the practical decision tree (README section 9). The repository README starts from what a TE is and how TEs were discovered, then walks through mechanisms, classification, sequence features, host effects, grapevine genomes, field difficulties and software, and ends here. It complements, and does not replace, the public hand-off in [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md).
 
