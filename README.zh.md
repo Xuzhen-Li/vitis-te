@@ -1,10 +1,30 @@
-# vitis-te
+# TE-Lib
+<a id="vitis-te"></a>
 
 [English](README.md) | 中文
 
-本仓库存放一部中文书稿、一份方法目录，以及若干用于葡萄属（*Vitis*）及其他植物转座元件（TE）的小脚本。要了解转座子是什么、如何分类、在葡萄里已知哪些事实，请看书的目录。要看分析怎么做，请看下面的软件、流程和脚本。基因软屏蔽所用的葡萄 TE 文库说明见 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)。
+TE-Lib 是一个通用的转座子（TE）知识、软件与流程库，面向植物及其他真核基因组：一部中文书稿，讲转座子是什么、怎样分类、与宿主怎样相互作用；每类转座子及其识别方法的知识页；按分析步骤整理的软件目录；以及一条从原始发现到可信 TE 库、测试过的路线，配有小脚本和测试数据。全书以葡萄（*Vitis*）为实例，葡萄的内容都保留；方法同样适用于其他基因组。基因软屏蔽所用的葡萄 TE 库说明见 [gene-structure-annotation `docs/TE_LIBRARY.md`](https://github.com/Xuzhen-Li/gene-structure-annotation/blob/main/docs/TE_LIBRARY.md)。本仓库原名 vitis-te，GitHub 会自动跳转旧链接。
 
 基因模型注释由 [gene-structure-annotation](https://github.com/Xuzhen-Li/gene-structure-annotation) 负责。功能注释属于 [gene-function-annotation](https://github.com/Xuzhen-Li/gene-function-annotation)。PAV 图和较长的图工具列表见 [vitis-pangenome](https://github.com/Xuzhen-Li/vitis-pangenome)。本仓库不是其他研究组原始 TE 识别结果的转存。尚未公开出现在 GitHub 上的私有实验草稿和讲义，不复制到这里。
+
+## 本仓库怎么组织
+
+先知识，再软件，再流程。全部页面按主题索引在 [`docs/KNOWLEDGE_MAP.zh.md`](docs/KNOWLEDGE_MAP.zh.md)。
+
+| 部分 | 用来 | 位置 |
+|---|---|---|
+| 书（中文） | 学习转座子生物学、分类、对宿主的影响以及葡萄中已知的事实 | [`book/`](book/README.md)；目录见下 |
+| 主题 | 把一个主题的所有内容放在一处看 | [`docs/KNOWLEDGE_MAP.zh.md`](docs/KNOWLEDGE_MAP.zh.md) |
+| 转座子类型 | 每个纲或目一页 | [`docs/types/`](docs/types/README.zh.md) |
+| 识别 | 序列特征、工具与流程，以及 soft-mask 交接 | [`signatures.zh.md`](docs/detection/signatures.zh.md)；[`tools_and_pipelines.zh.md`](docs/detection/tools_and_pipelines.zh.md)；[`softmask_handoff.zh.md`](docs/detection/softmask_handoff.zh.md) |
+| 宿主效应 | 宿主怎样沉默转座子、转座子怎样影响基因 | [`docs/host/`](docs/host/README.zh.md) |
+| 软件 | 按分析步骤比较 198 条工具、流程与数据库 | [按分析步骤划分的软件](#按分析步骤划分的软件)；[`docs/software/`](docs/software/README.zh.md)；[`catalog/SOFTWARE_AUTHORITY.tsv`](catalog/SOFTWARE_AUTHORITY.tsv) |
+| 流程 | 走一条从发现到可信库的路线 | [`docs/WORKFLOW.zh.md`](docs/WORKFLOW.zh.md) |
+| 葡萄实例 | 葡萄基因组、文库和已知结果 | [`docs/vitis/`](docs/vitis/README.zh.md) |
+| 脚本与测试数据 | 运行一个小型玩具流程 | [`scripts/`](scripts/README.md)；[`testdata/`](testdata/README.md) |
+| 图 | 查看示意图 | [`figures/`](figures/README.md) |
+| 来源与核对 | 查看读过哪些来源、核对过哪些 DOI | [`SOURCES_READ.tsv`](SOURCES_READ.tsv)；[`DOI_CHECKS.tsv`](DOI_CHECKS.tsv)；[`CHANGELOG.md`](CHANGELOG.md) |
+| 英文页面 | 阅读英文原版 | [`README.md`](README.md) |
 
 ## 书的目录
 
@@ -578,5 +598,8 @@ bash scripts/run_toy_pipeline.sh OUTDIR
 
 DOI 题名核对见 [`DOI_CHECKS.tsv`](DOI_CHECKS.tsv)，说明见 [`DOI_CHECKS.NOTES.md`](DOI_CHECKS.NOTES.md)。为目录论断打开过的来源见 [`SOURCES_READ.tsv`](SOURCES_READ.tsv)。变更记录见 [`CHANGELOG.md`](CHANGELOG.md)。
 
-作者：李旭振，[ORCID](https://orcid.org/0000-0003-3670-6657)
+作者：Xuzhen Li，[ORCID](https://orcid.org/0000-0003-3670-6657)
 
+## 许可
+
+本仓库的代码（脚本、流程文件、配置示例和测试）采用 [MIT 许可](LICENSE)。为本仓库撰写的文字、表格和绘制的图采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hans)。转载自已发表论文的图沿用原文许可，见各图注。详见 [`NOTICE.md`](NOTICE.md)。
