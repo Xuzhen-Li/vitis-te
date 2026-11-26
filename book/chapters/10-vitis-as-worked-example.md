@@ -28,6 +28,10 @@
 
 在阅读不同年代发表的葡萄基因组文献时，初学者必须警惕一个极为常见的误区：2007年早期PN40024草图报道的重复序列比例与近年T2T无间隙基因组报道的转座子比例往往存在数个百分点的差异，甚至同一份基因组在不同论文中报道的*Helitron*或*Unknown*占比也大相径庭。这绝非葡萄基因组本身在十几年间发生了演化，而是由**组装完整度提升（补齐了着丝粒高重复区）**以及**注释算法与文库构建策略不同（如早期仅用公共库RepeatMasker vs 现代EDTA整合注释，doi:10.1186/s13059-019-1905-y）**共同造成的计算口径差异。
 
+![PN40024 T2T assembly and TE composition](../illustrated_v3_p2d/figures/shi2023_uhad061_fig1.jpg)
+
+*图：PN40024 端粒到端粒组装概览；(D) 为该参考基因组中各类转座子的类型与比例。原图未修改，引自 Shi X、Cao S、Wang X 等（2023），The complete reference genome for grapevine (Vitis vinifera L.) genetics and breeding，Horticulture Research 10:uhad061，Fig. 1，doi:10.1093/hr/uhad061，PMC10199708，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
 ### 10.1.3 葡萄属不同野生种与欧亚种之间的转座子分化特征
 
 葡萄属（*Vitis*）是研究多年生木本植物演化与作物驯化的理想属级体系。按传统分类学，葡萄属分为两大亚属：染色体基数为19（$2n = 38$）的**真葡萄亚属（*Euvitis*）**与染色体基数为20（$2n = 40$）的**圆叶葡萄亚属（*Muscadinia*，以圆叶葡萄 *V. rotundifolia* 为代表）**。在物种最为丰富的真葡萄亚属内部，依据地理分布与系统发育关系，通常可清晰划分为三大主要演化支系：**欧亚群**（包含欧亚野生葡萄 *V. vinifera* subsp. *sylvestris* 及其驯化后代欧亚栽培葡萄 *V. vinifera* subsp. *vinifera*）、**北美群**（如河岸葡萄 *V. riparia*、沙地葡萄 *V. rupestris*、美洲葡萄 *V. labrusca* 等）以及**东亚群**（如山葡萄 *V. amurensis*、刺葡萄 *V. davidii*、毛葡萄 *V. quinquangularis* 等）[待确认]。

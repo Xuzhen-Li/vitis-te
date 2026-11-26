@@ -17,6 +17,10 @@
 
 在检测**参考缺失**时，DRP与SR信号的几何形态则恰好反转。当被测个体缺乏参考基因组上某段长度为 $L_{\text{TE}}$ 的转座子时，跨过该空位点的双端测序片段比对回参考基因组后，其两端的比对坐标会被参考基因组中那段额外的转座子强行撑开，导致观测到的模板跨度（TLEN）显著大于正常测序文库的插入片段均值（约等于正常插入片段长度加上 $L_{\text{TE}}$），且跨越该转座子内部的测序覆盖深度骤降至零（纯合缺失）或降至正常背景深度的一半（杂合缺失）。与此同时，直接跨越空位点接缝的单条读长会产生经典的缺失型分裂读长信号：读长的前半段精确比对至参考转座子的5'侧翼，后半段跳跃过整个转座子长度精确比对至3'侧翼，且缺失区间的起止坐标与参考基因组上该转座子的注释边界（包含一份TSD）高度吻合。
 
+![Detecting TE insertions from reads](../illustrated_v3_p2d/figures/chu2021_xtea_fig1.png)
+
+*图：短读长双端、linked reads 与长读长如何找到候选插入位点（不一致配对读长与劈裂读长），随后过滤、分型和注释。材料以人类数据为主。原图未修改，引自 Chu C、Borges-Monroy R、Viswanadham VV 等（2021），Comprehensive identification of transposable element insertions using multiple sequencing technologies，Nature Communications 12:3836，Fig. 1，doi:10.1038/s41467-021-24041-8，PMC8219666，许可 CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)。图片文件与配图合订本所用的相同。*
+
 ### 8.1.2 主流短读长TIPs检测工具的工作逻辑与高重复植物基因组误差来源
 
 在过去十余年中，生物信息学界围绕DRP与SR信号开发了数十款短读长TIPs检测工具。在群体基因组学实践中，**MELT**、**TEMP2**与**TEPID**是三款代表性极强且设计哲学各异的主流工具。

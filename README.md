@@ -88,6 +88,10 @@ The default route is EDTA, then TEtrimmer, then TEsorter, then a CDS-gated trust
 
 Contents of this section: links to each step are below. The number in parentheses is the number of entries in that table. The tier rule and the pipeline coverage table are included. This section has 198 entries.
 
+![Which tools for which question](figures/guide/te_question_to_tools.png)
+
+*Figure. Start from the question: the repository default (bold) and examples from the matching catalogue section. Names, roles and sections are checked against `catalog/SOFTWARE_AUTHORITY.tsv`; the tables below give paper, lab and tier for each. Schematic drawn for this repository; editable SVG: [`te_question_to_tools.svg`](figures/guide/te_question_to_tools.svg).*
+
 - [Tier rule](#tier-rule)
 - [Complete pipelines and the steps they cover](#complete-pipelines-and-the-steps-they-cover) (14)
 - [Complete pipelines: paper, lab and authority](#complete-pipelines-paper-lab-and-authority) (14)
@@ -124,6 +128,14 @@ The 198 software tools, databases and workflows in this catalogue are listed bel
 #### Tier rule
 
 > **Tier rule (stated once):** the indicator is the OpenAlex citation count of the paper (retrieved 2026-11-25). standard: 500 or more; established: 100–499; newer: fewer than 100 and the paper is from 2023 or later; niche: fewer than 100 and from before 2023; no paper: the catalogue has no title-matched paper. General-purpose tools such as BEDTools and IGV have counts from every field. Lab is the corresponding author named in the paper metadata with the institution (first one shown, +N for further corresponding authors; the last author when none is flagged). DOIs were checked against Crossref; the exceptions are in the `doi_check` column of `catalog/SOFTWARE_AUTHORITY.tsv`. This section has 198 entries: standard 28, established 47, newer 42, niche 58, no paper 23.
+
+![Catalogue entries per step by tier](figures/guide/te_catalog_by_step.png)
+
+*Figure. Catalogue entries per analysis step, coloured by citation tier (tier rule above). Counts computed from `catalog/SOFTWARE_AUTHORITY.tsv` (198 entries; OpenAlex counts retrieved 2026-11-25) by `figures/guide/src/make_catalog_charts.py`.*
+
+![Publication year against citations](figures/guide/te_catalog_year_citations.png)
+
+*Figure. Publication year against OpenAlex citations for the 175 catalogue entries with a paper; diamonds mark repository defaults (RepeatMasker has no paper and is not shown). A citation count is not a measure of accuracy on your genome. Source: `catalog/SOFTWARE_AUTHORITY.tsv`; script `figures/guide/src/make_catalog_charts.py`.*
 
 #### Complete pipelines and the steps they cover
 
@@ -480,6 +492,14 @@ Related publications in the same line of work (not standalone tools): a survey o
 Benchmark papers listed in the old tables (papers, not software tools): Hoen et al. 2015, on systematic benchmarking of transposable-element annotation methods ([10.1186/s13100-015-0044-6](https://doi.org/10.1186/s13100-015-0044-6)); Rishishwar et al. 2016, a benchmark of tools for polymorphic transposable-element detection ([10.1093/bib/bbw072](https://doi.org/10.1093/bib/bbw072)); and Saha et al. 2008, an empirical comparison of ab initio repeat-finding programs ([10.1093/nar/gkn064](https://doi.org/10.1093/nar/gkn064)).
 
 ### Practical workflow
+
+![TE library workflow](figures/guide/te_workflow.png)
+
+*Figure. The practical workflow as one picture: seven steps from EDTA per haplotype to downstream analyses, and which product may be used as `--curatedlib` or for gene soft-masking (only the trusted gated library). Schematic drawn for this repository from the practical workflow in README; editable SVG: [`te_workflow.svg`](figures/guide/te_workflow.svg).*
+
+![EDTA pipeline](book/illustrated_v3_p2d/figures/ou2019_edta_fig5.png)
+
+*Figure. The EDTA pipeline: LTR, TIR and Helitron candidates are found and filtered, the genome is masked, and the rest goes to RepeatModeler before a classified library is assembled. Reproduced without changes from Ou S, Su W, Liao Y, et al. (2019), Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline, Genome Biology 20:275, Fig. 5, doi:10.1186/s13059-019-1905-y, PMC6913007, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). The file is the one already used in the illustrated edition.*
 
 1. Run `EDTA` per assembly or haplotype using `--species others --sensitive 1 --anno 1`. Set `--u` explicitly and record its source. A grape value for `--u` is [待确认]; if `--u` is omitted, EDTA silently uses a rice rate of 1.3e-8 /bp/year, which must not be used for grape without stating it explicitly.
 2. Run `TEtrimmer` per haplotype, merge the Perfect and Good outputs, and use `CD-HIT` to generate a working library at about 95 percent identity. An optional 80-80 family catalog can also be built, provided it does not overwrite the working library.
