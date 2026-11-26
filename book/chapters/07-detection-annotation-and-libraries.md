@@ -16,9 +16,9 @@
 
 **第三类：基于结构特征的从头预测策略。** 该策略直接将第3章与第4章总结的转座子分子生物学结构规则编码为计算机搜索算法，完全不依赖拷贝数高低，也不依赖外部同源库。只要基因组中存在哪怕**唯一一个**结构完整的拷贝，算法就能依据其特有的序列几何特征（如成对同向LTR、末端反向重复TIR、保守末端二核苷酸、特征长度的TSD、PBS/PPT以及保守蛋白编码域）将其精准定位。结构预测的优势在于能直接获得边界精确到单碱基的完整自主型或非自主型元件，但它的盲区也显而易见：它对发生内部缺失、5'端截短、嵌套打断或古老退化的碎片化拷贝几乎完全失明。
 
-![Which tools for which question](../../figures/guide/te_question_to_tools.png)
+![Which tools for which question](../../figures/guide/te_question_to_tools_v2.png)
 
-*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；每个工具的论文、实验室和权威度见 README 的“按分析步骤划分的软件”各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools.svg`](../../figures/guide/te_question_to_tools.svg)。*
+*图：从问题出发找工具：粗体为本仓库默认工具，其余为对应目录小节中的例子。名称、角色和所属小节都与 `catalog/SOFTWARE_AUTHORITY.tsv` 核对过；每个工具的论文、实验室和权威度见 README 的“按分析步骤划分的软件”各表。示意图，为本仓库绘制；可编辑 SVG：[`te_question_to_tools_v2.svg`](../../figures/guide/te_question_to_tools_v2.svg)。*
 
 ### 7.1.2 代表性结构预测工具的算法核心
 

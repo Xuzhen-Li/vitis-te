@@ -21,41 +21,41 @@ bash figures/guide/src/render_svg.sh new_figs/NAME.svg new_figs/NAME.png WIDTH H
 
 ### TE library workflow
 
-![TE library workflow](te_workflow.png)
+![TE library workflow](te_workflow_v2.png)
 
-File: `te_workflow.png`
+File: `te_workflow_v2.png`
 
-Figure. The practical workflow as one picture: seven steps from EDTA per haplotype to downstream analyses, and which product may be used as `--curatedlib` or for gene soft-masking (only the trusted gated library). Schematic drawn for this repository from the practical workflow in README; editable SVG: `figures/guide/te_workflow.svg`.
+Figure. The practical workflow as one picture: seven steps from EDTA per haplotype to downstream analyses, and which product may be used as `--curatedlib` or for gene soft-masking (only the trusted gated library). Schematic drawn for this repository from the practical workflow in README; editable SVG: `figures/guide/te_workflow_v2.svg`.
 
 ### Which tools for which question
 
-![Which tools for which question](te_question_to_tools.png)
+![Which tools for which question](te_question_to_tools_v2.png)
 
-File: `te_question_to_tools.png`
+File: `te_question_to_tools_v2.png`
 
-Figure. Start from the question: the repository default (bold) and examples from the matching catalogue section. Names, roles and sections are checked against `catalog/SOFTWARE_AUTHORITY.tsv`; the tables below give paper, lab and tier for each. Schematic drawn for this repository; editable SVG: `figures/guide/te_question_to_tools.svg`.
+Figure. Start from the question: the repository default (bold) and examples from the matching catalogue section. Names, roles and sections are checked against `catalog/SOFTWARE_AUTHORITY.tsv`; the tables below give paper, lab and tier for each. Schematic drawn for this repository; editable SVG: `figures/guide/te_question_to_tools_v2.svg`.
 
 ### Dating an LTR insertion
 
-![Dating an LTR insertion](te_ltr_age_concept.png)
+![Dating an LTR insertion](te_ltr_age_concept_v2.png)
 
-File: `te_ltr_age_concept.png`
+File: `te_ltr_age_concept_v2.png`
 
 Figure. Dating an LTR retrotransposon insertion from its two LTRs: identical at insertion, then each LTR gains substitutions independently, so K = 2rT and T = K/(2r). The toy numbers are from `testdata/ltr_age.tsv` (written by `scripts/01_ltr_insertion_age.py` without a rate). Schematic drawn for this repository.
 
 ### Catalogue entries per step by tier
 
-![Catalogue entries per step by tier](te_catalog_by_step.png)
+![Catalogue entries per step by tier](te_catalog_by_step_v2.png)
 
-File: `te_catalog_by_step.png`
+File: `te_catalog_by_step_v2.png`
 
 Figure. Catalogue entries per analysis step, coloured by citation tier (tier rule above). Counts computed from `catalog/SOFTWARE_AUTHORITY.tsv` (198 entries; OpenAlex counts retrieved 2026-11-25) by `figures/guide/src/make_catalog_charts.py`.
 
 ### Publication year against citations
 
-![Publication year against citations](te_catalog_year_citations.png)
+![Publication year against citations](te_catalog_year_citations_v2.png)
 
-File: `te_catalog_year_citations.png`
+File: `te_catalog_year_citations_v2.png`
 
 Figure. Publication year against OpenAlex citations for the 175 catalogue entries with a paper; diamonds mark repository defaults (RepeatMasker has no paper and is not shown). A citation count is not a measure of accuracy on your genome. Source: `catalog/SOFTWARE_AUTHORITY.tsv`; script `figures/guide/src/make_catalog_charts.py`.
 
@@ -81,7 +81,7 @@ Figure. The Earl Grey workflow: prepare the genome, optionally mask known repeat
 
 File: `published/earlgrey_2024_fig2.jpg`
 
-Figure. Example Earl Grey output for an 840 Mb simulated genome: share of the genome in each TE class (a) and a repeat landscape, the percentage of the genome against CpG-adjusted Kimura distance to the family consensus, with recent activity on the right (b). Reproduced without changes from Baril T, Galbraith J and Hayward A (2024), Molecular Biology and Evolution 41:msae068, Fig. 2, doi:10.1093/molbev/msae068, PMC11003543, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+Figure. Example Earl Grey output for an 840 Mb simulated genome: share of the genome in each TE class (a) and a repeat landscape, the percentage of the genome against CpG-adjusted Kimura distance to the family consensus, with recent activity on the right (b). Reproduced without changes from Baril T, Galbraith J and Hayward A (2024), Earl Grey: a fully automated user-friendly transposable element annotation and analysis pipeline, Molecular Biology and Evolution 41:msae068, Fig. 2, doi:10.1093/molbev/msae068, PMC11003543, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 ### Classification of eukaryotic TEs
 
