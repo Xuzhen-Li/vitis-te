@@ -18,4 +18,4 @@ TIR 元件属于 Class II **亚类 1** 的 TIR 目（Wicker 等 2007，摘要，
 
 先前引用的正文（仍标 [待确认]）把 **hAT** 一名溯到 *hobo*、*Ac–Ds* 和 *Tam3*，并写植物 **Stowaway** 是“plant Mariner elements… always produce a TA TSD”。Wells 与 Feschotte（2020，全文，[doi:10.1146/annurev-genet-040620-022145](https://doi.org/10.1146/annurev-genet-040620-022145)）把 PIF/Harbinger 与细菌 IS5 样元件联系起来。
 
-McClintock 1950 的题名已在目录中。*Ac*、*Ds* 这两个名字分别出现在 1950 还是 1953 年的论文，本次追加只核了 1950 题名，标为 **[待确认]**。CACTA、Mutator 等超家族的命名史，除 Wicker 对 hAT 的那句外，也标 **[待确认]**。没有出处的“切除足迹”一句不讲。论断—出处表见 [class_II_tir.md](class_II_tir.md)。
+McClintock 1950 的题名已在目录中。*Ac*、*Ds* 这两个名字分别出现在 1950 还是 1953 年的论文，目前只核了 1950 题名，标为 **[待确认]**。CACTA、Mutator 等超家族的命名史，除 Wicker 对 hAT 的那句外，也标 **[待确认]**。没有出处的“切除足迹”一句不讲。论断—出处表见 [class_II_tir.md](class_II_tir.md)。
