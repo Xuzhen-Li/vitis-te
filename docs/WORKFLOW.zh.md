@@ -34,6 +34,6 @@ flowchart TD
 
 ## 脚本
 
-示例脚本在 `scripts/`。Python 演示链（`00_make_tiny_genome.py`、`01_ltr_insertion_age.py`、`02_softmask.py`）已在构建机上于 2026-11-15，Asia/Shanghai（CST，UTC+8）实测。年龄脚本只有在提供 `--rate` 时才输出年份；演示运行不给速率。`02_softmask.py` 可使用 `--uppercase-first`，并对每一条 FASTA 记录按染色体名套用 BED 区间。EDTA、RepeatModeler2/RepeatMasker 和 TEsorter 的封装只用于记录命令（`--dry-run` / `--help`），因这些工具未安装，此处未实测。
+示例脚本在 `scripts/`。Python 演示链（`00_make_tiny_genome.py`、`01_ltr_insertion_age.py`、`02_softmask.py`）已在本地于 2026-11-15，Asia/Shanghai（CST，UTC+8）实测。年龄脚本只有在提供 `--rate` 时才输出年份；演示运行不给速率。`02_softmask.py` 可使用 `--uppercase-first`，并对每一条 FASTA 记录按染色体名套用 BED 区间。EDTA、RepeatModeler2/RepeatMasker 和 TEsorter 的封装只用于记录命令（`--dry-run` / `--help`），因这些工具未安装，此处未实测。
 
 目录中的版本和 DOI 核对于 2026-11-15，Asia/Shanghai（CST，UTC+8）。

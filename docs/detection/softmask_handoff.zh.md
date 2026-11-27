@@ -15,11 +15,11 @@
 
 ## 只做软屏蔽，不做硬屏蔽
 
-BRAKER 的 README（本轮打开）写：为了在新基因组上准确预测基因，基因组应当做重复序列屏蔽，以免在重复和低复杂度区域预测出假阳性基因结构。对 GeneMark 和 AUGUSTUS，softmasking（重复区小写、其余大写）“leads to better results than hardmasking”（硬屏蔽是把重复区写成 `N`）。至于硬屏蔽成 `N` 会使重叠的真基因被截断或丢失，是本仓库的推断 **[待确认]**，不是 BRAKER 原句。只使用 RepeatMasker `-xsmall`（帮助页：使用 `-xsmall` 时重复区为小写）和 trusted 文库做软屏蔽。`EDTA.pl` 调用 `make_masked.pl` 时写的是 `-hardmask 1`（来自 EDTA.pl 源码，不是 EDTA README 里面向用户的默认项说明）。本仓库不把 EDTA `make_masked.pl` 当作 A0 软屏蔽步骤来教。
+BRAKER 的 README（已打开）写：为了在新基因组上准确预测基因，基因组应当做重复序列屏蔽，以免在重复和低复杂度区域预测出假阳性基因结构。对 GeneMark 和 AUGUSTUS，softmasking（重复区小写、其余大写）“leads to better results than hardmasking”（硬屏蔽是把重复区写成 `N`）。至于硬屏蔽成 `N` 会使重叠的真基因被截断或丢失，是本仓库的推断 **[待确认]**，不是 BRAKER 原句。只使用 RepeatMasker `-xsmall`（帮助页：使用 `-xsmall` 时重复区为小写）和 trusted 文库做软屏蔽。`EDTA.pl` 调用 `make_masked.pl` 时写的是 `-hardmask 1`（来自 EDTA.pl 源码，不是 EDTA README 里面向用户的默认项说明）。本仓库不把 EDTA `make_masked.pl` 当作 A0 软屏蔽步骤来教。
 
-仍留在注释仓库里的操作检查包括：交给 RepeatMasker 之前先把基因组转成大写（本仓库的防御性约定，因为 `-xsmall` 用小写表示屏蔽；RepeatMasker 帮助页并不要求事先转大写）；文库序列名用 `name#Class/Family`；EDTA 要求基因组序列名不超过 13 个字符（字母、数字和下划线），并保留对照表（EDTA README）；本仓库目前把 RepeatMasker 的 `.out` 当作 1 起始闭区间、把 BED 当作 0 起始半开区间；本轮打开的 RepeatMasker 帮助页并没有写这一坐标约定，因此标为 **[待确认]**。
+仍留在注释仓库里的操作检查包括：交给 RepeatMasker 之前先把基因组转成大写（本仓库的防御性约定，因为 `-xsmall` 用小写表示屏蔽；RepeatMasker 帮助页并不要求事先转大写）；文库序列名用 `name#Class/Family`；EDTA 要求基因组序列名不超过 13 个字符（字母、数字和下划线），并保留对照表（EDTA README）；本仓库目前把 RepeatMasker 的 `.out` 当作 1 起始闭区间、把 BED 当作 0 起始半开区间；已打开的 RepeatMasker 帮助页并没有写这一坐标约定，因此标为 **[待确认]**。
 
-## 这一批内容怎么搬家
+## 这部分内容如何迁移
 
 类型、工具和建库的深入讲解放在本仓库。gene-structure-annotation 只保留简短的 A0 使用说明，以及检查基因模型与 TE 重叠的质控（`qa08_te_overlap.py`）。拟议的删除和替换清单见随本教学包提供的 `REMOVALS.md`。该清单在经过审阅并合并 PR 之前不会执行。
 

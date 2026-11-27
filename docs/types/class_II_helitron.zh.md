@@ -8,7 +8,7 @@ Helitron 属于 Class II 的亚类 2（Wicker 2007 正文，[待确认]；Wells 
 
 Kapitonov 与 Jurka 2001（[doi:10.1073/pnas.151269298](https://doi.org/10.1073/pnas.151269298)；官方题名为 *Rolling-circle transposons in eukaryotes*）描述了这类元件。打开的摘要写：“conservative 5′-TC and CTRR-3′ termini”，“16- to 20-bp hairpins … 10–12 nucleotides from the 3′-end”，以及它们 “transpose precisely between the 5′-A and T-3′, with no modifications of the AT target sites。”随后的综述是 Kapitonov 与 Jurka 2007（[doi:10.1016/j.tig.2007.08.004](https://doi.org/10.1016/j.tig.2007.08.004)）。
 
-Wicker 等（2007，[doi:10.1038/nrg2165](https://doi.org/10.1038/nrg2165)；摘要；正文和图 1 引句本轮 **[待确认]**）此前被用来把 Helitron 放在 Class II 亚类 2，TSD 为 0，并写 “Subclass 2 holds DNA TEs that undergo a transposition process that entails replication without double-stranded cleavage。”同一篇还写 Helitron 有 “Y2-type tyrosine recombinase”、“TC or CTRR motifs” 和 “short hairpin”。Wells 与 Feschotte（2020，全文，[doi:10.1146/annurev-genet-040620-022145](https://doi.org/10.1146/annurev-genet-040620-022145)）把催化蛋白写成 HUH nuclease / Rep/Hel，没有使用 “Y2-type” 这一措辞。本章同时引用这两种说法，不把 “Y2-type” 写成 Kapitonov 2001 或 Wells 2020 的原词。
+Wicker 等（2007，[doi:10.1038/nrg2165](https://doi.org/10.1038/nrg2165)；摘要；正文和图 1 引句 **[待确认]**）此前被用来把 Helitron 放在 Class II 亚类 2，TSD 为 0，并写 “Subclass 2 holds DNA TEs that undergo a transposition process that entails replication without double-stranded cleavage。”同一篇还写 Helitron 有 “Y2-type tyrosine recombinase”、“TC or CTRR motifs” 和 “short hairpin”。Wells 与 Feschotte（2020，全文，[doi:10.1146/annurev-genet-040620-022145](https://doi.org/10.1146/annurev-genet-040620-022145)）把催化蛋白写成 HUH nuclease / Rep/Hel，没有使用 “Y2-type” 这一措辞。本章同时引用这两种说法，不把 “Y2-type” 写成 Kapitonov 2001 或 Wells 2020 的原词。
 
 根据上述来源，典型特征是：
 

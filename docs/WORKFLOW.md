@@ -34,6 +34,6 @@ flowchart TD
 
 ## Scripts
 
-Example scripts are in `scripts/`. The Python toy chain (`00_make_tiny_genome.py`, `01_ltr_insertion_age.py`, `02_softmask.py`) was tested on the build box on 2026-11-15, Asia/Shanghai (CST, UTC+8). The age script writes years only when `--rate` is supplied; the toy run does not pass a rate. `02_softmask.py` can take `--uppercase-first` and applies the BED mask to every FASTA record. The EDTA, RepeatModeler2/RepeatMasker and TEsorter wrappers are documentation only (`--dry-run` / `--help`) and are untested here because those tools are not installed.
+Example scripts are in `scripts/`. The Python toy chain (`00_make_tiny_genome.py`, `01_ltr_insertion_age.py`, `02_softmask.py`) was tested locally on 2026-11-15, Asia/Shanghai (CST, UTC+8). The age script writes years only when `--rate` is supplied; the toy run does not pass a rate. `02_softmask.py` can take `--uppercase-first` and applies the BED mask to every FASTA record. The EDTA, RepeatModeler2/RepeatMasker and TEsorter wrappers are documentation only (`--dry-run` / `--help`) and are untested here because those tools are not installed.
 
 Catalogue versions and DOIs were checked on 2026-11-15, Asia/Shanghai (CST, UTC+8).

@@ -39,4 +39,4 @@ Helitrons are well documented in plants (maize gene-fragment capture: Morgante e
 | Catalytic protein described as an HUH nuclease / Rep/Hel (not the wording “Y2-type”) | doi:10.1146/annurev-genet-040620-022145 | Full text | Full text extract (PMC8293684), doi:10.1146/annurev-genet-040620-022145 |
 | Later Helitron review | doi:10.1016/j.tig.2007.08.004 | Title (*Helitrons on a roll: eukaryotic rolling-circle transposons*) | Title/DOI verified; used as a later-review pointer |
 | Maize Helitron gene-fragment capture | doi:10.1038/ng1615 | Abstract | Abstract |
-| HelitronScanner; DeepHel | doi:10.1073/pnas.1410068111 ; doi:10.1093/bioinformatics/btag817 | Titles | Title/DOI as in v1; tools cited, not re-run |
+| HelitronScanner; DeepHel | doi:10.1073/pnas.1410068111 ; doi:10.1093/bioinformatics/btag817 | Titles | Title/DOI as in the earlier entry; tools cited, not re-run |
